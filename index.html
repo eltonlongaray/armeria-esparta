@@ -114,7 +114,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 @media(max-width:820px){
   body{display:block}
   .sidebar{display:none}
-  .main{padding:0 0 88px}
+  .main{padding:0 0 108px}
   .topbar{display:none}
   .screen{padding:14px}
   .mobilebar{display:flex;align-items:center;gap:11px;padding:13px 15px;position:sticky;top:0;z-index:40;background:linear-gradient(180deg,#161b24,rgba(14,16,20,.95));backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 8px 22px rgba(0,0,0,.3)}
@@ -131,11 +131,26 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .filters .btn{flex:1 1 100%}
   .count-note{order:5;flex-basis:100%;margin:2px 0 0;text-align:center}
   .kpi .v{font-size:23px}
-  .bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(16,19,25,.97);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:8px 2px calc(7px + env(safe-area-inset-bottom))}
-  .bottomnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 0;color:var(--muted);text-decoration:none;font-size:9.5px;font-weight:600;letter-spacing:.2px;cursor:pointer;transition:color .15s,transform .15s}
-  .bottomnav a .bic{font-size:18px;line-height:1}
-  .bottomnav a.active{color:var(--bronze)}
-  .bottomnav a.active .bic{transform:translateY(-2px)}
+  .bottomnav{display:flex;align-items:flex-end;justify-content:space-between;gap:2px;position:fixed;bottom:0;left:0;right:0;z-index:50;height:calc(78px + env(safe-area-inset-bottom));padding:0 8px calc(6px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#141821,#0a0c10);border-top:1px solid #05070a;box-shadow:0 -6px 20px rgba(0,0,0,.4)}
+  /* faixa dourada larga */
+  .bottomnav .navband{display:block;position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(180deg,#ffe793,#f4b400 48%,#a97e00);box-shadow:0 0 16px rgba(244,180,0,.6);border-bottom:1px solid rgba(0,0,0,.55)}
+  .bottomnav .navgroup{flex:1;display:flex;justify-content:space-around;align-items:flex-end;gap:2px;height:100%;padding-bottom:6px}
+  .bottomnav .navgroup a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.2px;padding:5px 3px;cursor:pointer;transition:color .15s,transform .15s;min-width:50px;text-align:center}
+  .bottomnav .navgroup a .bic{font-size:20px;line-height:1}
+  .bottomnav .navgroup a.active{color:var(--bronze)}
+  .bottomnav .navgroup a.active .bic{transform:translateY(-2px);filter:drop-shadow(0 0 6px rgba(244,180,0,.6))}
+  /* mira central (scope sniper) */
+  .bottomnav .scope{flex:0 0 auto;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;cursor:pointer;transform:translateY(-22px)}
+  .bottomnav .scope-optic{display:block;width:68px;height:56px;border-radius:15px;position:relative;background:radial-gradient(62% 60% at 42% 34%,rgba(120,205,255,.30),rgba(12,16,22,.92) 58%,#05070a 100%);border:2px solid var(--bronze);box-shadow:0 0 0 4px #0a0c10,0 8px 22px rgba(0,0,0,.55),0 0 22px rgba(244,180,0,.5),inset 0 0 16px rgba(0,0,0,.75)}
+  .bottomnav .scope-optic::before{content:"";position:absolute;top:6px;left:10px;width:28px;height:12px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);filter:blur(1px)}
+  .bottomnav .ch-h,.bottomnav .ch-v{position:absolute;background:rgba(244,180,0,.9)}
+  .bottomnav .ch-h{left:6px;right:6px;top:50%;height:1.5px;transform:translateY(-50%)}
+  .bottomnav .ch-v{top:6px;bottom:6px;left:50%;width:1.5px;transform:translateX(-50%)}
+  .bottomnav .ch-dot{position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;background:var(--bronze);transform:translate(-50%,-50%);box-shadow:0 0 10px var(--bronze);animation:reticle 2.4s ease-in-out infinite}
+  .bottomnav .scope-label{font-size:9.5px;font-weight:800;letter-spacing:1.3px;color:var(--bronze);text-shadow:0 1px 4px rgba(0,0,0,.6)}
+  .bottomnav .scope.active .scope-optic{box-shadow:0 0 0 4px #0a0c10,0 8px 22px rgba(0,0,0,.55),0 0 30px rgba(244,180,0,.85),inset 0 0 16px rgba(0,0,0,.75)}
+  @keyframes reticle{0%,100%{opacity:.85;box-shadow:0 0 8px var(--bronze)}50%{opacity:1;box-shadow:0 0 15px var(--bronze)}}
+  @media(prefers-reduced-motion:reduce){.bottomnav .ch-dot{animation:none}}
 }
 </style>
 </head>
@@ -352,12 +367,20 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   </section>
 
   <nav class="bottomnav">
-    <a data-s="inicio" class="active"><span class="bic">▚</span>Início</a>
-    <a data-s="estoque"><span class="bic">▤</span>Estoque</a>
-    <a data-s="custom"><span class="bic">✚</span>Nova OS</a>
-    <a data-s="cliente"><span class="bic">☻</span>Clientes</a>
-    <a data-s="arma"><span class="bic">▮</span>Armas</a>
-    <a data-s="financeiro"><span class="bic">₴</span>Financeiro</a>
+    <div class="navband"></div>
+    <div class="navgroup">
+      <a data-s="inicio" class="active"><span class="bic">▚</span>Início</a>
+      <a data-s="estoque"><span class="bic">▤</span>Estoque</a>
+    </div>
+    <a data-s="custom" class="scope" aria-label="Nova OS — tomar a mira">
+      <span class="scope-optic"><span class="ch-h"></span><span class="ch-v"></span><span class="ch-dot"></span></span>
+      <span class="scope-label">NOVA OS</span>
+    </a>
+    <div class="navgroup">
+      <a data-s="cliente"><span class="bic">☻</span>Clientes</a>
+      <a data-s="arma"><span class="bic">▮</span>Armas</a>
+      <a data-s="financeiro"><span class="bic">₴</span>Financeiro</a>
+    </div>
   </nav>
 </main>
 
