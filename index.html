@@ -243,6 +243,10 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
   <!-- ===== NOVA CUSTOMIZAÇÃO ===== -->
   <section class="screen" id="custom">
+    <div class="row" style="margin-bottom:16px;flex-wrap:wrap;gap:10px;align-items:center">
+      <div><div style="font-size:16px;font-weight:700" id="osNumero">Ordem de Serviço #1042</div><div class="mini">Preencha a arma, as peças e salve a OS</div></div>
+      <button class="btn" style="margin-left:auto" onclick="novaOS()">+ Nova OS</button>
+    </div>
     <div class="grid g2">
       <div class="card">
         <h3>Abrir customização (OS)</h3>
@@ -251,10 +255,8 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <div class="field"><label>Data de entrega prometida</label><div class="val">📅 05/08/2026</div></div>
 
         <h4 class="sec">Adicionar peça à OS</h4>
-        <div class="row" style="flex-wrap:wrap">
-          <select id="addSelect" style="flex:1;min-width:220px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 11px;font-size:12.5px"></select>
-          <button class="btn" onclick="addPeca()">Adicionar peça</button>
-        </div>
+        <select id="addSelect" onchange="addPeca()" style="width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 11px;font-size:12.5px"></select>
+        <p class="mini" style="margin-top:6px">Escolha a peça no campo acima — ela entra na OS na hora (e o sistema avisa se estiver comprometida).</p>
 
         <div id="conflictBox"></div>
 
@@ -280,6 +282,23 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
   <!-- ===== CLIENTE ===== -->
   <section class="screen" id="cliente">
+    <div class="row" style="margin-bottom:16px;flex-wrap:wrap;gap:10px;align-items:center">
+      <div><div style="font-size:16px;font-weight:700">Clientes</div><div class="mini">Ficha do atirador — dados, CRAF, aniversário e armas</div></div>
+      <button class="btn" style="margin-left:auto" onclick="toggleNovoCliente()">+ Novo cliente</button>
+    </div>
+    <div class="card" id="novoClienteForm" style="display:none;margin-bottom:16px">
+      <h3>Cadastrar novo cliente</h3>
+      <div class="grid g3">
+        <div class="field"><label>Nome completo</label><input class="fin-input" style="width:100%"></div>
+        <div class="field"><label>Telefone / WhatsApp</label><input class="fin-input" style="width:100%" placeholder="(54) 9...."></div>
+        <div class="field"><label>Aniversário</label><input class="fin-input" style="width:100%" type="date"></div>
+        <div class="field"><label>CRAF</label><input class="fin-input" style="width:100%"></div>
+        <div class="field"><label>Categoria (IPSC)</label><select class="fin-input" style="width:100%"><option>Standard</option><option>Light</option><option>Open</option><option>Optics</option><option>Production</option></select></div>
+        <div class="field"><label>Cidade</label><input class="fin-input" style="width:100%"></div>
+      </div>
+      <div class="field"><label>Observações</label><input class="fin-input" style="width:100%" placeholder="preferências, armas, etc."></div>
+      <div class="row" style="gap:10px;margin-top:6px"><button class="btn" onclick="salvarCliente()">Salvar cliente</button><button class="btn ghost" onclick="toggleNovoCliente()">Cancelar</button></div>
+    </div>
     <div class="card">
       <div class="row" style="gap:16px">
         <div class="avatar">MV</div>
@@ -539,9 +558,10 @@ function preencheAddSelect(){
     pecas.map(p=>'<option value="'+p.cod+'">'+p.tipo+' — '+p.marca+' '+p.modelo+(p.geracao!=='—'?' '+p.geracao:'')+(p.ipsc!=='—'?' '+p.ipsc:'')+'</option>').join('');
 }
 function addPeca(){
-  const cod=document.getElementById('addSelect').value;
+  const sel=document.getElementById('addSelect');
+  const cod=sel.value;
   const box=document.getElementById('conflictBox');
-  if(!cod){ box.innerHTML=''; return; }
+  if(!cod){ return; }
   const p=pecas.find(x=>x.cod===cod);
   const jaNaOS=osItems.filter(c=>c===cod).length;
   const livre=livreDe(p)-jaNaOS;
@@ -558,6 +578,7 @@ function addPeca(){
       '<div class="row" style="margin-top:10px"><button class="btn red sm" onclick="alert(\'No sistema real: abre o conflito com o outro cliente.\')">Ver conflito</button>'+
       '<button class="btn ghost sm" onclick="alert(\'No sistema real: cria pedido de compra da peça.\')">Comprar / repor</button></div></div>';
   }
+  sel.value='';
 }
 function removePeca(i){ osItems.splice(i,1); renderOS(); renderDisp(); renderOrc(); }
 function renderOS(){
@@ -584,6 +605,25 @@ function renderDisp(){
 function salvarOS(){
   if(!osItems.length){ alert('Adicione pelo menos uma peça à OS.'); return; }
   alert('OS salva! '+osItems.length+' peça(s) reservada(s) automaticamente.\n(No sistema real, o estoque livre é atualizado e a entrega entra na agenda.)');
+}
+let osSeq=1042;
+function novaOS(){
+  osItems=[];
+  const cb=document.getElementById('conflictBox'); if(cb) cb.innerHTML='';
+  const cob=document.getElementById('orcCobrado'); if(cob) cob.value=0;
+  osSeq++; const num=document.getElementById('osNumero'); if(num) num.textContent='Ordem de Serviço #'+osSeq;
+  renderOS(); renderDisp(); renderOrc();
+  go('custom');
+}
+function toggleNovoCliente(){
+  const f=document.getElementById('novoClienteForm');
+  const mostrar=f.style.display==='none';
+  f.style.display=mostrar?'block':'none';
+  if(mostrar) f.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function salvarCliente(){
+  alert('Cliente cadastrado! (No sistema real ele já fica disponível pra abrir OS e entra na lista de aniversariantes.)');
+  toggleNovoCliente();
 }
 
 /* ===== BLOCO 7: FINANCEIRO (calculado) ===== */
