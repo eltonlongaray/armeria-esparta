@@ -181,7 +181,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     <div class="card" style="padding:0">
       <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Peça</th><th>Compatibilidade</th><th>Local</th><th>Qtd</th><th>Status</th></tr></thead>
+        <thead><tr><th>Peça</th><th>Compatibilidade</th><th>Local</th><th>Valor</th><th>Qtd</th><th>Status</th></tr></thead>
         <tbody id="estBody"></tbody>
       </table>
       </div>
@@ -209,6 +209,13 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <h4 class="sec">Peças desta customização</h4>
         <div id="osList"></div>
         <p class="mini" id="osHint" style="margin-top:6px">Adicione peças acima. Se uma já estiver comprometida com outro cliente, o sistema trava na hora.</p>
+
+        <h4 class="sec">Orçamento deste serviço</h4>
+        <div class="alert-line"><span>Custo das peças (soma automática)</span><span style="margin-left:auto;font-weight:600" class="tnum" id="orcPecas">R$ 0</span></div>
+        <div class="alert-line"><span>Valor cobrado no serviço</span><div class="row" style="margin-left:auto;gap:5px"><span class="mini">R$</span><input class="fin-input val" type="number" min="0" step="50" id="orcCobrado" value="1200" oninput="renderOrc()"></div></div>
+        <div class="alert-line"><span>Horas de trabalho</span><div class="row" style="margin-left:auto;gap:5px"><input class="fin-input" style="width:70px;text-align:right" type="number" min="0" step="0.5" id="orcHoras" value="4" oninput="renderOrc()"><span class="mini">h</span></div></div>
+        <div class="alert-line"><span>Mão de obra (cobrado − peças)</span><span style="margin-left:auto;font-weight:600" class="tnum" id="orcMao">R$ 0</span></div>
+        <div class="ok-box" style="margin-top:10px"><span>⏱️</span><div class="row" style="width:100%"><b>Sua hora neste serviço</b><span style="margin-left:auto;font-weight:800;color:var(--bronze);font-size:17px" class="tnum" id="orcHora">—</span></div></div>
       </div>
 
       <div class="card">
@@ -294,12 +301,10 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <p class="mini">Percentuais calculados sobre o que entrou (R$&nbsp;<span id="finBase"></span>). O sistema separa isso sozinho — chega de sentar com o caderno 1x no mês.</p>
       </div>
       <div class="card">
-        <h3>Valor da sua hora — calculado, não no chute</h3>
-        <div class="kpi" style="margin:8px 0 18px"><div class="v" style="color:var(--bronze)">R$ 92<span style="font-size:15px;color:var(--muted)">/hora</span></div><div class="l">média real dos últimos serviços</div></div>
-        <div class="alert-line"><span class="mini">Customização G34 (3h)</span><span style="margin-left:auto" class="tnum">R$ 276</span></div>
-        <div class="alert-line"><span class="mini">Troca percussor (1h)</span><span style="margin-left:auto" class="tnum">R$ 92</span></div>
-        <div class="alert-line"><span class="mini">Instalação red dot (2h)</span><span style="margin-left:auto" class="tnum">R$ 184</span></div>
-        <div class="ok-box" style="margin-top:14px"><span>💡</span><div class="mini">O sistema calcula pra você <b>quanto cobrar</b> pra manter a margem — sem adivinhação.</div></div>
+        <h3>Quanto está valendo a sua hora?</h3>
+        <div class="kpi" style="margin:8px 0 16px"><div class="v" style="color:var(--bronze)" id="horaMedia"></div><div class="l">média real: (cobrado − peças) ÷ horas dos últimos serviços</div></div>
+        <div class="tbl-wrap"><table id="horaTbl"></table></div>
+        <div class="ok-box" style="margin-top:14px"><span>💡</span><div class="mini">Como o sistema sabe o <b>custo de cada peça</b>, ele desconta as peças do valor cobrado e mostra o que sobrou de <b>mão de obra por hora</b> — em cada serviço orçado.</div></div>
       </div>
     </div>
 
@@ -320,17 +325,17 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 <script>
 /* ===== BLOCO 1: DADOS ===== */
 const pecas = [
-  {tipo:"Guia de mola dupla", cod:"GM-G17-01", marca:"Glock", modelo:"G17", geracao:"Ger.3", calibre:"9mm", ipsc:"—", local:"Gaveta A2", qtd:2, reserv:2, inst:0, resFor:"M. Vinícius"},
-  {tipo:"Funil / Magwell", cod:"FN-G34-STD", marca:"Glock", modelo:"G34", geracao:"Ger.3", calibre:"9mm", ipsc:"Standard", local:"Prateleira 3", qtd:1, reserv:0, inst:1, resFor:""},
-  {tipo:"Tecla de gatilho", cod:"TG-SH2-FLAT", marca:"CZ", modelo:"Shadow 2", geracao:"—", calibre:"9mm", ipsc:"—", local:"Gaveta B1", qtd:5, reserv:0, inst:0, resFor:""},
-  {tipo:"Contrapeso", cod:"CP-SH2", marca:"CZ", modelo:"Shadow 2", geracao:"—", calibre:"9mm", ipsc:"—", local:"Gaveta B1", qtd:3, reserv:0, inst:0, resFor:""},
-  {tipo:"Percussor alongado", cod:"PC-IMB-1911", marca:"Imbel", modelo:"1911", geracao:"—", calibre:".45 ACP", ipsc:"—", local:"Gaveta A1", qtd:0, reserv:0, inst:0, resFor:""},
-  {tipo:"Moon clips 8 tiros", cod:"MC-TAU-8", marca:"Taurus", modelo:"RM66", geracao:"—", calibre:"Revólver", ipsc:"—", local:"Caixa 7", qtd:14, reserv:0, inst:0, resFor:""},
-  {tipo:"Funil / Magwell", cod:"FN-G17-OPEN", marca:"Glock", modelo:"G17", geracao:"Ger.4", calibre:"9mm", ipsc:"Open", local:"Prateleira 3", qtd:2, reserv:0, inst:0, resFor:""},
-  {tipo:"Guia de mola dupla", cod:"GM-G19-01", marca:"Glock", modelo:"G19", geracao:"Ger.5", calibre:"9mm", ipsc:"—", local:"Gaveta A2", qtd:4, reserv:1, inst:0, resFor:"A. Prado"},
-  {tipo:"Trava ambidestra", cod:"TA-2011", marca:"STI", modelo:"2011", geracao:"—", calibre:".40 S&W", ipsc:"Open", local:"Gaveta C2", qtd:1, reserv:1, inst:0, resFor:"J. Silva"},
-  {tipo:"Tecla de gatilho", cod:"TG-TS9", marca:"Taurus", modelo:"TS9", geracao:"—", calibre:"9mm", ipsc:"Standard", local:"Gaveta B2", qtd:6, reserv:0, inst:0, resFor:""},
-  {tipo:"Contrapeso", cod:"CP-G17", marca:"Glock", modelo:"G17", geracao:"Ger.3", calibre:"9mm", ipsc:"—", local:"Gaveta A3", qtd:3, reserv:0, inst:0, resFor:""}
+  {tipo:"Guia de mola dupla", cod:"GM-G17-01", marca:"Glock", modelo:"G17", geracao:"Ger.3", calibre:"9mm", ipsc:"—", local:"Gaveta A2", qtd:2, reserv:2, inst:0, resFor:"M. Vinícius", custo:180},
+  {tipo:"Funil / Magwell", cod:"FN-G34-STD", marca:"Glock", modelo:"G34", geracao:"Ger.3", calibre:"9mm", ipsc:"Standard", local:"Prateleira 3", qtd:1, reserv:0, inst:1, resFor:"", custo:250},
+  {tipo:"Tecla de gatilho", cod:"TG-SH2-FLAT", marca:"CZ", modelo:"Shadow 2", geracao:"—", calibre:"9mm", ipsc:"—", local:"Gaveta B1", qtd:5, reserv:0, inst:0, resFor:"", custo:220},
+  {tipo:"Contrapeso", cod:"CP-SH2", marca:"CZ", modelo:"Shadow 2", geracao:"—", calibre:"9mm", ipsc:"—", local:"Gaveta B1", qtd:3, reserv:0, inst:0, resFor:"", custo:300},
+  {tipo:"Percussor alongado", cod:"PC-IMB-1911", marca:"Imbel", modelo:"1911", geracao:"—", calibre:".45 ACP", ipsc:"—", local:"Gaveta A1", qtd:0, reserv:0, inst:0, resFor:"", custo:90},
+  {tipo:"Moon clips 8 tiros", cod:"MC-TAU-8", marca:"Taurus", modelo:"RM66", geracao:"—", calibre:"Revólver", ipsc:"—", local:"Caixa 7", qtd:14, reserv:0, inst:0, resFor:"", custo:70},
+  {tipo:"Funil / Magwell", cod:"FN-G17-OPEN", marca:"Glock", modelo:"G17", geracao:"Ger.4", calibre:"9mm", ipsc:"Open", local:"Prateleira 3", qtd:2, reserv:0, inst:0, resFor:"", custo:250},
+  {tipo:"Guia de mola dupla", cod:"GM-G19-01", marca:"Glock", modelo:"G19", geracao:"Ger.5", calibre:"9mm", ipsc:"—", local:"Gaveta A2", qtd:4, reserv:1, inst:0, resFor:"A. Prado", custo:180},
+  {tipo:"Trava ambidestra", cod:"TA-2011", marca:"STI", modelo:"2011", geracao:"—", calibre:".40 S&W", ipsc:"Open", local:"Gaveta C2", qtd:1, reserv:1, inst:0, resFor:"J. Silva", custo:260},
+  {tipo:"Tecla de gatilho", cod:"TG-TS9", marca:"Taurus", modelo:"TS9", geracao:"—", calibre:"9mm", ipsc:"Standard", local:"Gaveta B2", qtd:6, reserv:0, inst:0, resFor:"", custo:210},
+  {tipo:"Contrapeso", cod:"CP-G17", marca:"Glock", modelo:"G17", geracao:"Ger.3", calibre:"9mm", ipsc:"—", local:"Gaveta A3", qtd:3, reserv:0, inst:0, resFor:"", custo:300}
 ];
 
 /* ===== BLOCO 2: HELPERS DE STATUS ===== */
@@ -385,11 +390,11 @@ function renderEstoque(){
     (!busca||[p.tipo,p.cod,p.marca,p.modelo,p.calibre,p.ipsc,p.local].join(' ').toLowerCase().includes(busca))
   );
   const body=document.getElementById('estBody');
-  if(!lista.length){ body.innerHTML='<tr><td colspan="5" class="empty">Nenhuma peça com esses filtros. <a style="color:var(--bronze);cursor:pointer" onclick="limparFiltros()">Limpar</a></td></tr>'; }
+  if(!lista.length){ body.innerHTML='<tr><td colspan="6" class="empty">Nenhuma peça com esses filtros. <a style="color:var(--bronze);cursor:pointer" onclick="limparFiltros()">Limpar</a></td></tr>'; }
   else body.innerHTML=lista.map(p=>{
     const tags=[p.marca,p.modelo,p.geracao,p.calibre,p.ipsc].filter(v=>v&&v!=='—').map(v=>'<span>'+v+'</span>').join('');
     return '<tr><td><div class="pname">'+p.tipo+'</div><div class="psub">cód. '+p.cod+'</div></td>'+
-      '<td class="tags">'+tags+'</td><td>'+p.local+'</td><td>'+qtdChip(p)+'</td><td>'+statusChip(p)+'</td></tr>';
+      '<td class="tags">'+tags+'</td><td>'+p.local+'</td><td class="tnum">R$ '+p.custo+'</td><td>'+qtdChip(p)+'</td><td>'+statusChip(p)+'</td></tr>';
   }).join('');
   document.getElementById('estCount').textContent=lista.length+' de '+pecas.length+' peças';
 }
@@ -419,7 +424,7 @@ function addPeca(){
   if(livre>0){
     osItems.push(cod);
     box.innerHTML='';
-    renderOS(); renderDisp();
+    renderOS(); renderDisp(); renderOrc();
   } else {
     let motivo = p.qtd===0 ? 'está <b>em falta</b> (0 no estoque)' :
       (p.reserv>0 ? 'já está <b>reservada para a arma de '+(p.resFor||'outro cliente')+'</b>' : 'já está <b>instalada em outra arma</b>');
@@ -430,7 +435,7 @@ function addPeca(){
       '<button class="btn ghost sm" onclick="alert(\'No sistema real: cria pedido de compra da peça.\')">Comprar / repor</button></div></div>';
   }
 }
-function removePeca(i){ osItems.splice(i,1); renderOS(); renderDisp(); }
+function removePeca(i){ osItems.splice(i,1); renderOS(); renderDisp(); renderOrc(); }
 function renderOS(){
   const el=document.getElementById('osList');
   if(!osItems.length){ el.innerHTML=''; document.getElementById('osHint').style.display='block'; return; }
@@ -506,6 +511,37 @@ function setAj(i,campo,valor){ ajudantes[i][campo]= campo==='valor'?Number(valor
 function removeAj(i){ ajudantes.splice(i,1); renderAjudantes(); }
 function addAjudante(){ ajudantes.push({nome:"Novo ajudante",valor:0}); renderAjudantes(); }
 
+/* ===== BLOCO 7c: QUANTO VALE A HORA (por serviço, descontando peças) ===== */
+const servicos=[
+  {nome:"Customização IPSC — Glock G34", cobrado:1200, pecas:730, horas:4},
+  {nome:"Troca de percussor — Imbel 1911", cobrado:320, pecas:90, horas:1.5},
+  {nome:"Instalação red dot + base", cobrado:540, pecas:220, horas:2}
+];
+function renderHora(){
+  const fmt=n=>'R$ '+Math.round(n).toLocaleString('pt-BR');
+  let totMao=0, totH=0;
+  const linhas=servicos.map(s=>{
+    const mao=s.cobrado-s.pecas, hora=mao/s.horas; totMao+=mao; totH+=s.horas;
+    return '<tr><td><div class="pname" style="font-size:12.5px">'+s.nome+'</div>'+
+      '<div class="psub">cobrado '+fmt(s.cobrado)+' − peças '+fmt(s.pecas)+' = '+fmt(mao)+' · '+s.horas+'h</div></td>'+
+      '<td class="tnum" style="text-align:right;font-weight:700;color:var(--bronze)">'+fmt(hora)+'/h</td></tr>';
+  }).join('');
+  document.getElementById('horaTbl').innerHTML='<tbody>'+linhas+'</tbody>';
+  document.getElementById('horaMedia').innerHTML=fmt(totMao/totH)+'<span style="font-size:15px;color:var(--muted)">/hora</span>';
+}
+
+/* ===== BLOCO 7d: ORÇAMENTO DO SERVIÇO ATUAL (Nova Customização) ===== */
+function renderOrc(){
+  const fmt=n=>'R$ '+Math.round(n).toLocaleString('pt-BR');
+  const custoPecas=osItems.reduce((s,cod)=>{ const p=pecas.find(x=>x.cod===cod); return s+(p?p.custo:0); },0);
+  const cobrado=Number(document.getElementById('orcCobrado').value||0);
+  const horas=Number(document.getElementById('orcHoras').value||0);
+  const mao=cobrado-custoPecas;
+  document.getElementById('orcPecas').textContent=fmt(custoPecas);
+  document.getElementById('orcMao').textContent=fmt(mao);
+  document.getElementById('orcHora').textContent = horas>0 ? fmt(mao/horas)+'/h' : '—';
+}
+
 /* ===== BLOCO 8: INIT ===== */
 preencheSelect('fTipo','Tipo de peça (todos)','tipo');
 preencheSelect('fMarca','Marca (todas)','marca');
@@ -515,7 +551,7 @@ preencheSelect('fCalibre','Calibre (todos)','calibre');
 preencheSelect('fIpsc','Categoria IPSC (todas)','ipsc');
 document.getElementById('globalSearch').addEventListener('input', renderEstoque);
 preencheAddSelect();
-renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes();
+renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes(); renderHora(); renderOrc();
 </script>
 </body>
 </html>
