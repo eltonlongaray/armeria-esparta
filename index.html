@@ -109,7 +109,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
 /* chrome mobile (escondido no desktop) */
 .mobilebar{display:none}
-.bottomnav{display:none}
+.bottom-nav{display:none}
 
 @media(max-width:820px){
   body{display:block}
@@ -131,26 +131,33 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .filters .btn{flex:1 1 100%}
   .count-note{order:5;flex-basis:100%;margin:2px 0 0;text-align:center}
   .kpi .v{font-size:23px}
-  .bottomnav{display:flex;align-items:flex-end;justify-content:space-between;gap:2px;position:fixed;bottom:0;left:0;right:0;z-index:50;height:calc(78px + env(safe-area-inset-bottom));padding:0 8px calc(6px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#141821,#0a0c10);border-top:1px solid #05070a;box-shadow:0 -6px 20px rgba(0,0,0,.4)}
-  /* faixa dourada larga */
-  .bottomnav .navband{display:block;position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(180deg,#ffe793,#f4b400 48%,#a97e00);box-shadow:0 0 16px rgba(244,180,0,.6);border-bottom:1px solid rgba(0,0,0,.55)}
-  .bottomnav .navgroup{flex:1;display:flex;justify-content:space-around;align-items:flex-end;gap:2px;height:100%;padding-bottom:6px}
-  .bottomnav .navgroup a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.2px;padding:5px 3px;cursor:pointer;transition:color .15s,transform .15s;min-width:50px;text-align:center}
-  .bottomnav .navgroup a .bic{font-size:20px;line-height:1}
-  .bottomnav .navgroup a.active{color:var(--bronze)}
-  .bottomnav .navgroup a.active .bic{transform:translateY(-2px);filter:drop-shadow(0 0 6px rgba(244,180,0,.6))}
-  /* mira central (scope sniper) */
-  .bottomnav .scope{flex:0 0 auto;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;cursor:pointer;transform:translateY(-22px)}
-  .bottomnav .scope-optic{display:block;width:68px;height:56px;border-radius:15px;position:relative;background:radial-gradient(62% 60% at 42% 34%,rgba(120,205,255,.30),rgba(12,16,22,.92) 58%,#05070a 100%);border:2px solid var(--bronze);box-shadow:0 0 0 4px #0a0c10,0 8px 22px rgba(0,0,0,.55),0 0 22px rgba(244,180,0,.5),inset 0 0 16px rgba(0,0,0,.75)}
-  .bottomnav .scope-optic::before{content:"";position:absolute;top:6px;left:10px;width:28px;height:12px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);filter:blur(1px)}
-  .bottomnav .ch-h,.bottomnav .ch-v{position:absolute;background:rgba(244,180,0,.9)}
-  .bottomnav .ch-h{left:6px;right:6px;top:50%;height:1.5px;transform:translateY(-50%)}
-  .bottomnav .ch-v{top:6px;bottom:6px;left:50%;width:1.5px;transform:translateX(-50%)}
-  .bottomnav .ch-dot{position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;background:var(--bronze);transform:translate(-50%,-50%);box-shadow:0 0 10px var(--bronze);animation:reticle 2.4s ease-in-out infinite}
-  .bottomnav .scope-label{font-size:9.5px;font-weight:800;letter-spacing:1.3px;color:var(--bronze);text-shadow:0 1px 4px rgba(0,0,0,.6)}
-  .bottomnav .scope.active .scope-optic{box-shadow:0 0 0 4px #0a0c10,0 8px 22px rgba(0,0,0,.55),0 0 30px rgba(244,180,0,.85),inset 0 0 16px rgba(0,0,0,.75)}
-  @keyframes reticle{0%,100%{opacity:.85;box-shadow:0 0 8px var(--bronze)}50%{opacity:1;box-shadow:0 0 15px var(--bronze)}}
-  @media(prefers-reduced-motion:reduce){.bottomnav .ch-dot{animation:none}}
+  /* ===== CINTURÃO (belt) — portado do Falcon, tema Esparta, lente de vidro fosco ===== */
+  .bottom-nav{display:block;position:fixed;bottom:0;left:0;right:0;z-index:90;max-width:480px;margin:0 auto;overflow:visible;background:none;border:none;
+    clip-path:polygon(calc(50% - 84px) -24px, calc(50% + 84px) -24px, calc(50% + 84px) 26px, 100% 26px, 100% 100%, 0 100%, 0 26px, calc(50% - 84px) 26px)}
+  .belt-strap{position:relative;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .belt-strap::before{content:'';position:absolute;left:0;right:0;top:26px;bottom:0;z-index:0;
+    background:linear-gradient(180deg,#1c222c 0%,#12161d 52%,#090b0f 100%) left 0 top -26px / 100% 84px no-repeat;
+    border-top:2px solid var(--bronze);box-shadow:inset 0 -2px 6px rgba(0,0,0,.4),0 -2px 12px rgba(244,180,0,.22)}
+  .belt-track{position:relative;z-index:3;display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-ms-overflow-style:none;
+    padding:34px calc(50% - 44px) 13px;
+    clip-path:polygon(0 26px, calc(50% - 56px) 26px, calc(50% - 56px) 9px, calc(50% + 56px) 9px, calc(50% + 56px) 26px, 100% 26px, 100% 100%, 0 100%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
+    visibility:hidden}
+  .belt-track[data-pos="1"]{visibility:visible}
+  .belt-track::-webkit-scrollbar{display:none}
+  .belt-item{flex:0 0 88px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.2px;color:#f0d98a;opacity:.75;transform:scale(.78);transform-origin:center}
+  .belt-item .belt-ic{font-size:20px;line-height:1}
+  .belt-lbl{white-space:nowrap}
+  .belt-bump{position:absolute;z-index:1;pointer-events:none;left:50%;transform:translateX(-50%);top:2px;height:25px;width:126px;border-radius:22px 22px 0 0;border:1px solid var(--bronze);border-bottom:none;
+    background:linear-gradient(180deg,#1c222c 0%,#12161d 52%,#090b0f 100%) left 0 top 0 / 100% 84px no-repeat;box-shadow:inset 0 1px 0 rgba(246,226,122,.2)}
+  /* placa central = LENTE DE AUMENTO de vidro fosco (fundo embaçado) */
+  .belt-lens{position:absolute;z-index:2;pointer-events:none;left:50%;transform:translateX(-50%);top:9px;bottom:calc(6px + env(safe-area-inset-bottom,0px));width:112px;border-radius:15px;border:2px solid transparent;
+    background:radial-gradient(78% 78% at 42% 26%,rgba(255,255,255,.18),rgba(150,180,210,.10) 45%,rgba(14,18,24,.34) 100%);
+    -webkit-backdrop-filter:blur(7px) saturate(1.2);backdrop-filter:blur(7px) saturate(1.2);
+    box-shadow:0 0 18px rgba(244,180,0,.5),0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(253,243,189,.4),inset 0 -6px 14px rgba(0,0,0,.4)}
+  .belt-lens-frame{position:absolute;z-index:5;pointer-events:none;left:50%;transform:translateX(-50%);top:9px;bottom:calc(6px + env(safe-area-inset-bottom,0px));width:112px;border-radius:15px;border:2px solid var(--bronze)}
+  .belt-lens-frame::before{content:'';position:absolute;inset:4px;border-radius:11px;border:1px solid rgba(244,180,0,.42);box-shadow:inset 0 1px 0 rgba(253,243,189,.18)}
+  .belt-lens-frame::after{content:'';position:absolute;left:12px;right:12px;top:3px;height:20px;border-radius:13px 13px 50% 50%;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent)}
 }
 </style>
 </head>
@@ -255,12 +262,11 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <div id="osList"></div>
         <p class="mini" id="osHint" style="margin-top:6px">Adicione peças acima. Se uma já estiver comprometida com outro cliente, o sistema trava na hora.</p>
 
-        <h4 class="sec">Orçamento deste serviço</h4>
-        <div class="alert-line"><span>Custo das peças (soma automática)</span><span style="margin-left:auto;font-weight:600" class="tnum" id="orcPecas">R$ 0</span></div>
-        <div class="alert-line"><span>Valor cobrado no serviço</span><div class="row" style="margin-left:auto;gap:5px"><span class="mini">R$</span><input class="fin-input val" type="number" min="0" step="50" id="orcCobrado" value="1200" oninput="renderOrc()"></div></div>
-        <div class="alert-line"><span>Horas de trabalho</span><div class="row" style="margin-left:auto;gap:5px"><input class="fin-input" style="width:70px;text-align:right" type="number" min="0" step="0.5" id="orcHoras" value="4" oninput="renderOrc()"><span class="mini">h</span></div></div>
-        <div class="alert-line"><span>Mão de obra (cobrado − peças)</span><span style="margin-left:auto;font-weight:600" class="tnum" id="orcMao">R$ 0</span></div>
-        <div class="ok-box" style="margin-top:10px"><span>⏱️</span><div class="row" style="width:100%"><b>Sua hora neste serviço</b><span style="margin-left:auto;font-weight:800;color:var(--bronze);font-size:17px" class="tnum" id="orcHora">—</span></div></div>
+        <h4 class="sec">Orçamento deste serviço <span class="mini" style="font-weight:400;text-transform:none;letter-spacing:0">🔒 uso interno</span></h4>
+        <div class="alert-line"><span>Custo das peças (o que o Eduardo pagou)</span><span style="margin-left:auto;font-weight:600" class="tnum" id="orcPecas">R$ 0</span></div>
+        <div class="alert-line"><span>Valor cobrado do cliente</span><div class="row" style="margin-left:auto;gap:5px"><span class="mini">R$</span><input class="fin-input val" type="number" min="0" step="50" id="orcCobrado" value="1200" oninput="renderOrc()"></div></div>
+        <div class="alert-line" style="border:none"><span>Margem (cobrado − custo das peças)</span><span style="margin-left:auto;font-weight:700;color:var(--bronze)" class="tnum" id="orcMao">R$ 0</span></div>
+        <p class="mini" style="margin-top:8px">🔒 Só o Eduardo vê — não vai pro cliente. As <b>horas trabalhadas</b> ele registra ao <b>concluir o serviço</b> (na ficha da arma); é lá que sai o valor real da hora.</p>
       </div>
 
       <div class="card">
@@ -315,9 +321,9 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div class="card">
         <h3>Histórico de serviços</h3>
         <div class="timeline">
-          <div class="tl-item"><div class="tl-date">05/08/2026 · em andamento</div><b>Customização IPSC Standard</b><div class="mini">Funil + contrapeso + guia de mola. Peças reservadas.</div></div>
-          <div class="tl-item"><div class="tl-date">02/03/2026</div><b>Troca de percussor + polimento</b><div class="mini">Percussor alongado Imbel. R$ 320</div></div>
-          <div class="tl-item"><div class="tl-date">14/11/2025</div><b>Instalação de red dot + base mount</b><div class="mini">Base Esparta. R$ 540</div></div>
+          <div class="tl-item"><div class="tl-date">05/08/2026 · em andamento</div><b>Customização IPSC Standard</b><div class="mini">Funil + contrapeso + guia de mola. Peças reservadas.</div><button class="btn ghost sm" style="margin-top:8px" onclick="alert('Ao concluir, o Eduardo informa quantas HORAS levou. É aqui que a hora de trabalho é registrada — nunca no orçamento.')">✔ Concluir e registrar horas</button></div>
+          <div class="tl-item"><div class="tl-date">02/03/2026 · concluído</div><b>Troca de percussor + polimento</b><div class="mini">Percussor alongado Imbel · <b>1,5h</b> · cobrado R$ 320</div></div>
+          <div class="tl-item"><div class="tl-date">14/11/2025 · concluído</div><b>Instalação de red dot + base mount</b><div class="mini">Base Esparta · <b>2h</b> · cobrado R$ 540</div></div>
         </div>
       </div>
       <div class="card">
@@ -333,6 +339,14 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
   <!-- ===== FINANCEIRO ===== -->
   <section class="screen" id="financeiro">
+    <div class="card" style="margin-bottom:16px">
+      <h3>Faturamento</h3>
+      <div class="grid g3">
+        <div class="kpi"><div class="l">Mês atual (agosto)</div><div class="v up" id="fatAtual"></div></div>
+        <div class="kpi"><div class="l">Mês escolhido</div><select id="fatSel" style="background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 10px;font-size:13px;margin:3px 0"></select><div class="v" id="fatSelVal"></div></div>
+        <div class="kpi"><div class="l">Ano até agora (2026)</div><div class="v" style="color:var(--bronze)" id="fatAno"></div></div>
+      </div>
+    </div>
     <div class="grid g4">
       <div class="card kpi"><div class="l">Entrou (agosto)</div><div class="v up" id="fEntrou"></div></div>
       <div class="card kpi"><div class="l">Custo de peças</div><div class="v" id="fPecas"></div></div>
@@ -349,7 +363,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <h3>Quanto está valendo a sua hora?</h3>
         <div class="kpi" style="margin:8px 0 16px"><div class="v" style="color:var(--bronze)" id="horaMedia"></div><div class="l">média real: (cobrado − peças) ÷ horas dos últimos serviços</div></div>
         <div class="tbl-wrap"><table id="horaTbl"></table></div>
-        <div class="ok-box" style="margin-top:14px"><span>💡</span><div class="mini">Como o sistema sabe o <b>custo de cada peça</b>, ele desconta as peças do valor cobrado e mostra o que sobrou de <b>mão de obra por hora</b> — em cada serviço orçado.</div></div>
+        <div class="ok-box" style="margin-top:14px"><span>💡</span><div class="mini">Vem dos <b>serviços já concluídos</b>: em cada um o Eduardo registra as horas que levou, o sistema desconta o custo das peças e mostra <b>quanto valeu a hora</b>. Aí ele sabe se está cobrando certo.</div></div>
       </div>
     </div>
 
@@ -366,22 +380,6 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     </div>
   </section>
 
-  <nav class="bottomnav">
-    <div class="navband"></div>
-    <div class="navgroup">
-      <a data-s="inicio" class="active"><span class="bic">▚</span>Início</a>
-      <a data-s="estoque"><span class="bic">▤</span>Estoque</a>
-    </div>
-    <a data-s="custom" class="scope" aria-label="Nova OS — tomar a mira">
-      <span class="scope-optic"><span class="ch-h"></span><span class="ch-v"></span><span class="ch-dot"></span></span>
-      <span class="scope-label">NOVA OS</span>
-    </a>
-    <div class="navgroup">
-      <a data-s="cliente"><span class="bic">☻</span>Clientes</a>
-      <a data-s="arma"><span class="bic">▮</span>Armas</a>
-      <a data-s="financeiro"><span class="bic">₴</span>Financeiro</a>
-    </div>
-  </nav>
 </main>
 
 <script>
@@ -421,15 +419,77 @@ const titles={
   arma:["Armas & Histórico","Tudo que já foi feito em cada arma"],
   financeiro:["Financeiro","Seus números mastigados, sem caderno"]
 };
-function go(s){
-  document.querySelectorAll('.nav a, .bottomnav a').forEach(x=>x.classList.toggle('active', x.dataset.s===s));
+function switchScreen(s){
+  document.querySelectorAll('.nav a').forEach(x=>x.classList.toggle('active', x.dataset.s===s));
   document.querySelectorAll('.screen').forEach(sc=>sc.classList.toggle('active', sc.id===s));
   document.getElementById('pageTitle').childNodes[0].nodeValue=titles[s][0];
   document.getElementById('pageSub').textContent=titles[s][1];
   const mob=document.getElementById('mobSub'); if(mob) mob.textContent=titles[s][0];
   window.scrollTo(0,0);
 }
-document.querySelectorAll('.nav a, .bottomnav a').forEach(a=>a.onclick=()=>go(a.dataset.s));
+function go(s){ switchScreen(s); if(beltControl) beltControl.irPara(idxOf(s)); }
+document.querySelectorAll('.nav a').forEach(a=>a.onclick=()=>go(a.dataset.s));
+
+/* ===== CINTURÃO (belt) — mesmo sistema de rolagem do Falcon ===== */
+const TABS=[
+  {id:'inicio',ic:'▚',lbl:'Início'},
+  {id:'estoque',ic:'▤',lbl:'Estoque'},
+  {id:'custom',ic:'✚',lbl:'Nova OS'},
+  {id:'cliente',ic:'☻',lbl:'Clientes'},
+  {id:'arma',ic:'▮',lbl:'Armas'},
+  {id:'financeiro',ic:'₴',lbl:'Financeiro'}
+];
+const ITEM_W=88, CICLO=TABS.length, REPEATS=21, CENTRO=10, ESPERAS=[0,0,0,32,120,400];
+let beltControl=null;
+function idxOf(id){ return Math.max(0,TABS.findIndex(x=>x.id===id)); }
+function fazerLente(track,items){
+  let janela=[];
+  return ()=>{
+    const pos=track.scrollLeft/ITEM_W, c=Math.round(pos), nova=[];
+    for(let i=Math.max(0,c-3);i<=Math.min(items.length-1,c+3);i++) nova.push(i);
+    for(const i of janela){ if(nova.indexOf(i)===-1){ const el=items[i]; el.style.transform=''; el.style.opacity=''; el.style.filter=''; } }
+    for(const i of nova){
+      const d=Math.abs(i-pos), k=Math.max(0,1-d);
+      const dy=(2.5-11.5*k).toFixed(1);
+      const dx=(-Math.sign(i-pos)*28*Math.min(1,Math.max(0,d-1))).toFixed(1);
+      const el=items[i];
+      el.style.transform=`translate(${dx}px, ${dy}px) scale(${(0.78+0.42*k).toFixed(3)})`;
+      el.style.opacity=(0.75+0.25*k).toFixed(3);
+      el.style.filter=`grayscale(${((1-k)*0.2).toFixed(2)}) brightness(${(0.93+0.07*k).toFixed(2)})`;
+    }
+    janela=nova;
+  };
+}
+function wireBelt(track){
+  const nav=track.closest('.bottom-nav');
+  const items=[...track.querySelectorAll('.belt-item')];
+  if(!items.length) return {irPara(){}};
+  const idxAtivo=parseInt(nav?.dataset.idx||'0',10)||0;
+  const cicloPx=CICLO*ITEM_W, MIN_SEG=3*cicloPx, MAX_SEG=(REPEATS-3)*cicloPx;
+  const posDe=(i)=>i*ITEM_W;
+  let travado=true, teleportando=false, atual=CENTRO*CICLO+idxAtivo;
+  const pintarLente=fazerLente(track,items);
+  const talvezTeleportar=()=>{ if(teleportando)return; const sl=track.scrollLeft; if(sl>=MIN_SEG&&sl<MAX_SEG)return; teleportando=true; const dentro=((sl%cicloPx)+cicloPx)%cicloPx; const novo=CENTRO*cicloPx+dentro; track.scrollLeft=novo; atual=Math.round(novo/ITEM_W); setTimeout(()=>{teleportando=false;},0); };
+  const revelar=()=>{ pintarLente(); track.dataset.pos='1'; travado=false; };
+  const tentar=(i)=>{ if(track.clientWidth>0 && track.scrollWidth>track.clientWidth){ const alvo=posDe(atual); track.scrollLeft=alvo; revelar(); setTimeout(()=>{ if(Math.abs(track.scrollLeft-alvo)>2){track.scrollLeft=alvo;pintarLente();} },0); return; } if(i<ESPERAS.length) setTimeout(()=>tentar(i+1),ESPERAS[i]); else revelar(); };
+  tentar(0);
+  const rolarAte=(alvo)=>{ const inicio=track.scrollLeft; if(Math.abs(alvo-inicio)<2)return; const t0=(performance.now?performance.now():Date.now()); const DUR=420; let rodou=false; const passo=(agora)=>{ rodou=true; const t=Math.min(1,((agora||Date.now())-t0)/DUR); track.scrollLeft=inicio+(alvo-inicio)*(1-Math.pow(1-t,3)); if(t<1)requestAnimationFrame(passo); }; requestAnimationFrame(passo); setTimeout(()=>setTimeout(()=>{ if(!rodou)track.scrollLeft=alvo; },0),0); };
+  const irPara=(idxTab)=>{ const volta=Math.round((track.scrollLeft/ITEM_W - idxTab)/CICLO)*CICLO+idxTab; rolarAte(posDe(volta)); };
+  track.addEventListener('click',(ev)=>{ const alvo=ev.target.closest?.('.belt-item'); if(!alvo)return; const i=items.indexOf(alvo); if(i<0||Math.abs(track.scrollLeft-posDe(i))<2)return; ev.preventDefault(); rolarAte(posDe(i)); },true);
+  let parada;
+  track.addEventListener('scroll',()=>{ if(teleportando)return; pintarLente(); const i=Math.round(track.scrollLeft/ITEM_W); if(i!==atual) atual=i; clearTimeout(parada); parada=setTimeout(()=>{ talvezTeleportar(); if(travado)return; const id=TABS[((atual%CICLO)+CICLO)%CICLO].id; const scr=document.getElementById(id); if(scr && !scr.classList.contains('active')) switchScreen(id); },220); },{passive:true});
+  return { irPara };
+}
+function initBelt(active){
+  const idxAtivo=idxOf(active);
+  let itens='';
+  for(let v=0;v<REPEATS;v++) for(const tab of TABS) itens+=`<a href="javascript:void(0)" class="belt-item" data-tab="${tab.id}"><span class="belt-ic">${tab.ic}</span><span class="belt-lbl">${tab.lbl}</span></a>`;
+  const nav=document.createElement('nav');
+  nav.className='bottom-nav belt'; nav.dataset.active=active; nav.dataset.idx=idxAtivo;
+  nav.innerHTML=`<div class="belt-strap"><div class="belt-track">${itens}</div></div><div class="belt-bump"></div><div class="belt-lens"></div><div class="belt-lens-frame"></div>`;
+  document.body.appendChild(nav);
+  beltControl=wireBelt(nav.querySelector('.belt-track'));
+}
 
 /* ===== BLOCO 4: FILTROS DO ESTOQUE ===== */
 function unicos(campo){ return [...new Set(pecas.map(p=>p[campo]).filter(v=>v && v!=='—'))].sort(); }
@@ -599,11 +659,22 @@ function renderOrc(){
   const fmt=n=>'R$ '+Math.round(n).toLocaleString('pt-BR');
   const custoPecas=osItems.reduce((s,cod)=>{ const p=pecas.find(x=>x.cod===cod); return s+(p?p.custo:0); },0);
   const cobrado=Number(document.getElementById('orcCobrado').value||0);
-  const horas=Number(document.getElementById('orcHoras').value||0);
-  const mao=cobrado-custoPecas;
   document.getElementById('orcPecas').textContent=fmt(custoPecas);
-  document.getElementById('orcMao').textContent=fmt(mao);
-  document.getElementById('orcHora').textContent = horas>0 ? fmt(mao/horas)+'/h' : '—';
+  document.getElementById('orcMao').textContent=fmt(cobrado-custoPecas);
+}
+
+/* ===== BLOCO 7e: FATURAMENTO (mês atual, mês escolhido, ano até agora) ===== */
+const mesesFat=[['Janeiro',9800],['Fevereiro',11200],['Março',10450],['Abril',12800],['Maio',13100],['Junho',12250],['Julho',13600],['Agosto',14200]];
+function renderFaturamento(){
+  const fmt=n=>'R$ '+n.toLocaleString('pt-BR');
+  const atual=mesesFat[mesesFat.length-1];
+  document.getElementById('fatAtual').textContent=fmt(atual[1]);
+  document.getElementById('fatAno').textContent=fmt(mesesFat.reduce((s,m)=>s+m[1],0));
+  const sel=document.getElementById('fatSel');
+  sel.innerHTML=mesesFat.map((m,i)=>'<option value="'+i+'">'+m[0]+'</option>').join('');
+  sel.value=String(mesesFat.length-2); // Julho por padrão
+  const upd=()=>{ document.getElementById('fatSelVal').textContent=fmt(mesesFat[+sel.value][1]); };
+  sel.onchange=upd; upd();
 }
 
 /* ===== BLOCO 8: INIT ===== */
@@ -615,7 +686,8 @@ preencheSelect('fCalibre','Calibre (todos)','calibre');
 preencheSelect('fIpsc','Categoria IPSC (todas)','ipsc');
 document.getElementById('globalSearch').addEventListener('input', renderEstoque);
 preencheAddSelect();
-renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes(); renderHora(); renderOrc();
+renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento();
+initBelt('inicio');
 </script>
 </body>
 </html>
