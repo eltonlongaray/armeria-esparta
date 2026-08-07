@@ -78,7 +78,13 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 .fab-backdrop{position:fixed;inset:0;z-index:94;background:rgba(0,0,0,.5);display:none}
 .fab-backdrop.open{display:block}
 /* esteira de produção (kanban) */
-.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+/* sub-abas (dentro de Armas) */
+.subtabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.subtab{padding:8px 15px;border-radius:9px;border:1px solid var(--border);background:var(--panel);color:var(--muted);cursor:pointer;font-weight:600;font-size:12.5px}
+.subtab.active{background:var(--panel2);color:var(--bronze);border-color:var(--bronze-d)}
+.subview{display:none}
+.subview.active{display:block}
 .kan-col{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px}
 .kan-col h4{margin:0 0 10px;font-size:12px;letter-spacing:.3px;display:flex;align-items:center;gap:7px;font-weight:700}
 .kan-col .cnt{margin-left:auto;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:1px 8px;font-size:11px;color:var(--muted)}
@@ -170,12 +176,14 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .belt-sep{width:1px;align-self:center;height:36px;background:linear-gradient(180deg,transparent,rgba(244,180,0,.35),transparent);margin-bottom:12px}
   /* Início = lente central levantada */
   .belt-home{flex:0 0 auto;justify-content:flex-end;padding-bottom:8px}
-  .belt-home .belt-lens{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;transform:translateY(-22px);margin-bottom:-16px;
-    background:radial-gradient(72% 72% at 42% 28%,rgba(255,255,255,.2),rgba(150,180,210,.1) 45%,rgba(14,18,24,.55) 100%);
-    -webkit-backdrop-filter:blur(6px) saturate(1.2);backdrop-filter:blur(6px) saturate(1.2);
-    border:2px solid var(--bronze);box-shadow:0 0 22px rgba(244,180,0,.6),0 8px 18px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -5px 12px rgba(0,0,0,.4)}
-  .belt-home .belt-lens .belt-ic{font-size:30px;color:var(--bronze);filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
-  .belt-home.active .belt-lens{box-shadow:0 0 30px rgba(244,180,0,.9),0 8px 18px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -5px 12px rgba(0,0,0,.4)}
+  /* mira/red-dot da pistola — tela preta quadrada */
+  .belt-home .belt-lens{width:60px;height:60px;border-radius:14px;position:relative;transform:translateY(-22px);margin-bottom:-16px;
+    background:linear-gradient(160deg,#14181f,#05070a 72%);
+    border:2px solid var(--bronze);box-shadow:0 0 22px rgba(244,180,0,.55),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -6px 14px rgba(0,0,0,.65)}
+  .belt-home .belt-lens::before{content:'';position:absolute;top:6px;left:9px;width:22px;height:9px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent)}
+  .belt-home .belt-lens::after{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);background:#ff3b30;box-shadow:0 0 12px 2px rgba(255,59,48,.85);animation:reddot 2s ease-in-out infinite}
+  .belt-home.active .belt-lens{box-shadow:0 0 30px rgba(244,180,0,.85),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 14px rgba(0,0,0,.65)}
+  @keyframes reddot{0%,100%{opacity:.85}50%{opacity:1}}
   .fab-add{bottom:calc(106px + env(safe-area-inset-bottom))}
   .fab-menu{bottom:calc(174px + env(safe-area-inset-bottom))}
   .kanban{grid-template-columns:1fr}
@@ -222,19 +230,13 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div class="card kpi"><div class="ic-badge" style="background:rgba(230,144,43,.14)">🛠️</div><div class="v">12</div><div class="l">Customizações em andamento</div><div class="t">3 aguardando peça</div></div>
       <div class="card kpi"><div class="ic-badge" style="background:rgba(55,185,120,.13)">🎂</div><div class="v">2</div><div class="l">Aniversariantes do mês</div><div class="t up">Marcos (12) · Cléber (23)</div></div>
     </div>
-    <div class="grid g2" style="margin-top:16px">
-      <div class="card">
-        <h3>Próximas entregas</h3>
-        <div class="alert-line"><span class="dot" style="background:var(--red)"></span><b>Glock G34 — Marcos Vinícius</b><span class="mini" style="margin-left:auto">Amanhã · 05/08</span><span class="chip c-res">Aguardando 1 peça</span></div>
-        <div class="alert-line"><span class="dot" style="background:var(--amber)"></span><b>CZ Shadow 2 — Ana Prado</b><span class="mini" style="margin-left:auto">05/08</span><span class="chip c-livre">Pronta p/ montar</span></div>
-        <div class="alert-line"><span class="dot" style="background:var(--green)"></span><b>Taurus TS9 — Cléber Ramos</b><span class="mini" style="margin-left:auto">08/08</span><span class="chip c-livre">Em dia</span></div>
-        <div class="alert-line"><span class="dot" style="background:var(--green)"></span><b>Imbel MD7 — João Silva</b><span class="mini" style="margin-left:auto">12/08</span><span class="chip c-inst">Em montagem</span></div>
-      </div>
-      <div class="card">
-        <h3>🔔 Estoque baixo — repor</h3>
-        <div id="baixoList"></div>
-        <button class="btn ghost" style="margin-top:14px" onclick="go('estoque')">Ver no estoque</button>
-      </div>
+    <h4 class="sec" style="margin-top:22px">⚙️ Esteira de produção</h4>
+    <p class="mini" style="margin:-6px 0 12px">Tudo que está em produção agora, num olhar só — fila → esteira → pronta.</p>
+    <div class="kanban" id="kanban"></div>
+    <div class="card" style="margin-top:16px">
+      <h3>🔔 Estoque baixo — repor</h3>
+      <div id="baixoList"></div>
+      <button class="btn ghost" style="margin-top:14px" onclick="go('estoque')">Ver no estoque</button>
     </div>
   </section>
 
@@ -318,9 +320,6 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       </div>
     </div>
 
-    <h4 class="sec" style="margin-top:24px">⚙️ Esteira de produção</h4>
-    <p class="mini" style="margin:-6px 0 14px">Todas as OS abertas, do pedido à entrega. Arraste no sistema real pra mover de fase.</p>
-    <div class="kanban" id="kanban"></div>
   </section>
 
   <!-- ===== CLIENTE ===== -->
@@ -370,34 +369,77 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     </div>
   </section>
 
-  <!-- ===== ARMA & HISTÓRICO ===== -->
+  <!-- ===== ARMA (hub: Histórico / Pedidos / Documentos) ===== -->
   <section class="screen" id="arma">
     <div class="card">
-      <div class="row" style="gap:16px">
+      <div class="row" style="gap:16px;flex-wrap:wrap">
         <div class="avatar">🔫</div>
         <div><div style="font-size:19px;font-weight:700">Glock G34 · #204</div><div class="mini">Ger.3 · 9mm · IPSC Standard · dono: Marcos Vinícius Torres</div></div>
-        <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
-          <button class="btn ghost" onclick="compartilharGuia()">Guia de manutenção</button>
-          <button class="btn ghost" onclick="compartilharGuia()">🖨️ Compartilhar</button>
+        <button class="btn ghost" style="margin-left:auto">Editar arma</button>
+      </div>
+    </div>
+
+    <div class="subtabs">
+      <button class="subtab active" data-t="hist" onclick="armaTab('hist')">Histórico</button>
+      <button class="subtab" data-t="ped" onclick="armaTab('ped')">Pedidos (OS)</button>
+      <button class="subtab" data-t="doc" onclick="armaTab('doc')">Documentos</button>
+    </div>
+
+    <div class="subview active" data-t="hist">
+      <div class="grid g2">
+        <div class="card">
+          <h3>Histórico de serviços</h3>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-date">05/08/2026 · em andamento</div><b>Customização IPSC Standard</b><div class="mini">Funil + contrapeso + guia de mola. Peças reservadas.</div></div>
+            <div class="tl-item"><div class="tl-date">02/03/2026 · concluído</div><b>Troca de percussor + polimento</b><div class="mini">Percussor alongado Imbel · <b>1,5h</b> · cobrado R$ 320</div></div>
+            <div class="tl-item"><div class="tl-date">14/11/2025 · concluído</div><b>Instalação de red dot + base mount</b><div class="mini">Base Esparta · <b>2h</b> · cobrado R$ 540</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Fotos = cronômetro do serviço</h3>
+          <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div class="photo">📷 Antes</div><div class="photo">📷 Depois</div>
+          </div>
+          <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap">
+            <button class="btn" onclick="fotoAntes()">📷 Foto ANTES (inicia)</button>
+            <button class="btn ghost" onclick="fotoDepois()">📷 Foto DEPOIS (finaliza)</button>
+          </div>
+          <p class="mini" style="margin-top:10px">A foto <b>antes</b> marca o <b>início</b>; a foto <b>depois</b> marca o <b>fim</b>. O tempo entre as duas vira as <b>horas de trabalho</b> — sem precisar anotar nada.</p>
         </div>
       </div>
     </div>
-    <div class="grid g2" style="margin-top:16px">
+
+    <div class="subview" data-t="ped">
       <div class="card">
-        <h3>Histórico de serviços</h3>
-        <div class="timeline">
-          <div class="tl-item"><div class="tl-date">05/08/2026 · em andamento</div><b>Customização IPSC Standard</b><div class="mini">Funil + contrapeso + guia de mola. Peças reservadas.</div><button class="btn ghost sm" style="margin-top:8px" onclick="alert('Ao concluir, o Eduardo informa quantas HORAS levou. É aqui que a hora de trabalho é registrada — nunca no orçamento.')">✔ Concluir e registrar horas</button></div>
-          <div class="tl-item"><div class="tl-date">02/03/2026 · concluído</div><b>Troca de percussor + polimento</b><div class="mini">Percussor alongado Imbel · <b>1,5h</b> · cobrado R$ 320</div></div>
-          <div class="tl-item"><div class="tl-date">14/11/2025 · concluído</div><b>Instalação de red dot + base mount</b><div class="mini">Base Esparta · <b>2h</b> · cobrado R$ 540</div></div>
+        <div class="row" style="flex-wrap:wrap;gap:10px"><h3 style="margin:0">Pedidos desta arma</h3>
+          <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
+            <button class="btn ghost" onclick="compartilharOS()">🖨️ Compartilhar / Imprimir</button>
+            <button class="btn" onclick="addAcao('pedido')">+ Nova OS</button>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div class="alert-line"><b>OS #1042</b><span class="mini">Customização IPSC Standard · 3 peças</span><span class="chip c-res" style="margin-left:auto">Na esteira</span></div>
+          <div class="alert-line"><b>OS #0987</b><span class="mini">Troca de percussor + polimento</span><span class="chip c-livre" style="margin-left:auto">Concluída · 02/03</span></div>
+          <div class="alert-line" style="border:none"><b>OS #0921</b><span class="mini">Red dot + base mount</span><span class="chip c-livre" style="margin-left:auto">Concluída · 14/11</span></div>
         </div>
       </div>
-      <div class="card">
-        <h3>Fotos antes / depois</h3>
-        <div class="grid" style="grid-template-columns:1fr 1fr">
-          <div class="photo">📷 Antes</div><div class="photo">📷 Depois</div>
-          <div class="photo">📷 Detalhe 1</div><div class="photo">📷 Detalhe 2</div>
+    </div>
+
+    <div class="subview" data-t="doc">
+      <div class="grid g2">
+        <div class="card">
+          <h3>📄 CRAF — Registro da arma</h3>
+          <div class="field"><label>Número</label><div class="val">41.228-9</div></div>
+          <div class="field"><label>Validade</label><div class="val">14/09/2028</div></div>
+          <div class="photo" style="height:120px;margin-top:6px">📄 CRAF (imagem / PDF)</div>
+          <button class="btn ghost" style="margin-top:12px;width:100%" onclick="compartilharGuia()">🖨️ Compartilhar / Imprimir</button>
         </div>
-        <p class="mini" style="margin-top:12px">Registro visual de cada serviço — direto da câmera do celular.</p>
+        <div class="card">
+          <h3>🛠️ Guia de manutenção</h3>
+          <p class="mini">Acompanha o serviço: o que foi feito, peças trocadas, recomendações — pra entregar ao cliente e guardar (Exército).</p>
+          <div class="photo" style="height:120px;margin-top:6px">🛠️ Guia (PDF gerado)</div>
+          <button class="btn ghost" style="margin-top:12px;width:100%" onclick="compartilharGuia()">🖨️ Compartilhar / Imprimir</button>
+        </div>
       </div>
     </div>
   </section>
@@ -450,13 +492,11 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     <div class="belt-group">
       <a class="belt-item" data-s="estoque"><span class="belt-ic">▤</span><span class="belt-lbl">Estoque</span></a>
       <span class="belt-sep"></span>
-      <a class="belt-item" data-s="arma"><span class="belt-ic">▮</span><span class="belt-lbl">Armas</span></a>
-    </div>
-    <a class="belt-item belt-home active" data-s="inicio"><span class="belt-lens"><span class="belt-ic">⌂</span></span><span class="belt-lbl">Início</span></a>
-    <div class="belt-group">
       <a class="belt-item" data-s="cliente"><span class="belt-ic">☻</span><span class="belt-lbl">Clientes</span></a>
-      <span class="belt-sep"></span>
-      <a class="belt-item" data-s="custom"><span class="belt-ic">☰</span><span class="belt-lbl">Pedidos</span></a>
+    </div>
+    <a class="belt-item belt-home active" data-s="inicio"><span class="belt-lens"></span><span class="belt-lbl">No Alvo</span></a>
+    <div class="belt-group">
+      <a class="belt-item" data-s="arma"><span class="belt-ic">▮</span><span class="belt-lbl">Armas</span></a>
       <span class="belt-sep"></span>
       <a class="belt-item" data-s="financeiro"><span class="belt-ic">₴</span><span class="belt-lbl">Financeiro</span></a>
     </div>
@@ -502,9 +542,9 @@ function qtdChip(p){ return p.qtd<=2 ? '<span class="chip c-baixo">'+p.qtd+' un<
 const titles={
   inicio:["Início","Visão geral da oficina — hoje, 04/08/2026"],
   estoque:["Estoque de Peças","Cada peça: onde está, quantas tem, com quem está comprometida"],
-  custom:["Pedidos","OS em criação + esteira de produção (fila → esteira → pronta → entregue)"],
+  custom:["Nova OS","Abrir ordem de serviço e reservar peças — com trava anti-conflito"],
   cliente:["Clientes","Ficha completa do atirador — CRAF, aniversário e armas"],
-  arma:["Armas & Histórico","Tudo que já foi feito em cada arma"],
+  arma:["Armas","Ficha da arma — histórico, pedidos e documentos"],
   financeiro:["Financeiro","Seus números mastigados, sem caderno"]
 };
 function switchScreen(s){
@@ -538,20 +578,25 @@ const pedidos=[
   {n:1039,cli:'Cléber Ramos',arma:'Taurus TS9',ent:'08/08',st:'fila'},
   {n:1040,cli:'Ana Prado',arma:'CZ Shadow 2',ent:'09/08',st:'fila'},
   {n:1041,cli:'Rafael Dias',arma:'Glock G17',ent:'11/08',st:'fila'},
+  {n:1043,cli:'Tiago Melo',arma:'Taurus 1911',ent:'13/08',st:'fila'},
   {n:1042,cli:'Marcos Vinícius',arma:'Glock G34',ent:'05/08',st:'esteira'},
   {n:1036,cli:'João Silva',arma:'Imbel MD7',ent:'12/08',st:'esteira'},
   {n:1035,cli:'Pedro Alves',arma:'STI 2011',ent:'10/08',st:'esteira'},
   {n:1033,cli:'Lucas Martins',arma:'Glock G19',ent:'04/08',st:'pronta'},
   {n:1032,cli:'Diego Farias',arma:'Taurus 1911',ent:'04/08',st:'pronta'},
-  {n:1029,cli:'André Rocha',arma:'CZ Shadow 2',ent:'01/08',st:'entregue'},
-  {n:1028,cli:'Bruno Teles',arma:'Glock G34',ent:'30/07',st:'entregue'}
+  {n:1029,cli:'André Rocha',arma:'CZ Shadow 2',ent:'01/08',st:'pronta'}
 ];
 const kanCols=[
-  {id:'fila',lbl:'Na fila da esteira',ic:'🕒',cor:'var(--amber)'},
+  {id:'fila',lbl:'Na fila',ic:'🕒',cor:'var(--amber)'},
   {id:'esteira',lbl:'Na esteira',ic:'⚙️',cor:'var(--blue)'},
-  {id:'pronta',lbl:'Pronta p/ entrega',ic:'📦',cor:'var(--green)'},
-  {id:'entregue',lbl:'Entregue',ic:'✅',cor:'var(--muted)'}
+  {id:'pronta',lbl:'Pronta',ic:'✅',cor:'var(--green)'}
 ];
+function armaTab(t){
+  document.querySelectorAll('#arma .subtab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+  document.querySelectorAll('#arma .subview').forEach(v=>v.classList.toggle('active',v.dataset.t===t));
+}
+function fotoAntes(){ alert('📷 Foto ANTES\n\nTire ela só quando FOR INICIAR o serviço — o cronômetro do serviço começa agora.\n(início registrado: hoje 14:20)'); }
+function fotoDepois(){ alert('📷 Foto DEPOIS\n\nServiço finalizado (hoje 17:20). Trabalho: 3h.\nVou usar essas 3h pra calcular o valor da sua hora neste serviço, descontando as peças.'); }
 function renderPedidos(){
   const k=document.getElementById('kanban'); if(!k) return;
   k.innerHTML=kanCols.map(col=>{
