@@ -64,6 +64,28 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 .tbl-wrap::-webkit-scrollbar{height:7px}
 .tbl-wrap::-webkit-scrollbar-thumb{background:var(--bronze-d);border-radius:6px}
 .tbl-wrap::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:6px}
+/* botões +/- de estoque (ajuste manual) */
+.qbtn{width:24px;height:24px;border-radius:6px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;flex:0 0 auto}
+.qbtn:hover{border-color:var(--bronze-d);color:var(--bronze)}
+/* botão (+) flutuante + menu de adicionar */
+.fab-add{position:fixed;right:20px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:16px;background:linear-gradient(145deg,#ffe08a,#f4b400);color:#1a1206;font-size:30px;line-height:1;display:grid;place-items:center;border:none;box-shadow:0 8px 20px rgba(0,0,0,.45),0 0 16px rgba(244,180,0,.4);cursor:pointer;transition:transform .18s}
+.fab-add.open{transform:rotate(45deg)}
+.fab-menu{position:fixed;right:20px;bottom:92px;z-index:95;display:none;flex-direction:column;gap:12px;align-items:flex-end}
+.fab-menu.open{display:flex}
+.fab-menu a{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.fab-menu .fab-lbl{background:var(--panel);border:1px solid var(--border);color:var(--text);padding:8px 13px;border-radius:10px;font-weight:600;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+.fab-menu .fab-ic{width:46px;height:46px;border-radius:13px;background:linear-gradient(145deg,#ffe08a,#f4b400);color:#1a1206;display:grid;place-items:center;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+.fab-backdrop{position:fixed;inset:0;z-index:94;background:rgba(0,0,0,.5);display:none}
+.fab-backdrop.open{display:block}
+/* esteira de produção (kanban) */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kan-col{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px}
+.kan-col h4{margin:0 0 10px;font-size:12px;letter-spacing:.3px;display:flex;align-items:center;gap:7px;font-weight:700}
+.kan-col .cnt{margin-left:auto;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:1px 8px;font-size:11px;color:var(--muted)}
+.pedido-card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--bronze-d);border-radius:9px;padding:10px;margin-bottom:9px}
+.pedido-card:last-child{margin-bottom:0}
+.pedido-card .pc-top{font-weight:700;font-size:13px}
+.pedido-card .pc-sub{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
 table{width:100%;border-collapse:collapse;min-width:640px}
 th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--border)}
 td{padding:12px;border-bottom:1px solid var(--border);vertical-align:middle}
@@ -118,7 +140,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   html{overflow-x:clip}
   body{display:block;overflow-x:clip}
   .sidebar{display:none}
-  .main{padding:0 0 108px}
+  .main{padding:0 0 120px}
   .topbar{display:none}
   .screen{padding:14px}
   .mobilebar{display:flex;align-items:center;gap:11px;padding:13px 15px;position:sticky;top:0;z-index:40;background:linear-gradient(180deg,#161b24,rgba(14,16,20,.95));backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 8px 22px rgba(0,0,0,.3)}
@@ -137,33 +159,26 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .kpi .v{font-size:23px}
   #ajudantesList .alert-line{flex-wrap:wrap;gap:8px}
   .fin-input.nome{width:140px}
-  /* ===== CINTURÃO (belt) — portado do Falcon, tema Esparta, lente de vidro fosco ===== */
-  .bottom-nav{display:block;position:fixed;bottom:0;left:0;right:0;z-index:90;max-width:480px;margin:0 auto;overflow:visible;background:none;border:none;
-    clip-path:polygon(calc(50% - 84px) -24px, calc(50% + 84px) -24px, calc(50% + 84px) 26px, 100% 26px, 100% 100%, 0 100%, 0 26px, calc(50% - 84px) 26px)}
-  .belt-strap{position:relative;padding-bottom:env(safe-area-inset-bottom,0px)}
-  .belt-strap::before{content:'';position:absolute;left:0;right:0;top:26px;bottom:0;z-index:0;
-    background:linear-gradient(180deg,#1c222c 0%,#12161d 52%,#090b0f 100%) left 0 top -26px / 100% 84px no-repeat;
-    border-top:2px solid var(--bronze);box-shadow:inset 0 -2px 6px rgba(0,0,0,.4),0 -2px 12px rgba(244,180,0,.22)}
-  .belt-track{position:relative;z-index:3;display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-ms-overflow-style:none;
-    padding:34px calc(50% - 44px) 13px;
-    clip-path:polygon(0 26px, calc(50% - 56px) 26px, calc(50% - 56px) 9px, calc(50% + 56px) 9px, calc(50% + 56px) 26px, 100% 26px, 100% 100%, 0 100%);
-    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
-    visibility:hidden}
-  .belt-track[data-pos="1"]{visibility:visible}
-  .belt-track::-webkit-scrollbar{display:none}
-  .belt-item{flex:0 0 88px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.2px;color:#f0d98a;opacity:.75;transform:scale(.78);transform-origin:center}
-  .belt-item .belt-ic{font-size:20px;line-height:1}
-  .belt-lbl{white-space:nowrap}
-  .belt-bump{position:absolute;z-index:1;pointer-events:none;left:50%;transform:translateX(-50%);top:2px;height:25px;width:126px;border-radius:22px 22px 0 0;border:1px solid var(--bronze);border-bottom:none;
-    background:linear-gradient(180deg,#1c222c 0%,#12161d 52%,#090b0f 100%) left 0 top 0 / 100% 84px no-repeat;box-shadow:inset 0 1px 0 rgba(246,226,122,.2)}
-  /* placa central = LENTE DE AUMENTO de vidro fosco (fundo embaçado) */
-  .belt-lens{position:absolute;z-index:2;pointer-events:none;left:50%;transform:translateX(-50%);top:9px;bottom:calc(6px + env(safe-area-inset-bottom,0px));width:112px;border-radius:15px;border:2px solid transparent;
-    background:radial-gradient(78% 78% at 42% 26%,rgba(255,255,255,.18),rgba(150,180,210,.10) 45%,rgba(14,18,24,.34) 100%);
-    -webkit-backdrop-filter:blur(7px) saturate(1.2);backdrop-filter:blur(7px) saturate(1.2);
-    box-shadow:0 0 18px rgba(244,180,0,.5),0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(253,243,189,.4),inset 0 -6px 14px rgba(0,0,0,.4)}
-  .belt-lens-frame{position:absolute;z-index:5;pointer-events:none;left:50%;transform:translateX(-50%);top:9px;bottom:calc(6px + env(safe-area-inset-bottom,0px));width:112px;border-radius:15px;border:2px solid var(--bronze)}
-  .belt-lens-frame::before{content:'';position:absolute;inset:4px;border-radius:11px;border:1px solid rgba(244,180,0,.42);box-shadow:inset 0 1px 0 rgba(253,243,189,.18)}
-  .belt-lens-frame::after{content:'';position:absolute;left:12px;right:12px;top:3px;height:20px;border-radius:13px 13px 50% 50%;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent)}
+  /* ===== MENU INFERIOR FIXO — Início no centro, tarja Esparta larga ===== */
+  .bottom-nav{display:flex;align-items:flex-end;justify-content:space-around;position:fixed;bottom:0;left:0;right:0;z-index:90;max-width:520px;margin:0 auto;height:calc(94px + env(safe-area-inset-bottom));padding:0 4px calc(7px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#1c222c 0%,#12161d 55%,#090b0f 100%);border-top:1px solid #05070a;box-shadow:0 -6px 22px rgba(0,0,0,.45)}
+  .bottom-nav .belt-band{position:absolute;top:0;left:0;right:0;height:10px;background:linear-gradient(180deg,#ffe793,#f4b400 48%,#a97e00);box-shadow:0 0 18px rgba(244,180,0,.6);border-bottom:1px solid rgba(0,0,0,.5)}
+  .belt-group{flex:1;display:flex;justify-content:space-around;align-items:flex-end;height:100%}
+  .belt-item{display:flex;flex-direction:column;align-items:center;gap:5px;color:#8b93a3;text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.2px;padding:18px 2px 8px;cursor:pointer;transition:color .15s}
+  .belt-item .belt-ic{font-size:26px;line-height:1}
+  .belt-item.active{color:var(--bronze)}
+  .belt-item.active .belt-ic{filter:drop-shadow(0 0 6px rgba(244,180,0,.55))}
+  .belt-sep{width:1px;align-self:center;height:36px;background:linear-gradient(180deg,transparent,rgba(244,180,0,.35),transparent);margin-bottom:12px}
+  /* Início = lente central levantada */
+  .belt-home{flex:0 0 auto;justify-content:flex-end;padding-bottom:8px}
+  .belt-home .belt-lens{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;transform:translateY(-22px);margin-bottom:-16px;
+    background:radial-gradient(72% 72% at 42% 28%,rgba(255,255,255,.2),rgba(150,180,210,.1) 45%,rgba(14,18,24,.55) 100%);
+    -webkit-backdrop-filter:blur(6px) saturate(1.2);backdrop-filter:blur(6px) saturate(1.2);
+    border:2px solid var(--bronze);box-shadow:0 0 22px rgba(244,180,0,.6),0 8px 18px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -5px 12px rgba(0,0,0,.4)}
+  .belt-home .belt-lens .belt-ic{font-size:30px;color:var(--bronze);filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  .belt-home.active .belt-lens{box-shadow:0 0 30px rgba(244,180,0,.9),0 8px 18px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -5px 12px rgba(0,0,0,.4)}
+  .fab-add{bottom:calc(106px + env(safe-area-inset-bottom))}
+  .fab-menu{bottom:calc(174px + env(safe-area-inset-bottom))}
+  .kanban{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -225,6 +240,21 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
   <!-- ===== ESTOQUE ===== -->
   <section class="screen" id="estoque">
+    <div class="card" id="novaPecaForm" style="display:none;margin-bottom:16px">
+      <h3>Cadastrar nova peça</h3>
+      <div class="grid g3">
+        <div class="field"><label>Tipo</label><input class="fin-input" style="width:100%" placeholder="Guia de mola, funil..."></div>
+        <div class="field"><label>Marca</label><input class="fin-input" style="width:100%"></div>
+        <div class="field"><label>Modelo</label><input class="fin-input" style="width:100%"></div>
+        <div class="field"><label>Geração</label><input class="fin-input" style="width:100%" placeholder="Ger.3..."></div>
+        <div class="field"><label>Calibre</label><input class="fin-input" style="width:100%" placeholder="9mm..."></div>
+        <div class="field"><label>Categoria IPSC</label><select class="fin-input" style="width:100%"><option>—</option><option>Standard</option><option>Light</option><option>Open</option><option>Optics</option></select></div>
+        <div class="field"><label>📍 Local onde fica guardada</label><select class="fin-input" id="novaPecaLocal" style="width:100%"></select></div>
+        <div class="field"><label>Quantidade</label><input class="fin-input" style="width:100%" type="number" value="1"></div>
+        <div class="field"><label>Custo (R$)</label><input class="fin-input" style="width:100%" type="number"></div>
+      </div>
+      <div class="row" style="gap:10px;margin-top:6px"><button class="btn" onclick="salvarPeca()">Salvar peça</button><button class="btn ghost" onclick="abrirNovaPeca(false)">Cancelar</button></div>
+    </div>
     <div class="filters">
       <select id="fTipo"></select>
       <select id="fMarca"></select>
@@ -234,7 +264,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <select id="fIpsc"></select>
       <button class="btn ghost sm" onclick="limparFiltros()">Limpar</button>
       <span class="count-note" id="estCount"></span>
-      <button class="btn" onclick="alert('No sistema real: abre o formulário de cadastro de peça.')">+ Nova peça</button>
+      <button class="btn" onclick="abrirNovaPeca()">+ Nova peça</button>
     </div>
     <div class="card" style="padding:0">
       <div class="tbl-wrap">
@@ -250,8 +280,11 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   <!-- ===== NOVA CUSTOMIZAÇÃO ===== -->
   <section class="screen" id="custom">
     <div class="row" style="margin-bottom:16px;flex-wrap:wrap;gap:10px;align-items:center">
-      <div><div style="font-size:16px;font-weight:700" id="osNumero">Ordem de Serviço #1042</div><div class="mini">Preencha a arma, as peças e salve a OS</div></div>
-      <button class="btn" style="margin-left:auto" onclick="novaOS()">+ Nova OS</button>
+      <div><div style="font-size:16px;font-weight:700" id="osNumero">Ordem de Serviço #1042</div><div class="mini">OS aberta sendo criada — preencha e salve</div></div>
+      <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost" onclick="compartilharOS()">🖨️ Compartilhar / Imprimir</button>
+        <button class="btn" onclick="novaOS()">+ Nova OS</button>
+      </div>
     </div>
     <div class="grid g2">
       <div class="card">
@@ -284,6 +317,10 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <button class="btn" style="width:100%;margin-top:16px" onclick="salvarOS()">Salvar OS e reservar peças</button>
       </div>
     </div>
+
+    <h4 class="sec" style="margin-top:24px">⚙️ Esteira de produção</h4>
+    <p class="mini" style="margin:-6px 0 14px">Todas as OS abertas, do pedido à entrega. Arraste no sistema real pra mover de fase.</p>
+    <div class="kanban" id="kanban"></div>
   </section>
 
   <!-- ===== CLIENTE ===== -->
@@ -339,7 +376,10 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div class="row" style="gap:16px">
         <div class="avatar">🔫</div>
         <div><div style="font-size:19px;font-weight:700">Glock G34 · #204</div><div class="mini">Ger.3 · 9mm · IPSC Standard · dono: Marcos Vinícius Torres</div></div>
-        <button class="btn ghost" style="margin-left:auto">Guia de manutenção</button>
+        <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
+          <button class="btn ghost" onclick="compartilharGuia()">Guia de manutenção</button>
+          <button class="btn ghost" onclick="compartilharGuia()">🖨️ Compartilhar</button>
+        </div>
       </div>
     </div>
     <div class="grid g2" style="margin-top:16px">
@@ -405,6 +445,29 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     </div>
   </section>
 
+  <nav class="bottom-nav">
+    <div class="belt-band"></div>
+    <div class="belt-group">
+      <a class="belt-item" data-s="estoque"><span class="belt-ic">▤</span><span class="belt-lbl">Estoque</span></a>
+      <span class="belt-sep"></span>
+      <a class="belt-item" data-s="arma"><span class="belt-ic">▮</span><span class="belt-lbl">Armas</span></a>
+    </div>
+    <a class="belt-item belt-home active" data-s="inicio"><span class="belt-lens"><span class="belt-ic">⌂</span></span><span class="belt-lbl">Início</span></a>
+    <div class="belt-group">
+      <a class="belt-item" data-s="cliente"><span class="belt-ic">☻</span><span class="belt-lbl">Clientes</span></a>
+      <span class="belt-sep"></span>
+      <a class="belt-item" data-s="custom"><span class="belt-ic">☰</span><span class="belt-lbl">Pedidos</span></a>
+      <span class="belt-sep"></span>
+      <a class="belt-item" data-s="financeiro"><span class="belt-ic">₴</span><span class="belt-lbl">Financeiro</span></a>
+    </div>
+  </nav>
+  <div class="fab-backdrop" id="fabBackdrop" onclick="toggleFab(false)"></div>
+  <div class="fab-menu" id="fabMenu">
+    <a onclick="addAcao('pedido')"><span class="fab-lbl">Novo pedido (OS)</span><span class="fab-ic">☰</span></a>
+    <a onclick="addAcao('cliente')"><span class="fab-lbl">Novo cliente</span><span class="fab-ic">☻</span></a>
+    <a onclick="addAcao('peca')"><span class="fab-lbl">Nova peça</span><span class="fab-ic">▤</span></a>
+  </div>
+  <button class="fab-add" id="fabAdd" onclick="toggleFab()" aria-label="Adicionar">+</button>
 </main>
 
 <script>
@@ -439,82 +502,92 @@ function qtdChip(p){ return p.qtd<=2 ? '<span class="chip c-baixo">'+p.qtd+' un<
 const titles={
   inicio:["Início","Visão geral da oficina — hoje, 04/08/2026"],
   estoque:["Estoque de Peças","Cada peça: onde está, quantas tem, com quem está comprometida"],
-  custom:["Nova Customização","Abrir OS e reservar peças — com trava anti-conflito"],
+  custom:["Pedidos","OS em criação + esteira de produção (fila → esteira → pronta → entregue)"],
   cliente:["Clientes","Ficha completa do atirador — CRAF, aniversário e armas"],
   arma:["Armas & Histórico","Tudo que já foi feito em cada arma"],
   financeiro:["Financeiro","Seus números mastigados, sem caderno"]
 };
 function switchScreen(s){
-  document.querySelectorAll('.nav a').forEach(x=>x.classList.toggle('active', x.dataset.s===s));
+  document.querySelectorAll('.nav a, .belt-item').forEach(x=>x.classList.toggle('active', x.dataset.s===s));
   document.querySelectorAll('.screen').forEach(sc=>sc.classList.toggle('active', sc.id===s));
   document.getElementById('pageTitle').childNodes[0].nodeValue=titles[s][0];
   document.getElementById('pageSub').textContent=titles[s][1];
   const mob=document.getElementById('mobSub'); if(mob) mob.textContent=titles[s][0];
   window.scrollTo(0,0);
 }
-function go(s){ switchScreen(s); if(beltControl) beltControl.irPara(idxOf(s)); }
-document.querySelectorAll('.nav a').forEach(a=>a.onclick=()=>go(a.dataset.s));
+function go(s){ switchScreen(s); }
+document.querySelectorAll('.nav a, .belt-item').forEach(a=>a.onclick=()=>go(a.dataset.s));
 
-/* ===== CINTURÃO (belt) — mesmo sistema de rolagem do Falcon ===== */
-const TABS=[
-  {id:'inicio',ic:'▚',lbl:'Início'},
-  {id:'estoque',ic:'▤',lbl:'Estoque'},
-  {id:'custom',ic:'✚',lbl:'Nova OS'},
-  {id:'cliente',ic:'☻',lbl:'Clientes'},
-  {id:'arma',ic:'▮',lbl:'Armas'},
-  {id:'financeiro',ic:'₴',lbl:'Financeiro'}
+/* ===== MENU (+) FLUTUANTE — adicionar peça / cliente / pedido ===== */
+let fabOpen=false;
+function toggleFab(force){
+  fabOpen=(typeof force==='boolean')?force:!fabOpen;
+  document.getElementById('fabMenu').classList.toggle('open',fabOpen);
+  document.getElementById('fabAdd').classList.toggle('open',fabOpen);
+  document.getElementById('fabBackdrop').classList.toggle('open',fabOpen);
+}
+function addAcao(tipo){
+  toggleFab(false);
+  if(tipo==='peca'){ go('estoque'); abrirNovaPeca(); }
+  else if(tipo==='cliente'){ go('cliente'); const f=document.getElementById('novoClienteForm'); if(f){ f.style.display='block'; f.scrollIntoView({behavior:'smooth',block:'nearest'}); } }
+  else if(tipo==='pedido'){ novaOS(); }
+}
+
+/* ===== PEDIDOS (esteira de produção) ===== */
+const pedidos=[
+  {n:1039,cli:'Cléber Ramos',arma:'Taurus TS9',ent:'08/08',st:'fila'},
+  {n:1040,cli:'Ana Prado',arma:'CZ Shadow 2',ent:'09/08',st:'fila'},
+  {n:1041,cli:'Rafael Dias',arma:'Glock G17',ent:'11/08',st:'fila'},
+  {n:1042,cli:'Marcos Vinícius',arma:'Glock G34',ent:'05/08',st:'esteira'},
+  {n:1036,cli:'João Silva',arma:'Imbel MD7',ent:'12/08',st:'esteira'},
+  {n:1035,cli:'Pedro Alves',arma:'STI 2011',ent:'10/08',st:'esteira'},
+  {n:1033,cli:'Lucas Martins',arma:'Glock G19',ent:'04/08',st:'pronta'},
+  {n:1032,cli:'Diego Farias',arma:'Taurus 1911',ent:'04/08',st:'pronta'},
+  {n:1029,cli:'André Rocha',arma:'CZ Shadow 2',ent:'01/08',st:'entregue'},
+  {n:1028,cli:'Bruno Teles',arma:'Glock G34',ent:'30/07',st:'entregue'}
 ];
-const ITEM_W=88, CICLO=TABS.length, REPEATS=21, CENTRO=10, ESPERAS=[0,0,0,32,120,400];
-let beltControl=null;
-function idxOf(id){ return Math.max(0,TABS.findIndex(x=>x.id===id)); }
-function fazerLente(track,items){
-  let janela=[];
-  return ()=>{
-    const pos=track.scrollLeft/ITEM_W, c=Math.round(pos), nova=[];
-    for(let i=Math.max(0,c-3);i<=Math.min(items.length-1,c+3);i++) nova.push(i);
-    for(const i of janela){ if(nova.indexOf(i)===-1){ const el=items[i]; el.style.transform=''; el.style.opacity=''; el.style.filter=''; } }
-    for(const i of nova){
-      const d=Math.abs(i-pos), k=Math.max(0,1-d);
-      const dy=(2.5-11.5*k).toFixed(1);
-      const dx=(-Math.sign(i-pos)*28*Math.min(1,Math.max(0,d-1))).toFixed(1);
-      const el=items[i];
-      el.style.transform=`translate(${dx}px, ${dy}px) scale(${(0.78+0.42*k).toFixed(3)})`;
-      el.style.opacity=(0.75+0.25*k).toFixed(3);
-      el.style.filter=`grayscale(${((1-k)*0.2).toFixed(2)}) brightness(${(0.93+0.07*k).toFixed(2)})`;
-    }
-    janela=nova;
-  };
+const kanCols=[
+  {id:'fila',lbl:'Na fila da esteira',ic:'🕒',cor:'var(--amber)'},
+  {id:'esteira',lbl:'Na esteira',ic:'⚙️',cor:'var(--blue)'},
+  {id:'pronta',lbl:'Pronta p/ entrega',ic:'📦',cor:'var(--green)'},
+  {id:'entregue',lbl:'Entregue',ic:'✅',cor:'var(--muted)'}
+];
+function renderPedidos(){
+  const k=document.getElementById('kanban'); if(!k) return;
+  k.innerHTML=kanCols.map(col=>{
+    const cards=pedidos.filter(p=>p.st===col.id);
+    return '<div class="kan-col"><h4><span style="color:'+col.cor+'">'+col.ic+'</span> '+col.lbl+'<span class="cnt">'+cards.length+'</span></h4>'+
+      cards.map(p=>'<div class="pedido-card" style="border-left-color:'+col.cor+'"><div class="pc-top">OS #'+p.n+'</div><div class="pc-sub">'+p.cli+' · '+p.arma+'<br>entrega '+p.ent+'</div></div>').join('')+
+      '</div>';
+  }).join('');
 }
-function wireBelt(track){
-  const nav=track.closest('.bottom-nav');
-  const items=[...track.querySelectorAll('.belt-item')];
-  if(!items.length) return {irPara(){}};
-  const idxAtivo=parseInt(nav?.dataset.idx||'0',10)||0;
-  const cicloPx=CICLO*ITEM_W, MIN_SEG=3*cicloPx, MAX_SEG=(REPEATS-3)*cicloPx;
-  const posDe=(i)=>i*ITEM_W;
-  let travado=true, teleportando=false, atual=CENTRO*CICLO+idxAtivo;
-  const pintarLente=fazerLente(track,items);
-  const talvezTeleportar=()=>{ if(teleportando)return; const sl=track.scrollLeft; if(sl>=MIN_SEG&&sl<MAX_SEG)return; teleportando=true; const dentro=((sl%cicloPx)+cicloPx)%cicloPx; const novo=CENTRO*cicloPx+dentro; track.scrollLeft=novo; atual=Math.round(novo/ITEM_W); setTimeout(()=>{teleportando=false;},0); };
-  const revelar=()=>{ pintarLente(); track.dataset.pos='1'; travado=false; };
-  const tentar=(i)=>{ if(track.clientWidth>0 && track.scrollWidth>track.clientWidth){ const alvo=posDe(atual); track.scrollLeft=alvo; revelar(); setTimeout(()=>{ if(Math.abs(track.scrollLeft-alvo)>2){track.scrollLeft=alvo;pintarLente();} },0); return; } if(i<ESPERAS.length) setTimeout(()=>tentar(i+1),ESPERAS[i]); else revelar(); };
-  tentar(0);
-  const rolarAte=(alvo)=>{ const inicio=track.scrollLeft; if(Math.abs(alvo-inicio)<2)return; const t0=(performance.now?performance.now():Date.now()); const DUR=420; let rodou=false; const passo=(agora)=>{ rodou=true; const t=Math.min(1,((agora||Date.now())-t0)/DUR); track.scrollLeft=inicio+(alvo-inicio)*(1-Math.pow(1-t,3)); if(t<1)requestAnimationFrame(passo); }; requestAnimationFrame(passo); setTimeout(()=>setTimeout(()=>{ if(!rodou)track.scrollLeft=alvo; },0),0); };
-  const irPara=(idxTab)=>{ const volta=Math.round((track.scrollLeft/ITEM_W - idxTab)/CICLO)*CICLO+idxTab; rolarAte(posDe(volta)); };
-  track.addEventListener('click',(ev)=>{ const alvo=ev.target.closest?.('.belt-item'); if(!alvo)return; const i=items.indexOf(alvo); if(i<0||Math.abs(track.scrollLeft-posDe(i))<2)return; ev.preventDefault(); rolarAte(posDe(i)); },true);
-  let parada;
-  track.addEventListener('scroll',()=>{ if(teleportando)return; pintarLente(); const i=Math.round(track.scrollLeft/ITEM_W); if(i!==atual) atual=i; clearTimeout(parada); parada=setTimeout(()=>{ talvezTeleportar(); if(travado)return; const id=TABS[((atual%CICLO)+CICLO)%CICLO].id; const scr=document.getElementById(id); if(scr && !scr.classList.contains('active')) switchScreen(id); },220); },{passive:true});
-  return { irPara };
+
+/* ===== ESTOQUE: cadastro de peça (com local) + ajuste manual ===== */
+const LOCAIS=['Gaveta A1','Gaveta A2','Gaveta A3','Gaveta B1','Gaveta B2','Gaveta C2','Prateleira 3','Prateleira 4','Caixa 7','Caixa 8'];
+function abrirNovaPeca(show){
+  const f=document.getElementById('novaPecaForm'); if(!f) return;
+  if(show===false){ f.style.display='none'; return; }
+  const sel=document.getElementById('novaPecaLocal');
+  if(sel && !sel.options.length) sel.innerHTML=LOCAIS.map(l=>'<option>'+l+'</option>').join('');
+  f.style.display='block'; f.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function initBelt(active){
-  const idxAtivo=idxOf(active);
-  let itens='';
-  for(let v=0;v<REPEATS;v++) for(const tab of TABS) itens+=`<a href="javascript:void(0)" class="belt-item" data-tab="${tab.id}"><span class="belt-ic">${tab.ic}</span><span class="belt-lbl">${tab.lbl}</span></a>`;
-  const nav=document.createElement('nav');
-  nav.className='bottom-nav belt'; nav.dataset.active=active; nav.dataset.idx=idxAtivo;
-  nav.innerHTML=`<div class="belt-strap"><div class="belt-track">${itens}</div></div><div class="belt-bump"></div><div class="belt-lens"></div><div class="belt-lens-frame"></div>`;
-  document.body.appendChild(nav);
-  beltControl=wireBelt(nav.querySelector('.belt-track'));
+function salvarPeca(){ alert('Peça cadastrada! (No sistema real ela entra no estoque no local escolhido.)'); abrirNovaPeca(false); }
+function ajustarQtd(cod,delta){
+  const p=pecas.find(x=>x.cod===cod); if(!p) return;
+  if(delta<0){
+    if(p.qtd<=0){ alert('Estoque desta peça já está em 0.'); return; }
+    const motivo=prompt('Motivo da baixa? (venda, uso em serviço, perda, ajuste de contagem...)');
+    if(!motivo) return;
+    p.qtd-=1;
+  } else {
+    const motivo=prompt('Motivo da entrada? (compra, devolução, ajuste de contagem...)');
+    if(motivo===null) return;
+    p.qtd+=1;
+  }
+  renderEstoque(); renderInicio(); renderDisp();
 }
+function compartilharOS(){ alert('No sistema real: gera a OS em PDF/link pra você IMPRIMIR ou mandar no WhatsApp do cliente.'); }
+function compartilharGuia(){ alert('No sistema real: gera a guia de manutenção / CRAF em PDF pra imprimir ou compartilhar.'); }
 
 /* ===== BLOCO 4: FILTROS DO ESTOQUE ===== */
 function unicos(campo){ return [...new Set(pecas.map(p=>p[campo]).filter(v=>v && v!=='—'))].sort(); }
@@ -543,7 +616,11 @@ function renderEstoque(){
   else body.innerHTML=lista.map(p=>{
     const tags=[p.marca,p.modelo,p.geracao,p.calibre,p.ipsc].filter(v=>v&&v!=='—').map(v=>'<span>'+v+'</span>').join('');
     return '<tr><td><div class="pname">'+p.tipo+'</div><div class="psub">cód. '+p.cod+'</div></td>'+
-      '<td class="tags">'+tags+'</td><td>'+p.local+'</td><td class="tnum">R$ '+p.custo+'</td><td>'+qtdChip(p)+'</td><td>'+statusChip(p)+'</td></tr>';
+      '<td class="tags">'+tags+'</td><td>'+p.local+'</td><td class="tnum">R$ '+p.custo+'</td>'+
+      '<td><div class="row" style="gap:6px">'+
+        '<button class="qbtn" onclick="ajustarQtd(\''+p.cod+'\',-1)" title="Dar baixa (pede motivo)">−</button>'+qtdChip(p)+
+        '<button class="qbtn" onclick="ajustarQtd(\''+p.cod+'\',1)" title="Adicionar (pede motivo)">+</button></div></td>'+
+      '<td>'+statusChip(p)+'</td></tr>';
   }).join('');
   document.getElementById('estCount').textContent=lista.length+' de '+pecas.length+' peças';
 }
@@ -732,8 +809,7 @@ preencheSelect('fCalibre','Calibre (todos)','calibre');
 preencheSelect('fIpsc','Categoria IPSC (todas)','ipsc');
 document.getElementById('globalSearch').addEventListener('input', renderEstoque);
 preencheAddSelect();
-renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento();
-initBelt('inicio');
+renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento(); renderPedidos();
 </script>
 </body>
 </html>
