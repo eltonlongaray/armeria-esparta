@@ -68,13 +68,13 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 .qbtn{width:24px;height:24px;border-radius:6px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;flex:0 0 auto}
 .qbtn:hover{border-color:var(--bronze-d);color:var(--bronze)}
 /* botão (+) flutuante + menu de adicionar */
-.fab-add{position:fixed;right:20px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:16px;background:linear-gradient(145deg,#ffe08a,#f4b400);color:#1a1206;font-size:30px;line-height:1;display:grid;place-items:center;border:none;box-shadow:0 8px 20px rgba(0,0,0,.45),0 0 16px rgba(244,180,0,.4);cursor:pointer;transition:transform .18s}
+.fab-add{position:fixed;right:20px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:16px;background:var(--bronze);color:#1a1206;font-size:30px;line-height:1;display:grid;place-items:center;border:none;box-shadow:0 8px 20px rgba(0,0,0,.45);cursor:pointer;transition:transform .18s}
 .fab-add.open{transform:rotate(45deg)}
 .fab-menu{position:fixed;right:20px;bottom:92px;z-index:95;display:none;flex-direction:column;gap:12px;align-items:flex-end}
 .fab-menu.open{display:flex}
 .fab-menu a{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
 .fab-menu .fab-lbl{background:var(--panel);border:1px solid var(--border);color:var(--text);padding:8px 13px;border-radius:10px;font-weight:600;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.45)}
-.fab-menu .fab-ic{width:46px;height:46px;border-radius:13px;background:linear-gradient(145deg,#ffe08a,#f4b400);color:#1a1206;display:grid;place-items:center;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+.fab-menu .fab-ic{width:46px;height:46px;border-radius:13px;background:var(--bronze);color:#1a1206;display:grid;place-items:center;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.45)}
 .fab-backdrop{position:fixed;inset:0;z-index:94;background:rgba(0,0,0,.5);display:none}
 .fab-backdrop.open{display:block}
 /* esteira de produção (kanban) */
@@ -167,7 +167,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .fin-input.nome{width:140px}
   /* ===== MENU INFERIOR FIXO — Início no centro, tarja Esparta larga ===== */
   .bottom-nav{display:flex;align-items:flex-end;justify-content:space-around;position:fixed;bottom:0;left:0;right:0;z-index:90;max-width:520px;margin:0 auto;height:calc(94px + env(safe-area-inset-bottom));padding:0 4px calc(7px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#1c222c 0%,#12161d 55%,#090b0f 100%);border-top:1px solid #05070a;box-shadow:0 -6px 22px rgba(0,0,0,.45)}
-  .bottom-nav .belt-band{position:absolute;top:0;left:0;right:0;height:10px;background:linear-gradient(180deg,#ffe793,#f4b400 48%,#a97e00);box-shadow:0 0 18px rgba(244,180,0,.6);border-bottom:1px solid rgba(0,0,0,.5)}
+  .bottom-nav .belt-band{position:absolute;top:0;left:0;right:0;height:2px;background:var(--bronze);box-shadow:0 0 6px rgba(244,180,0,.4)}
   .belt-group{flex:1;display:flex;justify-content:space-around;align-items:flex-end;height:100%}
   .belt-item{display:flex;flex-direction:column;align-items:center;gap:5px;color:#8b93a3;text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.2px;padding:18px 2px 8px;cursor:pointer;transition:color .15s}
   .belt-item .belt-ic{font-size:26px;line-height:1}
@@ -177,12 +177,13 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   /* Início = lente central levantada */
   .belt-home{flex:0 0 auto;justify-content:flex-end;padding-bottom:8px}
   /* mira/red-dot da pistola — tela preta quadrada */
-  .belt-home .belt-lens{width:60px;height:60px;border-radius:14px;position:relative;transform:translateY(-22px);margin-bottom:-16px;
+  .belt-home .belt-lens{width:72px;height:72px;border-radius:17px;position:relative;transform:translateY(-30px);margin-bottom:-22px;
     background:linear-gradient(160deg,#14181f,#05070a 72%);
-    border:2px solid var(--bronze);box-shadow:0 0 22px rgba(244,180,0,.55),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -6px 14px rgba(0,0,0,.65)}
-  .belt-home .belt-lens::before{content:'';position:absolute;top:6px;left:9px;width:22px;height:9px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent)}
-  .belt-home .belt-lens::after{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);background:#ff3b30;box-shadow:0 0 12px 2px rgba(255,59,48,.85);animation:reddot 2s ease-in-out infinite}
-  .belt-home.active .belt-lens{box-shadow:0 0 30px rgba(244,180,0,.85),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 14px rgba(0,0,0,.65)}
+    border:2px solid var(--bronze);box-shadow:0 0 8px rgba(244,180,0,.08),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -6px 14px rgba(0,0,0,.65)}
+  .belt-home .belt-lens::before{content:'';position:absolute;top:7px;left:11px;width:26px;height:10px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent)}
+  .belt-home .belt-lens::after{content:'';position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);background:#ff3b30;box-shadow:0 0 12px 2px rgba(255,59,48,.85);animation:reddot 2s ease-in-out infinite}
+  .belt-home.active .belt-lens{box-shadow:0 0 8px rgba(244,180,0,.12),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 14px rgba(0,0,0,.65)}
+  .belt-home .belt-lbl{font-size:13px;font-weight:800;color:var(--bronze);letter-spacing:.6px;margin-top:2px}
   @keyframes reddot{0%,100%{opacity:.85}50%{opacity:1}}
   .fab-add{bottom:calc(106px + env(safe-area-inset-bottom))}
   .fab-menu{bottom:calc(174px + env(safe-area-inset-bottom))}
@@ -345,7 +346,11 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div class="row" style="gap:16px">
         <div class="avatar">MV</div>
         <div><div style="font-size:19px;font-weight:700">Marcos Vinícius Torres</div><div class="mini">Atirador de competição · IPSC Standard · cliente desde 2023</div></div>
-        <button class="btn ghost" style="margin-left:auto">Editar</button>
+        <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
+          <button class="btn" onclick="whatsappCliente()">💬 WhatsApp</button>
+          <button class="btn ghost" onclick="emailCliente()">✉️ E-mail</button>
+          <button class="btn ghost">Editar</button>
+        </div>
       </div>
       <div class="grid g4" style="margin-top:20px">
         <div class="field"><label>Telefone</label><div class="val">(54) 99123-4567</div></div>
@@ -631,6 +636,17 @@ function ajustarQtd(cod,delta){
   }
   renderEstoque(); renderInicio(); renderDisp();
 }
+function editarPeca(cod){
+  const p=pecas.find(x=>x.cod===cod); if(!p) return;
+  const v=prompt('Valor (custo em R$) da peça:\n'+p.tipo+' '+p.marca+' '+p.modelo, p.custo||'');
+  if(v===null) return;
+  p.custo=Number(v)||0;
+  const l=prompt('Local onde fica guardada:', p.local);
+  if(l!==null && l.trim()) p.local=l.trim();
+  renderEstoque();
+}
+function emailCliente(){ alert('No sistema real: abre o e-mail já preenchido pro cliente (parabéns de aniversário, orçamento, aviso de arma pronta...).'); }
+function whatsappCliente(){ alert('No sistema real: abre o WhatsApp do cliente com a mensagem pronta (arma pronta pra retirar, orçamento, lembrete...).'); }
 function compartilharOS(){ alert('No sistema real: gera a OS em PDF/link pra você IMPRIMIR ou mandar no WhatsApp do cliente.'); }
 function compartilharGuia(){ alert('No sistema real: gera a guia de manutenção / CRAF em PDF pra imprimir ou compartilhar.'); }
 
@@ -661,7 +677,8 @@ function renderEstoque(){
   else body.innerHTML=lista.map(p=>{
     const tags=[p.marca,p.modelo,p.geracao,p.calibre,p.ipsc].filter(v=>v&&v!=='—').map(v=>'<span>'+v+'</span>').join('');
     return '<tr><td><div class="pname">'+p.tipo+'</div><div class="psub">cód. '+p.cod+'</div></td>'+
-      '<td class="tags">'+tags+'</td><td>'+p.local+'</td><td class="tnum">R$ '+p.custo+'</td>'+
+      '<td class="tags">'+tags+'</td><td>'+p.local+'</td>'+
+      '<td><div class="row" style="gap:6px"><span class="tnum">'+(p.custo?('R$ '+p.custo):'<span style="color:var(--amber)">definir</span>')+'</span><button class="qbtn" onclick="editarPeca(\''+p.cod+'\')" title="Editar peça (valor/local)">✏️</button></div></td>'+
       '<td><div class="row" style="gap:6px">'+
         '<button class="qbtn" onclick="ajustarQtd(\''+p.cod+'\',-1)" title="Dar baixa (pede motivo)">−</button>'+qtdChip(p)+
         '<button class="qbtn" onclick="ajustarQtd(\''+p.cod+'\',1)" title="Adicionar (pede motivo)">+</button></div></td>'+
@@ -691,6 +708,12 @@ function addPeca(){
   const box=document.getElementById('conflictBox');
   if(!cod){ return; }
   const p=pecas.find(x=>x.cod===cod);
+  if(!p.custo){
+    const v=prompt('Qual o valor (custo) desta peça?\nVocê informa só UMA vez — fica salvo pras próximas.\n\n'+p.tipo+' '+p.marca+' '+p.modelo);
+    if(v===null){ sel.value=''; return; }
+    p.custo=Number(v)||0;
+    renderEstoque();
+  }
   const jaNaOS=osItems.filter(c=>c===cod).length;
   const livre=livreDe(p)-jaNaOS;
   if(livre>0){
