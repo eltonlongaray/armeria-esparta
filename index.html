@@ -654,7 +654,7 @@ function renderPedidos(){
   const k=document.getElementById('kanban'); if(!k) return;
   k.innerHTML=kanCols.map(col=>{
     const cards=pedidos.filter(p=>p.st===col.id);
-    return '<div class="kan-col"><h4><span style="color:'+col.cor+'">'+col.ic+'</span> '+col.lbl+'<span class="cnt">'+cards.length+'</span></h4>'+
+    return '<div class="kan-col"><h4 style="color:'+col.cor+';font-size:15px;text-transform:none;letter-spacing:0">'+col.ic+' '+col.lbl+'<span class="cnt">'+cards.length+'</span></h4>'+
       cards.map(p=>'<div class="pedido-card" style="border-left-color:'+col.cor+'"><div class="pc-top">OS #'+p.n+'</div><div class="pc-sub">'+p.cli+' · '+p.arma+'<br>entrega '+p.ent+'</div></div>').join('')+
       '</div>';
   }).join('');
