@@ -88,6 +88,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 /* accordion de clientes */
 .acc{background:var(--panel);border:1px solid var(--border);border-radius:13px;margin-bottom:12px;overflow:hidden}
 .acc-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.acc-head.open{border-bottom:1px solid rgba(244,180,0,.45);background:rgba(244,180,0,.05)}
 .avatar-sm{width:40px;height:40px;border-radius:10px;background:linear-gradient(145deg,#2a3040,#1c212b);display:grid;place-items:center;font-weight:700;color:var(--bronze);font-size:14px;flex:0 0 auto}
 .acc-chevron{margin-left:auto;color:var(--muted);transition:transform .2s;flex:0 0 auto}
 .acc-head.open .acc-chevron{transform:rotate(180deg)}
@@ -118,8 +119,11 @@ tr:hover td{background:rgba(255,255,255,.015)}
 .btn.sm{padding:6px 11px;font-size:11.5px}
 .count-note{font-size:12px;color:var(--muted);margin:0 0 0 auto}
 .fin-input{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:7px;padding:6px 9px;font-size:12.5px}
-.fin-input.nome{width:150px}
-.fin-input.val{width:110px;text-align:right;font-variant-numeric:tabular-nums}
+.fin-input.nome{flex:1 1 auto;min-width:0;width:auto}
+.fin-input.val{width:96px;text-align:right;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.fin-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
+.fin-row:last-of-type{border-bottom:none}
+.fin-row .mini{flex:0 0 auto}
 .pct-pill{font-size:11.5px;color:var(--muted);min-width:42px;text-align:right;font-variant-numeric:tabular-nums}
 
 .conflict{background:linear-gradient(90deg,rgba(216,72,63,.16),rgba(216,72,63,.04));border:1px solid rgba(216,72,63,.5);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;display:flex;gap:13px;align-items:flex-start;margin-top:12px}
@@ -171,8 +175,6 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .filters .btn{flex:1 1 100%}
   .count-note{order:5;flex-basis:100%;margin:2px 0 0;text-align:center}
   .kpi .v{font-size:23px}
-  #ajudantesList .alert-line, #despesasList .alert-line{flex-wrap:wrap;gap:8px}
-  .fin-input.nome{width:140px}
   .main{padding-bottom:130px}
   /* ===== MENU INFERIOR FIXO — Início no centro, tarja Esparta larga ===== */
   .bottom-nav{display:flex;align-items:flex-end;justify-content:space-around;position:fixed;bottom:0;left:0;right:0;z-index:90;max-width:520px;margin:0 auto;height:calc(94px + env(safe-area-inset-bottom));padding:0 4px calc(7px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#1c222c 0%,#12161d 55%,#090b0f 100%);border-top:1px solid #05070a;box-shadow:0 -6px 22px rgba(0,0,0,.45)}
@@ -361,7 +363,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div class="row" style="gap:10px;margin-top:6px"><button class="btn" onclick="salvarCliente()">Salvar cliente</button><button class="btn ghost" onclick="toggleNovoCliente()">Cancelar</button></div>
     </div>
 
-    <div class="acc">
+    <div class="acc" style="border-left:3px solid var(--bronze)">
       <div class="acc-head open" onclick="toggleCliente(this)">
         <div class="avatar-sm">MV</div>
         <div><b>Marcos Vinícius Torres</b><div class="mini">IPSC Standard · <span style="color:var(--green)">último serviço há 5 dias</span></div></div>
@@ -380,16 +382,20 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
           <div class="field"><label>CRAF</label><div class="val">41.228-9</div></div>
           <div class="field"><label>Última visita</label><div class="val">18/07/2026</div></div>
         </div>
-        <h4 class="sec">Armas do cliente <span class="mini" style="font-weight:400;text-transform:none;letter-spacing:0">— toque pra ver o histórico</span></h4>
-        <div class="alert-line" style="cursor:pointer" onclick="go('arma');armaAbrir()"><span>🔫</span><b>Glock G34</b><span class="mini">Ger.3 · 9mm</span><span class="chip c-inst" style="margin-left:auto">Em produção ›</span></div>
-        <div class="alert-line" style="cursor:pointer;border:none" onclick="go('arma');armaAbrir()"><span>🔫</span><b>Taurus TS9</b><span class="mini">9mm</span><span class="chip c-livre" style="margin-left:auto">Entregue ›</span></div>
+        <div style="border-top:1px solid var(--border);margin-top:16px;padding-top:14px">
+          <h4 class="sec" style="margin-top:0">Armas do cliente</h4>
+          <div class="row" style="gap:8px;flex-wrap:wrap">
+            <button class="btn ghost" onclick="go('arma');armaAbrir()">🔫 Glock G34</button>
+            <button class="btn ghost" onclick="go('arma');armaAbrir()">🔫 Taurus TS9</button>
+          </div>
+        </div>
         <h4 class="sec">Anotações & lembretes</h4>
         <textarea class="fin-input" style="width:100%;min-height:60px" placeholder="Anotações... (ex.: prefere PIX, gosta de gatilho leve, atira aos sábados)"></textarea>
         <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn" onclick="addLembrete()">🔔 Criar lembrete</button><span class="mini" style="margin-left:auto">Gastou R$ 3.480 em 12 meses</span></div>
       </div>
     </div>
 
-    <div class="acc">
+    <div class="acc" style="border-left:3px solid #aab1c0">
       <div class="acc-head" onclick="toggleCliente(this)">
         <div class="avatar-sm">AP</div>
         <div><b>Ana Prado</b><div class="mini">IPSC Open · <span style="color:var(--green)">último serviço há 3 dias</span></div></div>
@@ -401,7 +407,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       </div>
     </div>
 
-    <div class="acc">
+    <div class="acc" style="border-left:3px solid var(--bronze)">
       <div class="acc-head" onclick="toggleCliente(this)">
         <div class="avatar-sm">CR</div>
         <div><b>Cléber Ramos</b><div class="mini">IPSC Standard · <span style="color:var(--amber)">último serviço há 2 meses</span></div></div>
@@ -413,7 +419,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       </div>
     </div>
 
-    <div class="acc">
+    <div class="acc" style="border-left:3px solid #aab1c0">
       <div class="acc-head" onclick="toggleCliente(this)">
         <div class="avatar-sm">JS</div>
         <div><b>João Silva</b><div class="mini">IPSC Production · <span style="color:var(--red)">sumido há 7 meses</span></div></div>
@@ -870,11 +876,11 @@ function valorEstoque(){ return pecas.reduce((s,p)=>s+(Number(p.custo||0)*Number
 function renderDespesas(){
   const el=document.getElementById('despesasList'); if(!el) return;
   el.innerHTML=despesasFixas.map((d,i)=>
-    '<div class="alert-line"><span>🏷️</span>'+
+    '<div class="fin-row"><span>🏷️</span>'+
     '<input class="fin-input nome" value="'+d.nome+'" oninput="setDesp('+i+',\'nome\',this.value)">'+
-    '<div class="row" style="margin-left:auto;gap:8px"><span class="mini">R$</span>'+
+    '<span class="mini">R$</span>'+
     '<input class="fin-input val" type="number" min="0" step="50" value="'+d.valor+'" oninput="setDesp('+i+',\'valor\',this.value)">'+
-    '<button class="btn ghost sm" onclick="removeDesp('+i+')">×</button></div></div>').join('');
+    '<button class="btn ghost sm" onclick="removeDesp('+i+')">×</button></div>').join('');
   document.getElementById('despTotal').textContent=fmtBR(totalDespesas());
   renderBalanco();
 }
@@ -903,18 +909,12 @@ const FATURAMENTO=14200;
 function renderAjudantes(){
   const fmt=n=>'R$ '+Number(n).toLocaleString('pt-BR');
   const el=document.getElementById('ajudantesList');
-  el.innerHTML=ajudantes.map((a,i)=>{
-    const pct=(a.valor/FATURAMENTO*100).toFixed(1).replace('.',',');
-    return '<div class="alert-line">'+
-      '<span>🧑‍🔧</span>'+
-      '<input class="fin-input nome" value="'+a.nome+'" oninput="setAj('+i+',\'nome\',this.value)">'+
-      '<div class="row" style="margin-left:auto;gap:12px">'+
-        '<div class="row" style="gap:5px"><span class="mini">R$</span>'+
-          '<input class="fin-input val" type="number" min="0" step="50" value="'+a.valor+'" oninput="setAj('+i+',\'valor\',this.value)"></div>'+
-        '<span class="pct-pill">'+pct+'%</span>'+
-        '<button class="btn ghost sm" onclick="removeAj('+i+')">×</button>'+
-      '</div></div>';
-  }).join('');
+  el.innerHTML=ajudantes.map((a,i)=>
+    '<div class="fin-row"><span>🧑‍🔧</span>'+
+    '<input class="fin-input nome" value="'+a.nome+'" oninput="setAj('+i+',\'nome\',this.value)">'+
+    '<span class="mini">R$</span>'+
+    '<input class="fin-input val" type="number" min="0" step="50" value="'+a.valor+'" oninput="setAj('+i+',\'valor\',this.value)">'+
+    '<button class="btn ghost sm" onclick="removeAj('+i+')">×</button></div>').join('');
   const total=ajudantes.reduce((s,a)=>s+Number(a.valor||0),0);
   document.getElementById('ajTotal').textContent=fmt(total);
   document.getElementById('ajTotalPct').textContent=(total/FATURAMENTO*100).toFixed(1).replace('.',',')+'%';
