@@ -479,23 +479,35 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
         <div class="kpi"><div class="l">Ano até agora (2026)</div><div class="v" style="color:var(--bronze)" id="fatAno"></div></div>
       </div>
     </div>
-    <div class="grid g4">
-      <div class="card kpi"><div class="l">Entrou (agosto)</div><div class="v up" id="fEntrou"></div></div>
-      <div class="card kpi"><div class="l">Custo de peças</div><div class="v" id="fPecas"></div></div>
-      <div class="card kpi"><div class="l">Despesas fixas</div><div class="v" id="fDespesas"></div><div class="t mini">luz · internet · pró-labore · salários</div></div>
-      <div class="card kpi"><div class="l">Sobra real</div><div class="v" style="color:var(--bronze)" id="fSobra"></div></div>
+    <div class="card" style="margin-bottom:16px">
+      <h3>Balanço do mês (agosto)</h3>
+      <div class="grid g3" style="margin-bottom:8px">
+        <div class="kpi"><div class="l">Entrou (serviços)</div><div class="v up" id="balEntrou"></div></div>
+        <div class="kpi"><div class="l">Saiu (custos)</div><div class="v down" id="balSaiu"></div></div>
+        <div class="kpi"><div class="l">Sobrou (lucro)</div><div class="v" style="color:var(--bronze)" id="balSobrou"></div></div>
+      </div>
+      <div style="margin-top:12px"><div class="row"><span>💚 Ganhos</span><span class="mini tnum" style="margin-left:auto" id="barGanhoLbl"></span></div><div class="bar" style="height:12px"><i id="barGanho" style="background:var(--green)"></i></div></div>
+      <div style="margin-top:12px"><div class="row"><span>❤️ Gastos</span><span class="mini tnum" style="margin-left:auto" id="barGastoLbl"></span></div><div class="bar" style="height:12px"><i id="barGasto" style="background:var(--red)"></i></div></div>
+      <p class="mini" style="margin-top:12px"><b>Saiu</b> = despesas fixas + ajudantes + <b>peças que foram usadas nos serviços</b> (só as que entraram em armas). Comprar peça pra estoque <u>não</u> entra aqui.</p>
     </div>
-    <div class="grid g2" style="margin-top:16px">
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="ok-box" style="margin:0"><span>📦</span><div class="mini">Você comprou <b class="tnum" id="comprasMes"></b> em peças este mês — isso <b>não é gasto</b>, é dinheiro guardado em <b>estoque</b>. Hoje você tem <b class="tnum" id="estoqueValor"></b> investido em peças. O custo de cada peça só entra no balanço quando ela vai pra <b>arma do cliente</b>.</div></div>
+    </div>
+
+    <div class="grid g2">
       <div class="card">
-        <h3>Para onde vai o que entra (calculado)</h3>
-        <div id="finBreak"></div>
-        <p class="mini">Percentuais calculados sobre o que entrou (R$&nbsp;<span id="finBase"></span>). O sistema separa isso sozinho — chega de sentar com o caderno 1x no mês.</p>
+        <h3>Despesas fixas do mês</h3>
+        <div id="despesasList"></div>
+        <div class="alert-line" style="border-top:1px solid var(--border);border-bottom:none;margin-top:4px;padding-top:12px"><b>Total despesas fixas</b><span style="margin-left:auto;font-weight:700;color:var(--bronze)" class="tnum" id="despTotal"></span></div>
+        <button class="btn ghost sm" style="margin-top:12px" onclick="addDespesa()">+ Adicionar despesa</button>
+        <p class="mini">Aluguel, luz, internet, pró-labore... o que sai todo mês, fora as peças e os ajudantes.</p>
       </div>
       <div class="card">
         <h3>Quanto está valendo a sua hora?</h3>
         <div class="kpi" style="margin:8px 0 16px"><div class="v" style="color:var(--bronze)" id="horaMedia"></div><div class="l">média real: (cobrado − peças) ÷ horas dos últimos serviços</div></div>
         <div class="tbl-wrap"><table id="horaTbl"></table></div>
-        <div class="ok-box" style="margin-top:14px"><span>💡</span><div class="mini">Vem dos <b>serviços já concluídos</b>: em cada um o Eduardo registra as horas que levou, o sistema desconta o custo das peças e mostra <b>quanto valeu a hora</b>. Aí ele sabe se está cobrando certo.</div></div>
+        <div class="ok-box" style="margin-top:14px"><span>💡</span><div class="mini">Vem dos <b>serviços já concluídos</b>: o sistema desconta o custo das peças e mostra <b>quanto valeu a hora</b>. Aí ele sabe se está cobrando certo.</div></div>
       </div>
     </div>
 
@@ -798,27 +810,42 @@ function salvarCliente(){
   toggleNovoCliente();
 }
 
-/* ===== BLOCO 7: FINANCEIRO (calculado) ===== */
-function renderFinanceiro(){
-  const entrou=14200, custoPecas=4850, despesas=3100;
-  const sobra=entrou-custoPecas-despesas;
-  const fmt=n=>'R$ '+n.toLocaleString('pt-BR');
-  document.getElementById('fEntrou').textContent=fmt(entrou);
-  document.getElementById('fPecas').textContent=fmt(custoPecas);
-  document.getElementById('fDespesas').textContent=fmt(despesas);
-  document.getElementById('fSobra').textContent=fmt(sobra);
-  document.getElementById('finBase').textContent=entrou.toLocaleString('pt-BR');
-  const partes=[
-    {l:"Reinvestir (comprar peça)", v:custoPecas, c:"var(--blue)"},
-    {l:"Despesas fixas (ajudantes, aluguel, contas)", v:despesas, c:"var(--amber)"},
-    {l:"Sobra / lucro", v:sobra, c:"var(--green)"}
-  ];
-  document.getElementById('finBreak').innerHTML=partes.map(x=>{
-    const pct=Math.round(x.v/entrou*100);
-    return '<div style="margin:14px 0"><div class="row"><span>'+x.l+'</span>'+
-      '<span style="margin-left:auto;font-weight:600" class="tnum">'+fmt(x.v)+' · '+pct+'%</span></div>'+
-      '<div class="bar"><i style="width:'+pct+'%;background:'+x.c+'"></i></div></div>';
-  }).join('');
+/* ===== BLOCO 7: FINANCEIRO — despesas fixas + balanço do mês ===== */
+let despesasFixas=[{nome:"Aluguel",valor:900},{nome:"Luz",valor:250},{nome:"Internet",valor:150},{nome:"Pró-labore",valor:600}];
+const PECAS_USADAS_MES=4850;   // custo das peças que entraram em ARMAS este mês (isso conta)
+const COMPRAS_PECA_MES=3200;   // comprou pra estoque este mês (NÃO conta como gasto — é investimento)
+function fmtBR(n){ return 'R$ '+Math.round(n).toLocaleString('pt-BR'); }
+function totalDespesas(){ return despesasFixas.reduce((s,d)=>s+Number(d.valor||0),0); }
+function totalAjudantes(){ return ajudantes.reduce((s,a)=>s+Number(a.valor||0),0); }
+function valorEstoque(){ return pecas.reduce((s,p)=>s+(Number(p.custo||0)*Number(p.qtd||0)),0); }
+function renderDespesas(){
+  const el=document.getElementById('despesasList'); if(!el) return;
+  el.innerHTML=despesasFixas.map((d,i)=>
+    '<div class="alert-line"><span>🏷️</span>'+
+    '<input class="fin-input nome" value="'+d.nome+'" oninput="setDesp('+i+',\'nome\',this.value)">'+
+    '<div class="row" style="margin-left:auto;gap:8px"><span class="mini">R$</span>'+
+    '<input class="fin-input val" type="number" min="0" step="50" value="'+d.valor+'" oninput="setDesp('+i+',\'valor\',this.value)">'+
+    '<button class="btn ghost sm" onclick="removeDesp('+i+')">×</button></div></div>').join('');
+  document.getElementById('despTotal').textContent=fmtBR(totalDespesas());
+  renderBalanco();
+}
+function setDesp(i,c,v){ despesasFixas[i][c]= c==='valor'?Number(v||0):v; renderDespesas(); }
+function removeDesp(i){ despesasFixas.splice(i,1); renderDespesas(); }
+function addDespesa(){ despesasFixas.push({nome:"Nova despesa",valor:0}); renderDespesas(); }
+function renderBalanco(){
+  const entrou=FATURAMENTO;
+  const saiu=totalDespesas()+totalAjudantes()+PECAS_USADAS_MES;
+  const sobrou=entrou-saiu;
+  document.getElementById('balEntrou').textContent=fmtBR(entrou);
+  document.getElementById('balSaiu').textContent=fmtBR(saiu);
+  document.getElementById('balSobrou').textContent=fmtBR(sobrou);
+  const max=Math.max(entrou,saiu)||1;
+  document.getElementById('barGanho').style.width=(entrou/max*100)+'%';
+  document.getElementById('barGasto').style.width=(saiu/max*100)+'%';
+  document.getElementById('barGanhoLbl').textContent=fmtBR(entrou);
+  document.getElementById('barGastoLbl').textContent=fmtBR(saiu);
+  const cm=document.getElementById('comprasMes'); if(cm) cm.textContent=fmtBR(COMPRAS_PECA_MES);
+  const ev=document.getElementById('estoqueValor'); if(ev) ev.textContent=fmtBR(valorEstoque());
 }
 
 /* ===== BLOCO 7b: PAGAMENTO DOS AJUDANTES (editável) ===== */
@@ -842,6 +869,7 @@ function renderAjudantes(){
   const total=ajudantes.reduce((s,a)=>s+Number(a.valor||0),0);
   document.getElementById('ajTotal').textContent=fmt(total);
   document.getElementById('ajTotalPct').textContent=(total/FATURAMENTO*100).toFixed(1).replace('.',',')+'%';
+  if(typeof renderBalanco==='function') renderBalanco();
 }
 function setAj(i,campo,valor){ ajudantes[i][campo]= campo==='valor'?Number(valor||0):valor; renderAjudantes(); }
 function removeAj(i){ ajudantes.splice(i,1); renderAjudantes(); }
@@ -898,7 +926,7 @@ preencheSelect('fCalibre','Calibre (todos)','calibre');
 preencheSelect('fIpsc','Categoria IPSC (todas)','ipsc');
 document.getElementById('globalSearch').addEventListener('input', renderEstoque);
 preencheAddSelect();
-renderEstoque(); renderInicio(); renderDisp(); renderFinanceiro(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento(); renderPedidos();
+renderEstoque(); renderInicio(); renderDisp(); renderDespesas(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento(); renderPedidos();
 </script>
 </body>
 </html>
