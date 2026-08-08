@@ -183,7 +183,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .belt-home .belt-lens::before{content:'';position:absolute;top:7px;left:11px;width:26px;height:10px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent)}
   .belt-home .belt-lens::after{content:'';position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);background:#ff3b30;box-shadow:0 0 12px 2px rgba(255,59,48,.85);animation:reddot 2s ease-in-out infinite}
   .belt-home.active .belt-lens{box-shadow:0 0 8px rgba(244,180,0,.12),0 8px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 14px rgba(0,0,0,.65)}
-  .belt-home .belt-lbl{font-size:13px;font-weight:800;color:var(--bronze);letter-spacing:.6px;margin-top:2px}
+  .belt-home .belt-lbl{font-size:13px;font-weight:800;letter-spacing:.6px;margin-top:2px}
   @keyframes reddot{0%,100%{opacity:.85}50%{opacity:1}}
   .fab-add{bottom:calc(106px + env(safe-area-inset-bottom))}
   .fab-menu{bottom:calc(174px + env(safe-area-inset-bottom))}
@@ -234,6 +234,15 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     <h4 class="sec" style="margin-top:22px">⚙️ Esteira de produção</h4>
     <p class="mini" style="margin:-6px 0 12px">Tudo que está em produção agora, num olhar só — fila → esteira → pronta.</p>
     <div class="kanban" id="kanban"></div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>🔔 Lembretes</h3>
+      <div class="alert-line"><span>🎂</span> Aniversário do Marcos Vinícius<span class="mini" style="margin-left:auto">12/08</span></div>
+      <div class="alert-line"><span>📞</span> Ligar pro Cléber — arma pronta<span class="mini" style="margin-left:auto">hoje</span></div>
+      <div class="alert-line" style="border:none"><span>💳</span> Cobrar OS #1032 (entregue, não paga)<span class="mini" style="margin-left:auto;color:var(--red)">atrasado</span></div>
+      <button class="btn ghost" style="margin-top:12px" onclick="addLembrete()">+ Novo lembrete</button>
+    </div>
+
     <div class="card" style="margin-top:16px">
       <h3>🔔 Estoque baixo — repor</h3>
       <div id="baixoList"></div>
@@ -361,15 +370,24 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     </div>
     <div class="grid g2" style="margin-top:16px">
       <div class="card">
-        <h3>Armas do cliente</h3>
-        <div class="alert-line"><span>🔫</span><b>Glock G34</b><span class="mini">Ger.3 · 9mm</span><span class="chip c-res" style="margin-left:auto">Em customização</span></div>
-        <div class="alert-line"><span>🔫</span><b>Taurus TS9</b><span class="mini">9mm</span><span class="chip c-inst" style="margin-left:auto">Customizada</span></div>
+        <h3>Armas do cliente <span class="mini" style="font-weight:400;text-transform:none;letter-spacing:0">— clique pra ver o histórico</span></h3>
+        <div class="alert-line" style="cursor:pointer" onclick="go('arma')"><span>🔫</span><b>Glock G34</b><span class="mini">Ger.3 · 9mm</span><span class="chip c-res" style="margin-left:auto">Em customização ›</span></div>
+        <div class="alert-line" style="cursor:pointer;border:none" onclick="go('arma')"><span>🔫</span><b>Taurus TS9</b><span class="mini">9mm</span><span class="chip c-inst" style="margin-left:auto">Customizada ›</span></div>
       </div>
       <div class="card">
         <h3>Relacionamento</h3>
         <div class="ok-box"><span>🎂</span><div class="mini">Aniversário em <b>8 dias</b> — sistema pode lembrar você de mandar uma mensagem.</div></div>
         <div class="alert-line" style="margin-top:10px"><span class="mini">Última visita</span><span class="mini" style="margin-left:auto">18/07/2026</span></div>
         <div class="alert-line"><span class="mini">Total gasto (12 meses)</span><span style="margin-left:auto;font-weight:700;color:var(--bronze)">R$ 3.480</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Anotações & lembretes</h3>
+      <textarea class="fin-input" style="width:100%;min-height:70px" placeholder="Anotações sobre o cliente... (ex.: prefere pagar no PIX, gosta de gatilho leve, atira aos sábados)"></textarea>
+      <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn" onclick="addLembrete()">🔔 Criar lembrete</button>
+        <button class="btn ghost" onclick="go('inicio')">Ver todos os lembretes na Início</button>
       </div>
     </div>
   </section>
@@ -385,48 +403,39 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     </div>
 
     <div class="subtabs">
-      <button class="subtab active" data-t="hist" onclick="armaTab('hist')">Histórico</button>
-      <button class="subtab" data-t="ped" onclick="armaTab('ped')">Pedidos (OS)</button>
+      <button class="subtab active" data-t="ped" onclick="armaTab('ped')">Pedidos (OS)</button>
       <button class="subtab" data-t="doc" onclick="armaTab('doc')">Documentos</button>
+      <button class="subtab" data-t="hist" onclick="armaTab('hist')">Histórico</button>
     </div>
 
-    <div class="subview active" data-t="hist">
-      <div class="grid g2">
-        <div class="card">
-          <h3>Histórico de serviços</h3>
-          <div class="timeline">
-            <div class="tl-item"><div class="tl-date">05/08/2026 · em andamento</div><b>Customização IPSC Standard</b><div class="mini">Funil + contrapeso + guia de mola. Peças reservadas.</div></div>
-            <div class="tl-item"><div class="tl-date">02/03/2026 · concluído</div><b>Troca de percussor + polimento</b><div class="mini">Percussor alongado Imbel · <b>1,5h</b> · cobrado R$ 320</div></div>
-            <div class="tl-item"><div class="tl-date">14/11/2025 · concluído</div><b>Instalação de red dot + base mount</b><div class="mini">Base Esparta · <b>2h</b> · cobrado R$ 540</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Fotos = cronômetro do serviço</h3>
-          <div class="grid" style="grid-template-columns:1fr 1fr">
-            <div class="photo">📷 Antes</div><div class="photo">📷 Depois</div>
-          </div>
-          <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap">
-            <button class="btn" onclick="fotoAntes()">📷 Foto ANTES (inicia)</button>
-            <button class="btn ghost" onclick="fotoDepois()">📷 Foto DEPOIS (finaliza)</button>
-          </div>
-          <p class="mini" style="margin-top:10px">A foto <b>antes</b> marca o <b>início</b>; a foto <b>depois</b> marca o <b>fim</b>. O tempo entre as duas vira as <b>horas de trabalho</b> — sem precisar anotar nada.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="subview" data-t="ped">
+    <div class="subview active" data-t="ped">
       <div class="card">
-        <div class="row" style="flex-wrap:wrap;gap:10px"><h3 style="margin:0">Pedidos desta arma</h3>
-          <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
-            <button class="btn ghost" onclick="compartilharOS()">🖨️ Compartilhar / Imprimir</button>
-            <button class="btn" onclick="addAcao('pedido')">+ Nova OS</button>
-          </div>
+        <div class="row" style="flex-wrap:wrap;gap:10px"><h3 style="margin:0">Pedidos (OS) desta arma</h3>
+          <button class="btn" style="margin-left:auto" onclick="addAcao('pedido')">+ Nova OS</button>
         </div>
         <div style="margin-top:12px">
           <div class="alert-line"><b>OS #1042</b><span class="mini">Customização IPSC Standard · 3 peças</span><span class="chip c-res" style="margin-left:auto">Na esteira</span></div>
-          <div class="alert-line"><b>OS #0987</b><span class="mini">Troca de percussor + polimento</span><span class="chip c-livre" style="margin-left:auto">Concluída · 02/03</span></div>
-          <div class="alert-line" style="border:none"><b>OS #0921</b><span class="mini">Red dot + base mount</span><span class="chip c-livre" style="margin-left:auto">Concluída · 14/11</span></div>
+          <div class="alert-line" style="border:none"><b>OS #1050</b><span class="mini">Ajuste de gatilho</span><span class="chip c-res" style="margin-left:auto">Na fila</span></div>
         </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="row" style="flex-wrap:wrap;gap:8px"><h3 style="margin:0">OS #1042 — aberta</h3>
+          <button class="btn ghost" style="margin-left:auto" onclick="compartilharOS()">🖨️ Compartilhar / Imprimir</button>
+        </div>
+        <h4 class="sec">Peças</h4>
+        <div class="alert-line"><span>Funil G34 Standard</span><span class="mini tnum" style="margin-left:auto">R$ 250</span></div>
+        <div class="alert-line"><span>Contrapeso G17</span><span class="mini tnum" style="margin-left:auto">R$ 300</span></div>
+        <div class="alert-line" style="border:none"><span>Guia de mola G17 G3</span><span class="mini tnum" style="margin-left:auto">R$ 180</span></div>
+        <h4 class="sec">Fotos = cronômetro do serviço</h4>
+        <div class="grid" style="grid-template-columns:1fr 1fr"><div class="photo">📷 Antes</div><div class="photo">📷 Depois</div></div>
+        <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap">
+          <button class="btn" onclick="fotoAntes()">📷 Foto ANTES (inicia)</button>
+          <button class="btn ghost" onclick="fotoDepois()">📷 Foto DEPOIS (finaliza)</button>
+        </div>
+        <p class="mini" style="margin-top:8px">A foto <b>antes</b> marca o início, a de <b>depois</b> o fim → vira as horas do serviço.</p>
+        <h4 class="sec">Anotações do pedido</h4>
+        <textarea class="fin-input" style="width:100%;min-height:60px" placeholder="Ex.: cliente pediu gatilho mais leve; testar 50 tiros antes de entregar..."></textarea>
       </div>
     </div>
 
@@ -445,6 +454,17 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
           <div class="photo" style="height:120px;margin-top:6px">🛠️ Guia (PDF gerado)</div>
           <button class="btn ghost" style="margin-top:12px;width:100%" onclick="compartilharGuia()">🖨️ Compartilhar / Imprimir</button>
         </div>
+      </div>
+    </div>
+
+    <div class="subview" data-t="hist">
+      <div class="card">
+        <h3>Histórico — serviços concluídos nesta arma</h3>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-date">02/03/2026</div><b>OS #0987 · Troca de percussor + polimento</b><div class="mini">1,5h · cobrado R$ 320 · 📝 "cliente aprovou o gatilho mais leve"</div></div>
+          <div class="tl-item"><div class="tl-date">14/11/2025</div><b>OS #0921 · Instalação de red dot + base</b><div class="mini">2h · cobrado R$ 540 · 📷 fotos antes/depois · 📝 "revisar a mola em 6 meses"</div></div>
+        </div>
+        <p class="mini" style="margin-top:6px">Clicar numa OS abre o pedido completo (peças, fotos e anotações).</p>
       </div>
     </div>
   </section>
@@ -645,6 +665,7 @@ function editarPeca(cod){
   if(l!==null && l.trim()) p.local=l.trim();
   renderEstoque();
 }
+function addLembrete(){ const t=prompt('Novo lembrete (ex.: "ligar pro João dia 20", "cobrar OS #1032"):'); if(t){ alert('Lembrete criado: "'+t+'"\nEle aparece aqui na Início e te avisa na data.'); } }
 function emailCliente(){ alert('No sistema real: abre o e-mail já preenchido pro cliente (parabéns de aniversário, orçamento, aviso de arma pronta...).'); }
 function whatsappCliente(){ alert('No sistema real: abre o WhatsApp do cliente com a mensagem pronta (arma pronta pra retirar, orçamento, lembrete...).'); }
 function compartilharOS(){ alert('No sistema real: gera a OS em PDF/link pra você IMPRIMIR ou mandar no WhatsApp do cliente.'); }
