@@ -85,6 +85,14 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 .subtab.active{background:var(--panel2);color:var(--bronze);border-color:var(--bronze-d)}
 .subview{display:none}
 .subview.active{display:block}
+/* accordion de clientes */
+.acc{background:var(--panel);border:1px solid var(--border);border-radius:13px;margin-bottom:12px;overflow:hidden}
+.acc-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.avatar-sm{width:40px;height:40px;border-radius:10px;background:linear-gradient(145deg,#2a3040,#1c212b);display:grid;place-items:center;font-weight:700;color:var(--bronze);font-size:14px;flex:0 0 auto}
+.acc-chevron{margin-left:auto;color:var(--muted);transition:transform .2s;flex:0 0 auto}
+.acc-head.open .acc-chevron{transform:rotate(180deg)}
+.acc-body{display:none;padding:0 16px 16px}
+.acc-body.open{display:block}
 .kan-col{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px}
 .kan-col h4{margin:0 0 10px;font-size:12px;letter-spacing:.3px;display:flex;align-items:center;gap:7px;font-weight:700}
 .kan-col .cnt{margin-left:auto;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:1px 8px;font-size:11px;color:var(--muted)}
@@ -163,8 +171,9 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .filters .btn{flex:1 1 100%}
   .count-note{order:5;flex-basis:100%;margin:2px 0 0;text-align:center}
   .kpi .v{font-size:23px}
-  #ajudantesList .alert-line{flex-wrap:wrap;gap:8px}
+  #ajudantesList .alert-line, #despesasList .alert-line{flex-wrap:wrap;gap:8px}
   .fin-input.nome{width:140px}
+  .main{padding-bottom:130px}
   /* ===== MENU INFERIOR FIXO — Início no centro, tarja Esparta larga ===== */
   .bottom-nav{display:flex;align-items:flex-end;justify-content:space-around;position:fixed;bottom:0;left:0;right:0;z-index:90;max-width:520px;margin:0 auto;height:calc(94px + env(safe-area-inset-bottom));padding:0 4px calc(7px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#1c222c 0%,#12161d 55%,#090b0f 100%);border-top:1px solid #05070a;box-shadow:0 -6px 22px rgba(0,0,0,.45)}
   .bottom-nav .belt-band{position:absolute;top:0;left:0;right:0;height:2px;background:var(--bronze);box-shadow:0 0 6px rgba(244,180,0,.4)}
@@ -199,11 +208,10 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
     <div><b>ARMERIA<br>ESPARTA</b><span>SISTEMA</span></div>
   </div>
   <nav class="nav">
-    <a class="active" data-s="inicio"><span class="ic">▚</span> <span>Início</span></a>
-    <a data-s="estoque"><span class="ic">▤</span> <span>Estoque de Peças</span></a>
-    <a data-s="custom"><span class="ic">✚</span> <span>Nova Customização</span></a>
+    <a class="active" data-s="inicio"><span class="ic">◎</span> <span>Visão Geral</span></a>
+    <a data-s="estoque"><span class="ic">▤</span> <span>Estoque</span></a>
     <a data-s="cliente"><span class="ic">☻</span> <span>Clientes</span></a>
-    <a data-s="arma"><span class="ic">▮</span> <span>Armas &amp; Histórico</span></a>
+    <a data-s="arma"><span class="ic">▮</span> <span>Armas</span></a>
     <a data-s="financeiro"><span class="ic">₴</span> <span>Financeiro</span></a>
   </nav>
   <div class="side-foot"><i style="color:var(--bronze);font-style:italic;letter-spacing:1px">Si vis pacem, para bellum</i><br>Protótipo v0.2 · telas ilustrativas<br>feito por Élton Longaray</div>
@@ -212,11 +220,11 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 <main class="main">
   <div class="mobilebar">
     <div class="shield"><svg viewBox="0 0 48 48" aria-label="Armeria Esparta"><g fill="#f4b400"><path d="M20 5 C20 1 28 1 28 5 L26.5 11 L21.5 11 Z"/><path d="M24 6 C15.5 6 11.5 12.5 11.5 21.5 L11.5 31 C11.5 33.2 12.8 34.5 15 35.4 L19 37.2 L19 23.5 C19 20.5 21 18.5 24 18.5 C27 18.5 29 20.5 29 23.5 L29 37.2 L33 35.4 C35.2 34.5 36.5 33.2 36.5 31 L36.5 21.5 C36.5 12.5 32.5 6 24 6 Z"/><path d="M22 18.5 L26 18.5 L26 34.5 L24 36.5 L22 34.5 Z"/></g></svg></div>
-    <div><b>ARMERIA ESPARTA</b><span class="msub" id="mobSub">Início</span></div>
+    <div><b>ARMERIA ESPARTA</b><span class="msub" id="mobSub">Visão Geral</span></div>
     <span class="proto-tag" style="margin-left:auto">◈</span>
   </div>
   <div class="topbar">
-    <h1 id="pageTitle">Início<small id="pageSub">Visão geral da oficina — hoje, 04/08/2026</small></h1>
+    <h1 id="pageTitle">Visão Geral<small id="pageSub">Raio-x da oficina — hoje, 04/08/2026</small></h1>
     <div class="row">
       <span class="proto-tag">◈ PROTÓTIPO</span>
       <input class="search" id="globalSearch" placeholder="Buscar peça...">
@@ -253,19 +261,19 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   <!-- ===== ESTOQUE ===== -->
   <section class="screen" id="estoque">
     <div class="card" id="novaPecaForm" style="display:none;margin-bottom:16px">
-      <h3>Cadastrar nova peça</h3>
+      <h3>Pedido de peça (encomenda)</h3>
       <div class="grid g3">
-        <div class="field"><label>Tipo</label><input class="fin-input" style="width:100%" placeholder="Guia de mola, funil..."></div>
-        <div class="field"><label>Marca</label><input class="fin-input" style="width:100%"></div>
-        <div class="field"><label>Modelo</label><input class="fin-input" style="width:100%"></div>
-        <div class="field"><label>Geração</label><input class="fin-input" style="width:100%" placeholder="Ger.3..."></div>
+        <div class="field"><label>O que foi encomendado</label><input class="fin-input" style="width:100%" placeholder="Guia de mola, funil, contrapeso..."></div>
+        <div class="field"><label>Marca / modelo</label><input class="fin-input" style="width:100%" placeholder="Glock G17 Ger.3..."></div>
         <div class="field"><label>Calibre</label><input class="fin-input" style="width:100%" placeholder="9mm..."></div>
-        <div class="field"><label>Categoria IPSC</label><select class="fin-input" style="width:100%"><option>—</option><option>Standard</option><option>Light</option><option>Open</option><option>Optics</option></select></div>
-        <div class="field"><label>📍 Local onde fica guardada</label><select class="fin-input" id="novaPecaLocal" style="width:100%"></select></div>
+        <div class="field"><label>Fornecedor</label><input class="fin-input" style="width:100%"></div>
         <div class="field"><label>Quantidade</label><input class="fin-input" style="width:100%" type="number" value="1"></div>
-        <div class="field"><label>Custo (R$)</label><input class="fin-input" style="width:100%" type="number"></div>
+        <div class="field"><label>Custo unitário (R$)</label><input class="fin-input" style="width:100%" type="number"></div>
+        <div class="field"><label>📅 Data de entrega prevista</label><input class="fin-input" style="width:100%" type="date"></div>
+        <div class="field"><label>📍 Local onde vai ficar</label><select class="fin-input" id="novaPecaLocal" style="width:100%"></select></div>
       </div>
-      <div class="row" style="gap:10px;margin-top:6px"><button class="btn" onclick="salvarPeca()">Salvar peça</button><button class="btn ghost" onclick="abrirNovaPeca(false)">Cancelar</button></div>
+      <div class="ok-box" style="margin:8px 0 4px"><span>📦</span><div class="mini">Quando a peça chegar, você marca como <b>recebida</b> e ela <b>entra no estoque automaticamente</b> no local escolhido.</div></div>
+      <div class="row" style="gap:10px;margin-top:10px"><button class="btn" onclick="salvarPeca()">Registrar pedido</button><button class="btn ghost" onclick="abrirNovaPeca(false)">Cancelar</button></div>
     </div>
     <div class="filters">
       <select id="fTipo"></select>
@@ -334,10 +342,11 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
   <!-- ===== CLIENTE ===== -->
   <section class="screen" id="cliente">
-    <div class="row" style="margin-bottom:16px;flex-wrap:wrap;gap:10px;align-items:center">
-      <div><div style="font-size:16px;font-weight:700">Clientes</div><div class="mini">Ficha do atirador — dados, CRAF, aniversário e armas</div></div>
+    <div class="row" style="margin-bottom:12px;flex-wrap:wrap;gap:10px;align-items:center">
+      <div><div style="font-size:16px;font-weight:700">Clientes</div><div class="mini">Toque num cliente pra abrir a ficha</div></div>
       <button class="btn" style="margin-left:auto" onclick="toggleNovoCliente()">+ Novo cliente</button>
     </div>
+    <input class="search" style="width:100%;max-width:none;margin-bottom:14px" placeholder="🔎 Buscar cliente por nome...">
     <div class="card" id="novoClienteForm" style="display:none;margin-bottom:16px">
       <h3>Cadastrar novo cliente</h3>
       <div class="grid g3">
@@ -351,43 +360,68 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div class="field"><label>Observações</label><input class="fin-input" style="width:100%" placeholder="preferências, armas, etc."></div>
       <div class="row" style="gap:10px;margin-top:6px"><button class="btn" onclick="salvarCliente()">Salvar cliente</button><button class="btn ghost" onclick="toggleNovoCliente()">Cancelar</button></div>
     </div>
-    <div class="card">
-      <div class="row" style="gap:16px">
-        <div class="avatar">MV</div>
-        <div><div style="font-size:19px;font-weight:700">Marcos Vinícius Torres</div><div class="mini">Atirador de competição · IPSC Standard · cliente desde 2023</div></div>
-        <div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">
+
+    <div class="acc">
+      <div class="acc-head open" onclick="toggleCliente(this)">
+        <div class="avatar-sm">MV</div>
+        <div><b>Marcos Vinícius Torres</b><div class="mini">IPSC Standard · <span style="color:var(--green)">último serviço há 5 dias</span></div></div>
+        <span class="acc-chevron">▾</span>
+      </div>
+      <div class="acc-body open">
+        <div class="row" style="gap:8px;flex-wrap:wrap;margin:14px 0">
           <button class="btn" onclick="whatsappCliente()">💬 WhatsApp</button>
           <button class="btn ghost" onclick="emailCliente()">✉️ E-mail</button>
           <button class="btn ghost">Editar</button>
+          <span class="chip c-livre" style="margin-left:auto">Cliente frequente</span>
         </div>
-      </div>
-      <div class="grid g4" style="margin-top:20px">
-        <div class="field"><label>Telefone</label><div class="val">(54) 99123-4567</div></div>
-        <div class="field"><label>Aniversário</label><div class="val">🎂 12 de agosto</div></div>
-        <div class="field"><label>CRAF</label><div class="val">41.228-9</div></div>
-        <div class="field"><label>Categoria</label><div class="val">IPSC Standard</div></div>
-      </div>
-    </div>
-    <div class="grid g2" style="margin-top:16px">
-      <div class="card">
-        <h3>Armas do cliente <span class="mini" style="font-weight:400;text-transform:none;letter-spacing:0">— clique pra ver o histórico</span></h3>
-        <div class="alert-line" style="cursor:pointer" onclick="go('arma');armaAbrir()"><span>🔫</span><b>Glock G34</b><span class="mini">Ger.3 · 9mm</span><span class="chip c-res" style="margin-left:auto">Em customização ›</span></div>
-        <div class="alert-line" style="cursor:pointer;border:none" onclick="go('arma');armaAbrir()"><span>🔫</span><b>Taurus TS9</b><span class="mini">9mm</span><span class="chip c-inst" style="margin-left:auto">Customizada ›</span></div>
-      </div>
-      <div class="card">
-        <h3>Relacionamento</h3>
-        <div class="ok-box"><span>🎂</span><div class="mini">Aniversário em <b>8 dias</b> — sistema pode lembrar você de mandar uma mensagem.</div></div>
-        <div class="alert-line" style="margin-top:10px"><span class="mini">Última visita</span><span class="mini" style="margin-left:auto">18/07/2026</span></div>
-        <div class="alert-line"><span class="mini">Total gasto (12 meses)</span><span style="margin-left:auto;font-weight:700;color:var(--bronze)">R$ 3.480</span></div>
+        <div class="grid g4">
+          <div class="field"><label>Telefone</label><div class="val">(54) 99123-4567</div></div>
+          <div class="field"><label>Aniversário</label><div class="val">🎂 12 de agosto</div></div>
+          <div class="field"><label>CRAF</label><div class="val">41.228-9</div></div>
+          <div class="field"><label>Última visita</label><div class="val">18/07/2026</div></div>
+        </div>
+        <h4 class="sec">Armas do cliente <span class="mini" style="font-weight:400;text-transform:none;letter-spacing:0">— toque pra ver o histórico</span></h4>
+        <div class="alert-line" style="cursor:pointer" onclick="go('arma');armaAbrir()"><span>🔫</span><b>Glock G34</b><span class="mini">Ger.3 · 9mm</span><span class="chip c-inst" style="margin-left:auto">Em produção ›</span></div>
+        <div class="alert-line" style="cursor:pointer;border:none" onclick="go('arma');armaAbrir()"><span>🔫</span><b>Taurus TS9</b><span class="mini">9mm</span><span class="chip c-livre" style="margin-left:auto">Entregue ›</span></div>
+        <h4 class="sec">Anotações & lembretes</h4>
+        <textarea class="fin-input" style="width:100%;min-height:60px" placeholder="Anotações... (ex.: prefere PIX, gosta de gatilho leve, atira aos sábados)"></textarea>
+        <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn" onclick="addLembrete()">🔔 Criar lembrete</button><span class="mini" style="margin-left:auto">Gastou R$ 3.480 em 12 meses</span></div>
       </div>
     </div>
 
-    <div class="card" style="margin-top:16px">
-      <h3>Anotações & lembretes</h3>
-      <textarea class="fin-input" style="width:100%;min-height:70px" placeholder="Anotações sobre o cliente... (ex.: prefere pagar no PIX, gosta de gatilho leve, atira aos sábados)"></textarea>
-      <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap">
-        <button class="btn" onclick="addLembrete()">🔔 Criar lembrete</button>
-        <button class="btn ghost" onclick="go('inicio')">Ver todos os lembretes na Início</button>
+    <div class="acc">
+      <div class="acc-head" onclick="toggleCliente(this)">
+        <div class="avatar-sm">AP</div>
+        <div><b>Ana Prado</b><div class="mini">IPSC Open · <span style="color:var(--green)">último serviço há 3 dias</span></div></div>
+        <span class="acc-chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="row" style="gap:8px;flex-wrap:wrap;margin:14px 0"><button class="btn" onclick="whatsappCliente()">💬 WhatsApp</button><button class="btn ghost" onclick="emailCliente()">✉️ E-mail</button><span class="chip c-livre" style="margin-left:auto">Frequente</span></div>
+        <div class="mini">📞 (54) 99988-1122 · 🎂 04/03 · CRAF 55.101-2 · 1 arma (CZ Shadow 2)</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-head" onclick="toggleCliente(this)">
+        <div class="avatar-sm">CR</div>
+        <div><b>Cléber Ramos</b><div class="mini">IPSC Standard · <span style="color:var(--amber)">último serviço há 2 meses</span></div></div>
+        <span class="acc-chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="row" style="gap:8px;flex-wrap:wrap;margin:14px 0"><button class="btn" onclick="whatsappCliente()">💬 WhatsApp</button><button class="btn ghost" onclick="emailCliente()">✉️ E-mail</button><span class="chip c-res" style="margin-left:auto">Faz tempo — reative</span></div>
+        <div class="mini">📞 (54) 99777-3344 · 🎂 23/09 · 1 arma (Taurus TS9)</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-head" onclick="toggleCliente(this)">
+        <div class="avatar-sm">JS</div>
+        <div><b>João Silva</b><div class="mini">IPSC Production · <span style="color:var(--red)">sumido há 7 meses</span></div></div>
+        <span class="acc-chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="row" style="gap:8px;flex-wrap:wrap;margin:14px 0"><button class="btn" onclick="whatsappCliente()">💬 WhatsApp</button><span class="chip c-baixo" style="margin-left:auto">Sumido — chamar</span></div>
+        <div class="mini">📞 (54) 99555-8899 · 1 arma (Imbel MD7)</div>
       </div>
     </div>
   </section>
@@ -499,7 +533,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       </div>
       <div style="margin-top:12px"><div class="row"><span>💚 Ganhos</span><span class="mini tnum" style="margin-left:auto" id="barGanhoLbl"></span></div><div class="bar" style="height:12px"><i id="barGanho" style="background:var(--green)"></i></div></div>
       <div style="margin-top:12px"><div class="row"><span>❤️ Gastos</span><span class="mini tnum" style="margin-left:auto" id="barGastoLbl"></span></div><div class="bar" style="height:12px"><i id="barGasto" style="background:var(--red)"></i></div></div>
-      <p class="mini" style="margin-top:12px"><b>Saiu</b> = despesas fixas + ajudantes + <b>peças que foram usadas nos serviços</b> (só as que entraram em armas). Comprar peça pra estoque <u>não</u> entra aqui.</p>
+      <p class="mini" style="margin-top:12px"><b>Saiu</b> = despesas fixas + ajudantes + <b>peças usadas nos serviços</b> (só as que entram em armas).</p>
     </div>
 
     <div class="card" style="margin-bottom:16px">
@@ -542,7 +576,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <span class="belt-sep"></span>
       <a class="belt-item" data-s="cliente"><span class="belt-ic">☻</span><span class="belt-lbl">Clientes</span></a>
     </div>
-    <a class="belt-item belt-home active" data-s="inicio"><span class="belt-lens"></span><span class="belt-lbl">No Alvo</span></a>
+    <a class="belt-item belt-home active" data-s="inicio"><span class="belt-lens"></span><span class="belt-lbl">Visão Geral</span></a>
     <div class="belt-group">
       <a class="belt-item" data-s="arma"><span class="belt-ic">▮</span><span class="belt-lbl">Armas</span></a>
       <span class="belt-sep"></span>
@@ -553,7 +587,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   <div class="fab-menu" id="fabMenu">
     <a onclick="addAcao('pedido')"><span class="fab-lbl">Novo pedido (OS)</span><span class="fab-ic">☰</span></a>
     <a onclick="addAcao('cliente')"><span class="fab-lbl">Novo cliente</span><span class="fab-ic">☻</span></a>
-    <a onclick="addAcao('peca')"><span class="fab-lbl">Nova peça</span><span class="fab-ic">▤</span></a>
+    <a onclick="addAcao('peca')"><span class="fab-lbl">Pedir peça</span><span class="fab-ic">▤</span></a>
   </div>
   <button class="fab-add" id="fabAdd" onclick="toggleFab()" aria-label="Adicionar">+</button>
 </main>
@@ -588,7 +622,7 @@ function qtdChip(p){ return p.qtd<=2 ? '<span class="chip c-baixo">'+p.qtd+' un<
 
 /* ===== BLOCO 3: NAVEGAÇÃO ===== */
 const titles={
-  inicio:["Início","Visão geral da oficina — hoje, 04/08/2026"],
+  inicio:["Visão Geral","Raio-x da oficina — hoje, 04/08/2026"],
   estoque:["Estoque de Peças","Cada peça: onde está, quantas tem, com quem está comprometida"],
   custom:["Nova OS","Abrir ordem de serviço e reservar peças — com trava anti-conflito"],
   cliente:["Clientes","Ficha completa do atirador — CRAF, aniversário e armas"],
@@ -602,6 +636,8 @@ function switchScreen(s){
   document.getElementById('pageSub').textContent=titles[s][1];
   const mob=document.getElementById('mobSub'); if(mob) mob.textContent=titles[s][0];
   if(s==='arma' && typeof armaVoltar==='function') armaVoltar();
+  const fab=document.getElementById('fabAdd'); if(fab) fab.style.display=(s==='inicio')?'grid':'none';
+  if(typeof toggleFab==='function') toggleFab(false);
   window.scrollTo(0,0);
 }
 function go(s){ switchScreen(s); }
@@ -667,19 +703,11 @@ function abrirNovaPeca(show){
   if(sel && !sel.options.length) sel.innerHTML=LOCAIS.map(l=>'<option>'+l+'</option>').join('');
   f.style.display='block'; f.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function salvarPeca(){ alert('Peça cadastrada! (No sistema real ela entra no estoque no local escolhido.)'); abrirNovaPeca(false); }
+function salvarPeca(){ alert('Pedido de peça registrado!\nQuando a peça chegar, marque como recebida — ela entra no estoque automaticamente no local escolhido.'); abrirNovaPeca(false); }
 function ajustarQtd(cod,delta){
   const p=pecas.find(x=>x.cod===cod); if(!p) return;
-  if(delta<0){
-    if(p.qtd<=0){ alert('Estoque desta peça já está em 0.'); return; }
-    const motivo=prompt('Motivo da baixa? (venda, uso em serviço, perda, ajuste de contagem...)');
-    if(!motivo) return;
-    p.qtd-=1;
-  } else {
-    const motivo=prompt('Motivo da entrada? (compra, devolução, ajuste de contagem...)');
-    if(motivo===null) return;
-    p.qtd+=1;
-  }
+  if(delta<0 && p.qtd<=0) return;
+  p.qtd+=delta;
   renderEstoque(); renderInicio(); renderDisp();
 }
 function editarPeca(cod){
@@ -822,6 +850,13 @@ function toggleNovoCliente(){
 function salvarCliente(){
   alert('Cliente cadastrado! (No sistema real ele já fica disponível pra abrir OS e entra na lista de aniversariantes.)');
   toggleNovoCliente();
+}
+function toggleCliente(head){
+  const body=head.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('#cliente .acc-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('#cliente .acc-head').forEach(h=>h.classList.remove('open'));
+  if(!isOpen){ body.classList.add('open'); head.classList.add('open'); }
 }
 
 /* ===== BLOCO 7: FINANCEIRO — despesas fixas + balanço do mês ===== */
