@@ -41,9 +41,9 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 .grid{display:grid;gap:16px}
-.g4{grid-template-columns:repeat(4,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g2{grid-template-columns:1.6fr 1fr}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:18px}
 .card h3{margin:0 0 14px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .kpi{display:flex;flex-direction:column;gap:6px}
@@ -78,7 +78,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,system
 .fab-backdrop{position:fixed;inset:0;z-index:94;background:rgba(0,0,0,.5);display:none}
 .fab-backdrop.open{display:block}
 /* esteira de produção (kanban) */
-.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kanban{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 /* sub-abas (dentro de Armas) */
 .subtabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
 .subtab{padding:8px 15px;border-radius:9px;border:1px solid var(--border);background:var(--panel);color:var(--muted);cursor:pointer;font-weight:600;font-size:12.5px}
@@ -167,7 +167,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   .mobilebar .shield svg{width:25px;height:25px;display:block}
   .mobilebar b{font-size:14.5px;letter-spacing:1.5px;display:block;line-height:1.15}
   .mobilebar .msub{font-size:11.5px;color:var(--muted)}
-  .g4{grid-template-columns:repeat(2,1fr)} .g2,.g3{grid-template-columns:1fr}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))} .g2,.g3{grid-template-columns:minmax(0,1fr)}
   .grid{gap:12px}
   .card{padding:15px;border-radius:15px}
   .filters{gap:7px}
@@ -198,7 +198,7 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
   @keyframes reddot{0%,100%{opacity:.85}50%{opacity:1}}
   .fab-add{bottom:calc(106px + env(safe-area-inset-bottom))}
   .fab-menu{bottom:calc(174px + env(safe-area-inset-bottom))}
-  .kanban{grid-template-columns:1fr}
+  .kanban{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 </head>
