@@ -258,10 +258,37 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <div id="baixoList"></div>
       <button class="btn ghost" style="margin-top:14px" onclick="go('estoque')">Ver no estoque</button>
     </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3>🔻 Peças que mais saem</h3>
+        <div class="alert-line"><span>Guia de mola dupla</span><span class="mini" style="margin-left:auto">42 un</span></div>
+        <div class="alert-line"><span>Funil / Magwell</span><span class="mini" style="margin-left:auto">31 un</span></div>
+        <div class="alert-line"><span>Contrapeso</span><span class="mini" style="margin-left:auto">27 un</span></div>
+        <div class="alert-line" style="border:none"><span>Tecla de gatilho</span><span class="mini" style="margin-left:auto">19 un</span></div>
+        <button class="btn ghost sm" style="margin-top:12px" onclick="gerarRelatorio('Peças que mais saem')">📄 Gerar relatório</button>
+      </div>
+      <div class="card">
+        <h3>🔫 Armas que mais aparecem</h3>
+        <div class="alert-line"><span>Glock G34</span><span class="mini" style="margin-left:auto">18 serviços</span></div>
+        <div class="alert-line"><span>CZ Shadow 2</span><span class="mini" style="margin-left:auto">14 serviços</span></div>
+        <div class="alert-line"><span>Taurus TS9</span><span class="mini" style="margin-left:auto">11 serviços</span></div>
+        <div class="alert-line" style="border:none"><span>Imbel 1911</span><span class="mini" style="margin-left:auto">9 serviços</span></div>
+        <button class="btn ghost sm" style="margin-top:12px" onclick="gerarRelatorio('Armas que mais aparecem')">📄 Gerar relatório</button>
+      </div>
+    </div>
   </section>
 
   <!-- ===== ESTOQUE ===== -->
   <section class="screen" id="estoque">
+    <div class="card" id="encomendaPanel" style="display:none;margin-bottom:16px">
+      <div class="row" id="encomendaHeader" style="flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px">
+        <span class="chip c-res">📦 Aguardando transporte</span>
+        <button class="btn" style="margin-left:auto" onclick="chegouEncomendas()">✓ Chegou → estoque</button>
+      </div>
+      <div id="encomendaList"></div>
+      <button class="btn ghost sm" style="margin-top:12px" onclick="abrirNovaPeca()">+ Nova encomenda</button>
+    </div>
     <div class="card" id="novaPecaForm" style="display:none;margin-bottom:16px">
       <h3>Pedido de peça (encomenda)</h3>
       <div class="grid g3">
@@ -286,7 +313,6 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
       <select id="fIpsc"></select>
       <button class="btn ghost sm" onclick="limparFiltros()">Limpar</button>
       <span class="count-note" id="estCount"></span>
-      <button class="btn" onclick="abrirNovaPeca()">+ Nova peça</button>
     </div>
     <div class="card" style="padding:0">
       <div class="tbl-wrap">
@@ -522,6 +548,10 @@ h4.sec{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu
 
   <!-- ===== FINANCEIRO ===== -->
   <section class="screen" id="financeiro">
+    <div class="row" style="margin-bottom:16px;flex-wrap:wrap;gap:10px;align-items:center">
+      <div class="mini">🔒 Área protegida por senha (na versão final)</div>
+      <button class="btn" style="margin-left:auto" onclick="gerarRelatorio('Financeiro do mês')">📄 Gerar relatório financeiro</button>
+    </div>
     <div class="card" style="margin-bottom:16px">
       <h3>Faturamento</h3>
       <div class="grid g3">
@@ -659,7 +689,7 @@ function toggleFab(force){
 }
 function addAcao(tipo){
   toggleFab(false);
-  if(tipo==='peca'){ go('estoque'); abrirNovaPeca(); }
+  if(tipo==='peca'){ go('estoque'); const ep=document.getElementById('encomendaPanel'); if(ep){ ep.style.display='block'; ep.scrollIntoView({behavior:'smooth',block:'nearest'}); } renderEncomendas(); }
   else if(tipo==='cliente'){ go('cliente'); const f=document.getElementById('novoClienteForm'); if(f){ f.style.display='block'; f.scrollIntoView({behavior:'smooth',block:'nearest'}); } }
   else if(tipo==='pedido'){ novaOS(); }
 }
@@ -709,7 +739,34 @@ function abrirNovaPeca(show){
   if(sel && !sel.options.length) sel.innerHTML=LOCAIS.map(l=>'<option>'+l+'</option>').join('');
   f.style.display='block'; f.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function salvarPeca(){ alert('Pedido de peça registrado!\nQuando a peça chegar, marque como recebida — ela entra no estoque automaticamente no local escolhido.'); abrirNovaPeca(false); }
+let encomendas=[
+  {cod:'GM-G17-01', nome:'Guia de mola dupla · Glock G17 G3', qtd:5, pedido:'05/08', entrega:'12/08'},
+  {cod:'FN-G34-STD', nome:'Funil / Magwell · Glock G34 Standard', qtd:3, pedido:'05/08', entrega:'12/08'},
+  {cod:'PC-IMB-1911', nome:'Percussor alongado · Imbel 1911', qtd:10, pedido:'06/08', entrega:'14/08'},
+  {cod:'CP-SH2', nome:'Contrapeso · CZ Shadow 2', qtd:4, pedido:'06/08', entrega:'15/08'}
+];
+function renderEncomendas(){
+  const el=document.getElementById('encomendaList'); if(!el) return;
+  const hd=document.getElementById('encomendaHeader');
+  if(!encomendas.length){ el.innerHTML='<p class="mini">Nenhuma encomenda aguardando. Toque em "+ Nova encomenda".</p>'; if(hd) hd.style.display='none'; return; }
+  if(hd) hd.style.display='flex';
+  el.innerHTML=encomendas.map(e=>
+    '<div class="alert-line"><span>📦</span><div><b>'+e.nome+'</b><div class="mini">'+e.qtd+' un · pedido '+e.pedido+' · entrega '+e.entrega+'</div></div></div>').join('');
+}
+function chegouEncomendas(){
+  if(!encomendas.length){ alert('Nenhuma encomenda aguardando.'); return; }
+  let tot=0;
+  encomendas.forEach(e=>{ const p=pecas.find(x=>x.cod===e.cod); if(p){ p.qtd+=e.qtd; } tot+=e.qtd; });
+  alert('✅ '+tot+' peças recebidas — entraram no estoque automaticamente!');
+  encomendas=[];
+  renderEncomendas(); renderEstoque(); renderInicio(); renderDisp();
+}
+function salvarPeca(){
+  encomendas.push({cod:'', nome:'Nova peça encomendada', qtd:1, pedido:'08/08', entrega:'18/08'});
+  renderEncomendas();
+  abrirNovaPeca(false);
+  alert('Encomenda registrada! Quando chegar, toque em "Chegou" e ela entra no estoque.');
+}
 function ajustarQtd(cod,delta){
   const p=pecas.find(x=>x.cod===cod); if(!p) return;
   if(delta<0 && p.qtd<=0) return;
@@ -728,6 +785,7 @@ function editarPeca(cod){
 function addLembrete(){ const t=prompt('Novo lembrete (ex.: "ligar pro João dia 20", "cobrar OS #1032"):'); if(t){ alert('Lembrete criado: "'+t+'"\nEle aparece aqui na Início e te avisa na data.'); } }
 function emailCliente(){ alert('No sistema real: abre o e-mail já preenchido pro cliente (parabéns de aniversário, orçamento, aviso de arma pronta...).'); }
 function whatsappCliente(){ alert('No sistema real: abre o WhatsApp do cliente com a mensagem pronta (arma pronta pra retirar, orçamento, lembrete...).'); }
+function gerarRelatorio(nome){ alert('📄 Relatório "'+nome+'" gerado!\nNo sistema real: PDF pronto pra imprimir ou compartilhar, com período à sua escolha (mês/ano).'); }
 function compartilharOS(){ alert('No sistema real: gera a OS em PDF/link pra você IMPRIMIR ou mandar no WhatsApp do cliente.'); }
 function compartilharGuia(){ alert('No sistema real: gera a guia de manutenção / CRAF em PDF pra imprimir ou compartilhar.'); }
 
@@ -975,7 +1033,7 @@ preencheSelect('fCalibre','Calibre (todos)','calibre');
 preencheSelect('fIpsc','Categoria IPSC (todas)','ipsc');
 document.getElementById('globalSearch').addEventListener('input', renderEstoque);
 preencheAddSelect();
-renderEstoque(); renderInicio(); renderDisp(); renderDespesas(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento(); renderPedidos();
+renderEstoque(); renderInicio(); renderDisp(); renderDespesas(); renderAjudantes(); renderHora(); renderOrc(); renderFaturamento(); renderPedidos(); renderEncomendas();
 </script>
 </body>
 </html>
