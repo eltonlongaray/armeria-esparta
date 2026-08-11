@@ -28,8 +28,8 @@ h2.title{font-size:29px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;te
 .lead{color:var(--muted);font-size:16.5px;max-width:680px}
 
 .logo{display:flex;align-items:center;gap:12px}
-.logo .mark{width:44px;height:44px;border-radius:50%;background:conic-gradient(from 210deg,#20456f,#3a7bd5,#20456f);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.logo .mark span{font-family:Georgia,serif;font-weight:700;color:#fff;font-size:20px}
+.logo .mark{width:48px;height:48px;border-radius:12px;background:#fff;display:grid;place-items:center;padding:5px;flex:0 0 auto;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.logo .mark img{width:100%;height:100%;object-fit:contain;display:block}
 .logo b{font-size:17px;letter-spacing:.3px;line-height:1.05;color:#fff}
 .logo small{display:block;font-size:9.5px;letter-spacing:1.3px;color:var(--steel);text-transform:uppercase;font-weight:600}
 
@@ -139,10 +139,13 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <body>
 
 <!-- ===== HERO / OBJETIVO (sem botões) ===== -->
-<div class="logobar"><img src="logo.png" alt="Elton Longaray — Soluções inteligentes em programação e IA"></div>
 <header class="hero">
   <div class="wrap">
     <div class="top">
+      <div class="logo">
+        <span class="mark"><img src="emblema.png" alt=""></span>
+        <div><b>Elton Longaray</b><small>Soluções inteligentes em programação e IA</small></div>
+      </div>
       <span class="tag">PROPOSTA · ARMERIA ESPARTA</span>
     </div>
 
@@ -257,26 +260,40 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <!-- ===== CTA FINAL ===== -->
 <section class="final" id="aceite">
   <div class="wrap">
-    <div class="eyebrow" style="color:var(--blue-br)">Vamos fechar?</div>
+    <div class="eyebrow" style="color:var(--blue-br)">Formas de pagamento</div>
     <h2>Escolha uma das opções abaixo</h2>
     <div class="payopts">
       <label class="payopt"><input type="radio" name="pg"><div><b>a) À vista</b><span>R$ 6.000 pagos de uma vez</span></div></label>
       <label class="payopt"><input type="radio" name="pg" checked><div><b>b) Entrada + parcelas no PIX</b><span>R$ 3.000 + 6× R$ 500 · sem juros</span></div></label>
       <label class="payopt"><input type="radio" name="pg"><div><b>c) Cartão de crédito</b><span>Total, ou entrada + parcelas · juros da operadora</span></div></label>
     </div>
-    <p class="doubt"><a onclick="return false">🤔 Ficou com alguma dúvida? Clique aqui</a></p>
-    <a href="#" class="btn primary big" onclick="return false">✅ Aceitar proposta</a>
-    <small>Ilustrativo por enquanto — o "Aceitar" vai levar ao WhatsApp do Élton com a forma escolhida + o link do documento (com opção de baixar).</small>
+    <p style="color:#c4d3e6;font-size:16px;margin:26px 0 12px">Pronto pra tirar a oficina do caderno?</p>
+    <a class="btn primary big" onclick="aceitar()">✅ Aceitar proposta</a>
+    <p style="margin:14px 0 0"><a onclick="duvida()" style="color:#8ea2ba;font-size:13.5px;text-decoration:underline;cursor:pointer">Ainda tenho dúvidas</a></p>
   </div>
 </section>
 
 <footer>
   <div class="logo" style="justify-content:center">
-    <div class="mark"><span>A</span></div>
+    <span class="mark"><img src="emblema.png" alt=""></span>
     <div style="text-align:left"><b style="color:#eaf1fb">Elton Longaray</b><small>Soluções inteligentes em programação e IA</small></div>
   </div>
   <div class="motto">Proposta · Sistema de gestão para a Armeria Esparta</div>
 </footer>
+
+<script>
+const ZAP='5551982276577';
+const DOC='https://eltonlongaray.github.io/armeria-esparta/proposta/';
+function aceitar(){
+  const sel=document.querySelector('input[name="pg"]:checked');
+  const opt=sel?sel.closest('.payopt').querySelector('b').textContent:'';
+  const msg='Aceito a proposta! Forma de pagamento: '+opt+'. — '+DOC;
+  window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent(msg),'_blank');
+}
+function duvida(){
+  window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent('Ainda tenho dúvidas'),'_blank');
+}
+</script>
 
 </body>
 </html>
