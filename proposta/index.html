@@ -21,45 +21,38 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-section{padding:64px 0}
+section{padding:60px 0}
 h1,h2,h3{line-height:1.15;margin:0}
-.eyebrow{color:var(--blue-br);font-size:12.5px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase}
-h2.title{font-size:30px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;text-wrap:balance}
-.lead{color:var(--muted);font-size:17px;max-width:640px}
-.center{text-align:center} .center .lead{margin-left:auto;margin-right:auto}
+.eyebrow{color:var(--blue-br);font-size:12.5px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase}
+h2.title{font-size:29px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;text-wrap:balance}
+.lead{color:var(--muted);font-size:16.5px;max-width:680px}
 
-/* logo lockup */
 .logo{display:flex;align-items:center;gap:12px}
 .logo .mark{width:44px;height:44px;border-radius:50%;background:conic-gradient(from 210deg,#20456f,#3a7bd5,#20456f);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.logo .mark span{font-family:Georgia,serif;font-weight:700;color:#fff;font-size:20px;letter-spacing:-1px}
+.logo .mark span{font-family:Georgia,serif;font-weight:700;color:#fff;font-size:20px}
 .logo b{font-size:17px;letter-spacing:.3px;line-height:1.05;color:#fff}
-.logo small{display:block;font-size:9.5px;letter-spacing:1.4px;color:var(--steel);text-transform:uppercase;font-weight:600}
+.logo small{display:block;font-size:9.5px;letter-spacing:1.3px;color:var(--steel);text-transform:uppercase;font-weight:600}
 
 /* hero */
 .hero{background:radial-gradient(1200px 500px at 80% -10%,rgba(74,144,217,.28),transparent 60%),linear-gradient(180deg,var(--navy2),var(--navy));color:#eaf1fb;position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,transparent,var(--blue-br),transparent)}
-.hero .wrap{padding-top:26px;padding-bottom:74px}
+.hero .wrap{padding-top:26px;padding-bottom:72px}
 .hero .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .tag{border:1px solid rgba(159,178,200,.4);color:var(--steel);border-radius:30px;padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:.6px}
-.hero h1{font-size:44px;font-weight:800;letter-spacing:-1px;margin:34px 0 14px;max-width:16ch;text-wrap:balance;color:#fff}
+.hero h1{font-size:43px;font-weight:800;letter-spacing:-1px;margin:34px 0 16px;max-width:17ch;text-wrap:balance;color:#fff}
 .hero h1 .hl{color:var(--blue-br)}
-.hero p.sub{color:#c4d3e6;font-size:19px;max-width:60ch;margin:0}
+.hero p.sub{color:#c4d3e6;font-size:18.5px;max-width:62ch;margin:0}
 .hero .meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;font-size:14px;color:#aebfd4}
 .hero .meta b{color:#fff}
-.hero .cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
 
 .btn{display:inline-flex;align-items:center;gap:9px;border:none;border-radius:12px;padding:15px 26px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .12s,box-shadow .15s;font-family:inherit}
 .btn:active{transform:translateY(1px)}
 .btn.primary{background:var(--green);color:#fff;box-shadow:0 8px 22px rgba(31,157,85,.35)}
 .btn.primary:hover{box-shadow:0 10px 28px rgba(31,157,85,.45)}
 .btn.ghost{background:transparent;color:#eaf1fb;border:1.5px solid rgba(159,178,200,.5)}
-.btn.ghost.dark{color:var(--ink);border-color:var(--line)}
-.btn.blue{background:var(--blue);color:#fff}
 
-/* cards / grid */
 .grid{display:grid;gap:16px}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
 .mod{display:flex;gap:13px;align-items:flex-start}
 .mod .ico{width:40px;height:40px;border-radius:11px;background:linear-gradient(145deg,#eaf2fc,#d5e6f8);color:var(--blue);display:grid;place-items:center;font-size:19px;flex:0 0 auto}
@@ -67,9 +60,15 @@ h2.title{font-size:30px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;te
 .mod h3{font-size:15.5px;font-weight:700;margin-bottom:2px}
 .mod p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.45}
 
+/* fora do escopo */
+.out-list{list-style:none;margin:14px 0 0;padding:0;max-width:640px}
+.out-list li{position:relative;padding:9px 0 9px 30px;border-bottom:1px dashed rgba(120,130,150,.2);font-size:15.5px}
+.out-list li:last-child{border:none}
+.out-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:800}
+
 /* antes x depois */
 .tint{background:linear-gradient(180deg,var(--panel),var(--bg))}
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
 .ba .col{border-radius:var(--radius);padding:24px;border:1px solid var(--line)}
 .ba .antes{background:var(--red-sf);border-color:rgba(192,71,59,.25)}
 .ba .depois{background:var(--green-sf);border-color:rgba(31,157,85,.28)}
@@ -81,20 +80,16 @@ h2.title{font-size:30px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;te
 .ba .antes li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:800}
 .ba .depois li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
 
-/* comparison */
-.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
-.price-card{border-radius:var(--radius);padding:26px;border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow)}
-.price-card.out{background:var(--bg)}
-.price-card.mine{border:2px solid var(--blue);position:relative}
-.price-card .k{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
-.price-card .big{font-size:34px;font-weight:800;margin:8px 0;letter-spacing:-1px}
-.price-card.mine .big{color:var(--blue)}
-.price-card ul{list-style:none;margin:12px 0 0;padding:0;font-size:14.5px}
-.price-card li{padding:6px 0;border-top:1px solid var(--line);color:var(--muted)}
-.ribbon{position:absolute;top:-13px;left:26px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;letter-spacing:.6px;padding:4px 12px;border-radius:20px}
+/* preço lá fora */
+.pricebox{border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow);overflow:hidden;margin-top:16px;max-width:640px}
+.pricebox .r{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.pricebox .r:last-child{border-bottom:none}
+.pricebox .r span{color:var(--muted);font-size:14.5px}
+.pricebox .r b{font-size:17px;white-space:nowrap}
+.big-out{color:var(--red)!important;font-size:20px!important}
 
-/* investment */
-.invest{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+/* investimento */
+.invest{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-top:16px}
 .invest .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .invest .row:last-of-type{border-bottom:none}
 .invest .row .d{color:var(--muted);font-size:14px}
@@ -107,29 +102,27 @@ h2.title{font-size:30px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;te
 .pay .opt b{color:var(--blue)}
 .chip{display:inline-block;background:var(--green-sf);color:var(--green);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700;margin-left:6px}
 
-/* final cta */
 .final{background:linear-gradient(180deg,var(--navy2),var(--navy));color:#eaf1fb;text-align:center}
-.final h2{color:#fff;font-size:32px;font-weight:800}
+.final h2{color:#fff;font-size:31px;font-weight:800}
 .final p{color:#c4d3e6;font-size:17px;max-width:52ch;margin:12px auto 0}
 .final .cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .final small{display:block;margin-top:20px;color:#8ea2ba;font-size:13px}
 
-/* footer */
 footer{background:var(--navy);color:#aebfd4;text-align:center;padding:30px 22px;font-size:13px}
 footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top:6px}
 
 @media(max-width:760px){
-  section{padding:46px 0}
-  .hero h1{font-size:33px} .hero p.sub{font-size:17px}
-  h2.title{font-size:25px}
-  .g3,.g2,.ba,.compare,.pay{grid-template-columns:1fr}
-  .hero .cta .btn,.final .cta .btn{flex:1 1 100%;justify-content:center}
+  section{padding:44px 0}
+  .hero h1{font-size:32px} .hero p.sub{font-size:16.5px}
+  h2.title{font-size:24px}
+  .g3,.ba,.pay{grid-template-columns:1fr}
+  .final .cta .btn{flex:1 1 100%;justify-content:center}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO / OBJETIVO (sem botões) ===== -->
 <header class="hero">
   <div class="wrap">
     <div class="top">
@@ -141,50 +134,59 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
     </div>
 
     <h1>O fim da peça prometida <span class="hl">pra dois clientes.</span></h1>
-    <p class="sub">Um sistema sob medida para a Armeria Esparta — estoque, clientes, produção, documentos e financeiro num só lugar, no <b>celular e no PC</b>, funcionando <b>online e offline</b>.</p>
+    <p class="sub">Acabar com a dor central da oficina — prometer ou usar uma peça que já estava reservada para a arma de outro cliente — e tirar a operação do caderno: estoque, clientes, produção, documentos e financeiro num só lugar, no <b>celular e no PC</b>.</p>
 
     <div class="meta">
       <div>Para <b>Eduardo Aurelio</b></div>
-      <div>Prazo <b>2 a 3 meses</b></div>
-      <div>Projeto <b>R$ 6.000</b> · Manutenção <b>R$ 250/mês</b></div>
-    </div>
-
-    <div class="cta">
-      <a href="#aceite" class="btn primary">Aceitar proposta</a>
-      <a href="#aceite" class="btn ghost">Ainda tenho dúvidas</a>
+      <div>Responsável <b>Élton Longaray</b></div>
+      <div>Prazo de entrega <b>2 a 3 meses</b></div>
     </div>
   </div>
 </header>
 
-<!-- ===== O QUE RECEBE ===== -->
+<!-- ===== 02 · ESCOPO ===== -->
 <section>
   <div class="wrap">
-    <div class="eyebrow">O que você recebe</div>
-    <h2 class="title">12 módulos, feitos pra sua oficina</h2>
-    <p class="lead" style="margin-bottom:26px">Tudo pensado no dia a dia do armeiro — nada de sistema genérico.</p>
+    <div class="eyebrow">Escopo</div>
+    <h2 class="title">O que está sendo entregue — 12 módulos</h2>
+    <p class="lead" style="margin-bottom:26px">Feito no dia a dia do armeiro, nada de sistema genérico.</p>
     <div class="grid g3">
-      <div class="card mod"><div class="ico">📦</div><div><h3>Estoque de peças</h3><p>Status livre / reservada / instalada, local, valor e alerta de estoque baixo.</p></div></div>
-      <div class="card mod"><div class="ico">🚚</div><div><h3>Encomendas</h3><p>Pedido com entrega prevista; "Chegou" → entra no estoque automaticamente.</p></div></div>
-      <div class="card mod"><div class="ico">👤</div><div><h3>Clientes</h3><p>Ficha com CRAF e aniversário, busca, frequência, anotações, WhatsApp e e-mail.</p></div></div>
+      <div class="card mod"><div class="ico">📦</div><div><h3>Estoque de peças</h3><p>Cadastro por tipo, marca, modelo, geração, calibre e IPSC. Status livre / reservada / instalada, local, valor e alerta de estoque baixo.</p></div></div>
+      <div class="card mod"><div class="ico">🚚</div><div><h3>Encomendas</h3><p>Pedido com entrega prevista; "aguardando transporte" → botão Chegou e a peça entra no estoque automaticamente.</p></div></div>
+      <div class="card mod"><div class="ico">👤</div><div><h3>Clientes</h3><p>Ficha (CRAF, aniversário, categoria), busca, frequência, anotações, lembretes e WhatsApp/e-mail.</p></div></div>
       <div class="card mod"><div class="ico">🔫</div><div><h3>Armas</h3><p>Vinculadas ao dono, com ficha e status (em produção / entregue).</p></div></div>
-      <div class="card mod"><div class="ico">🧾</div><div><h3>Ordem de Serviço</h3><p>Trava anti-conflito de peça, fotos antes/depois, anotações, imprimir/compartilhar.</p></div></div>
+      <div class="card mod"><div class="ico">🧾</div><div><h3>Ordem de Serviço</h3><p>Abrir OS com trava anti-conflito; peças, fotos antes/depois (cronômetro das horas), anotações, imprimir/compartilhar.</p></div></div>
       <div class="card mod"><div class="ico">⚙️</div><div><h3>Esteira de produção</h3><p>Fluxo visual: na fila → na esteira → pronta.</p></div></div>
-      <div class="card mod"><div class="ico">📄</div><div><h3>Documentos</h3><p>CRAF e guia de manutenção por arma, imprimir e compartilhar (Exército).</p></div></div>
-      <div class="card mod"><div class="ico">💰</div><div><h3>Financeiro</h3><p>Balanço entrou/saiu/sobrou, valor da hora, acesso por senha e relatório.</p></div></div>
-      <div class="card mod"><div class="ico">📊</div><div><h3>Relatórios</h3><p>Peças que mais saem, armas que mais aparecem e financeiro.</p></div></div>
+      <div class="card mod"><div class="ico">📄</div><div><h3>Documentos</h3><p>CRAF + guia de manutenção por arma, imprimir/compartilhar (Exército).</p></div></div>
+      <div class="card mod"><div class="ico">💰</div><div><h3>Financeiro</h3><p>Balanço entrou/saiu/sobrou, despesas e ajudantes, valor da hora, acesso por senha, relatório.</p></div></div>
+      <div class="card mod"><div class="ico">📊</div><div><h3>Relatórios</h3><p>Peças que mais saem · Armas que mais aparecem · Financeiro.</p></div></div>
       <div class="card mod"><div class="ico">🔔</div><div><h3>Lembretes</h3><p>Aniversários, cobranças e retorno de cliente.</p></div></div>
-      <div class="card mod"><div class="ico">📲</div><div><h3>Multiplataforma (PWA)</h3><p>App instalável no celular e no PC, sem depender das lojas.</p></div></div>
+      <div class="card mod"><div class="ico">📲</div><div><h3>Multiplataforma (PWA)</h3><p>Aplicativo web instalável: vira um ícone e abre como app no celular e no PC, sem depender das lojas.</p></div></div>
       <div class="card mod"><div class="ico">🌐</div><div><h3>Online + Offline</h3><p>Funciona sem internet e sincroniza sozinho quando a conexão volta.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== ANTES x DEPOIS ===== -->
+<!-- ===== 03 · FORA DO ESCOPO ===== -->
 <section class="tint">
+  <div class="wrap">
+    <div class="eyebrow">Fora do escopo (nesta fase)</div>
+    <h2 class="title">O que não entra agora</h2>
+    <ul class="out-list">
+      <li>🤖 Inteligência artificial embarcada</li>
+      <li>Emissão fiscal de nota (NF-e)</li>
+      <li>Integração com bancos / maquininha</li>
+      <li>App nativo nas lojas (entregue como app web instalável)</li>
+    </ul>
+    <p class="lead" style="margin-top:12px;font-size:14.5px">Podem virar fases futuras, orçadas à parte.</p>
+  </div>
+</section>
+
+<!-- ===== ANTES x DEPOIS ===== -->
+<section>
   <div class="wrap">
     <div class="eyebrow">A virada de chave</div>
     <h2 class="title">Antes × Depois do sistema</h2>
-    <p class="lead" style="margin-bottom:24px">O mesmo dia de trabalho — com e sem o controle na mão.</p>
     <div class="ba">
       <div class="col antes">
         <h3>😮‍💨 Antes</h3>
@@ -210,50 +212,42 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
   </div>
 </section>
 
-<!-- ===== COMPARAÇÃO DE CUSTO ===== -->
-<section>
+<!-- ===== 04 · QUANTO CUSTARIA LÁ FORA ===== -->
+<section class="tint">
   <div class="wrap">
     <div class="eyebrow">Comparativo</div>
     <h2 class="title">Quanto custaria com uma empresa de software de fora</h2>
-    <div class="compare">
-      <div class="price-card out">
-        <div class="k">Empresa de software de fora</div>
-        <div class="big">R$ 15–30 mil<span style="font-size:16px;color:var(--muted)"> ou mais</span></div>
-        <ul>
-          <li>Manutenção: R$ 400 – R$ 800 / mês</li>
-          <li>Suporte: chamado, só horário comercial</li>
-          <li>Mudanças: processo lento</li>
-        </ul>
-      </div>
-      <div class="price-card mine">
-        <div class="ribbon">COMIGO</div>
-        <div class="k">Com o Elton</div>
-        <div class="big">R$ 6.000</div>
-        <ul>
-          <li>Manutenção: R$ 250 / mês</li>
-          <li>Suporte direto comigo, a qualquer hora — inclusive domingo</li>
-          <li>Ajustes rápidos e próximos de você</li>
-        </ul>
-      </div>
+    <div class="pricebox">
+      <div class="r"><span>Projeto (sistema sob medida)</span><b class="big-out">R$ 15.000 – R$ 30.000 ou mais</b></div>
+      <div class="r"><span>Manutenção mensal</span><b>R$ 400 – R$ 800</b></div>
+      <div class="r"><span>Suporte</span><b>Chamado, só horário comercial</b></div>
     </div>
-    <p class="lead" style="margin-top:16px;font-size:14.5px">Você mesmo pode conferir — peça orçamento a 2 ou 3 empresas (reuniões de 30–40 min com o comercial delas).</p>
+    <p class="lead" style="margin-top:14px">Você mesmo pode conferir esses valores fazendo orçamentos com 2 ou 3 empresas através de reuniões de aproximadamente 30 a 40 min com o time comercial delas. Você pode pedir orçamento pra qualquer <b>software house / desenvolvedora de sistema sob medida</b>.</p>
   </div>
 </section>
 
-<!-- ===== INVESTIMENTO ===== -->
-<section class="tint">
+<!-- ===== 05 · INVESTIMENTO ===== -->
+<section>
   <div class="wrap">
     <div class="eyebrow">Investimento no meu trabalho</div>
-    <h2 class="title">Valores e pagamento</h2>
-    <div class="invest" style="margin-top:16px">
+    <h2 class="title">Com o Élton</h2>
+    <div class="invest">
       <div class="row"><div><b>🛠️ Projeto</b><div class="d">Desenvolvimento dos 12 módulos, entrega e publicação no ar</div></div><div class="v blue">R$ 6.000,00</div></div>
-      <div class="row"><div><b>🔄 Manutenção mensal</b><div class="d">Hospedagem, banco de dados, backup para segurança dos dados, suporte e melhorias</div></div><div class="v">R$ 250,00<span style="font-size:14px;color:var(--muted)">/mês</span></div></div>
+      <div class="row"><div><b>🔄 Manutenção mensal</b><div class="d">Hospedagem, banco de dados, backup para segurança dos dados, suporte, correções e pequenas melhorias</div></div><div class="v">R$ 250,00<span style="font-size:14px;color:var(--muted)">/mês</span></div></div>
       <div class="notes">
         <div>⭐ <b>O suporte é direto comigo, a qualquer hora — inclusive domingo.</b></div>
         <div>💡 A manutenção só começa a ser cobrada <b>depois da entrega</b> (1ª cobrança 30 dias após o sistema no ar).</div>
         <div>⚠️ Instalação de novas tecnologias/funcionalidades futuras é cobrada separadamente.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== 06 · PAGAMENTO ===== -->
+<section class="tint">
+  <div class="wrap">
+    <div class="eyebrow">Formas de pagamento</div>
+    <h2 class="title">Como pagar o projeto (R$ 6.000,00)</h2>
     <div class="pay">
       <div class="opt"><b>Opção A · PIX</b> <span class="chip">sem juros</span><p style="margin:8px 0 0;color:var(--muted);font-size:14.5px">Entrada de <b>R$ 3.000</b> + restante em <b>6× R$ 500</b>.</p></div>
       <div class="opt"><b>Opção B · Cartão</b><p style="margin:8px 0 0;color:var(--muted);font-size:14.5px">Valor total no cartão, ou entrada + parcelamento no cartão (com juros da operadora).</p></div>
@@ -261,17 +255,17 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
   </div>
 </section>
 
-<!-- ===== CTA FINAL / ACEITE ===== -->
+<!-- ===== CTA FINAL ===== -->
 <section class="final" id="aceite">
   <div class="wrap">
-    <div class="eyebrow" style="color:var(--blue-br)">Vamos começar?</div>
+    <div class="eyebrow" style="color:var(--blue-br)">Resposta</div>
     <h2>Pronto pra tirar a oficina do caderno</h2>
-    <p>Em 2 a 3 meses o sistema está no ar, no seu celular e no seu PC. Escolha abaixo — a gente segue a conversa pelo WhatsApp.</p>
+    <p>Em 2 a 3 meses o sistema está no ar, no seu celular e no seu PC. É só escolher — a gente segue a conversa pelo WhatsApp.</p>
     <div class="cta">
       <a href="#" class="btn primary" onclick="return false">✅ Aceitar proposta</a>
       <a href="#" class="btn ghost" onclick="return false">🤔 Ainda tenho dúvidas</a>
     </div>
-    <small>(botões ilustrativos — vão levar ao WhatsApp do Elton com a mensagem automática)</small>
+    <small>(botões ilustrativos — vão levar ao WhatsApp do Élton com a mensagem automática)</small>
   </div>
 </section>
 
