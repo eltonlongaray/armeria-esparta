@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposta · Sistema Armeria Esparta · Elton Longaray</title>
+<style>
+:root{
+  --navy:#0e2138; --navy2:#16304f; --blue:#2f6fb3; --blue-br:#4a90d9; --steel:#9fb2c8;
+  --bg:#f3f6fb; --panel:#ffffff; --ink:#16202e; --muted:#5b6a80; --line:#e3e9f2;
+  --green:#1f9d55; --green-sf:#e7f6ee; --red:#c0473b; --red-sf:#fbecea; --amber:#e08a1e;
+  --shadow:0 10px 30px rgba(16,40,70,.08); --radius:16px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#0b1420; --panel:#111c2b; --ink:#e9eef6; --muted:#93a2b8; --line:#213248;
+    --navy:#081420; --navy2:#0f2236; --green-sf:rgba(31,157,85,.12); --red-sf:rgba(192,71,59,.14); --shadow:0 10px 34px rgba(0,0,0,.4); }
+}
+:root[data-theme="light"]{ --bg:#f3f6fb; --panel:#fff; --ink:#16202e; --muted:#5b6a80; --line:#e3e9f2; --navy:#0e2138; --navy2:#16304f; --green-sf:#e7f6ee; --red-sf:#fbecea; --shadow:0 10px 30px rgba(16,40,70,.08); }
+:root[data-theme="dark"]{ --bg:#0b1420; --panel:#111c2b; --ink:#e9eef6; --muted:#93a2b8; --line:#213248; --navy:#081420; --navy2:#0f2236; --green-sf:rgba(31,157,85,.12); --red-sf:rgba(192,71,59,.14); --shadow:0 10px 34px rgba(0,0,0,.4); }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:64px 0}
+h1,h2,h3{line-height:1.15;margin:0}
+.eyebrow{color:var(--blue-br);font-size:12.5px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase}
+h2.title{font-size:30px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;text-wrap:balance}
+.lead{color:var(--muted);font-size:17px;max-width:640px}
+.center{text-align:center} .center .lead{margin-left:auto;margin-right:auto}
+
+/* logo lockup */
+.logo{display:flex;align-items:center;gap:12px}
+.logo .mark{width:44px;height:44px;border-radius:50%;background:conic-gradient(from 210deg,#20456f,#3a7bd5,#20456f);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.logo .mark span{font-family:Georgia,serif;font-weight:700;color:#fff;font-size:20px;letter-spacing:-1px}
+.logo b{font-size:17px;letter-spacing:.3px;line-height:1.05;color:#fff}
+.logo small{display:block;font-size:9.5px;letter-spacing:1.4px;color:var(--steel);text-transform:uppercase;font-weight:600}
+
+/* hero */
+.hero{background:radial-gradient(1200px 500px at 80% -10%,rgba(74,144,217,.28),transparent 60%),linear-gradient(180deg,var(--navy2),var(--navy));color:#eaf1fb;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,transparent,var(--blue-br),transparent)}
+.hero .wrap{padding-top:26px;padding-bottom:74px}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.tag{border:1px solid rgba(159,178,200,.4);color:var(--steel);border-radius:30px;padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:.6px}
+.hero h1{font-size:44px;font-weight:800;letter-spacing:-1px;margin:34px 0 14px;max-width:16ch;text-wrap:balance;color:#fff}
+.hero h1 .hl{color:var(--blue-br)}
+.hero p.sub{color:#c4d3e6;font-size:19px;max-width:60ch;margin:0}
+.hero .meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;font-size:14px;color:#aebfd4}
+.hero .meta b{color:#fff}
+.hero .cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;gap:9px;border:none;border-radius:12px;padding:15px 26px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .12s,box-shadow .15s;font-family:inherit}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--green);color:#fff;box-shadow:0 8px 22px rgba(31,157,85,.35)}
+.btn.primary:hover{box-shadow:0 10px 28px rgba(31,157,85,.45)}
+.btn.ghost{background:transparent;color:#eaf1fb;border:1.5px solid rgba(159,178,200,.5)}
+.btn.ghost.dark{color:var(--ink);border-color:var(--line)}
+.btn.blue{background:var(--blue);color:#fff}
+
+/* cards / grid */
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.mod{display:flex;gap:13px;align-items:flex-start}
+.mod .ico{width:40px;height:40px;border-radius:11px;background:linear-gradient(145deg,#eaf2fc,#d5e6f8);color:var(--blue);display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+:root[data-theme="dark"] .mod .ico{background:rgba(74,144,217,.16)}
+.mod h3{font-size:15.5px;font-weight:700;margin-bottom:2px}
+.mod p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.45}
+
+/* antes x depois */
+.tint{background:linear-gradient(180deg,var(--panel),var(--bg))}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ba .col{border-radius:var(--radius);padding:24px;border:1px solid var(--line)}
+.ba .antes{background:var(--red-sf);border-color:rgba(192,71,59,.25)}
+.ba .depois{background:var(--green-sf);border-color:rgba(31,157,85,.28)}
+.ba h3{font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.ba .antes h3{color:var(--red)} .ba .depois h3{color:var(--green)}
+.ba ul{list-style:none;margin:0;padding:0}
+.ba li{position:relative;padding:8px 0 8px 28px;font-size:15px;border-bottom:1px dashed rgba(120,130,150,.18)}
+.ba li:last-child{border:none}
+.ba .antes li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:800}
+.ba .depois li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+
+/* comparison */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.price-card{border-radius:var(--radius);padding:26px;border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow)}
+.price-card.out{background:var(--bg)}
+.price-card.mine{border:2px solid var(--blue);position:relative}
+.price-card .k{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.price-card .big{font-size:34px;font-weight:800;margin:8px 0;letter-spacing:-1px}
+.price-card.mine .big{color:var(--blue)}
+.price-card ul{list-style:none;margin:12px 0 0;padding:0;font-size:14.5px}
+.price-card li{padding:6px 0;border-top:1px solid var(--line);color:var(--muted)}
+.ribbon{position:absolute;top:-13px;left:26px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;letter-spacing:.6px;padding:4px 12px;border-radius:20px}
+
+/* investment */
+.invest{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.invest .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.invest .row:last-of-type{border-bottom:none}
+.invest .row .d{color:var(--muted);font-size:14px}
+.invest .row .v{font-size:22px;font-weight:800;white-space:nowrap}
+.invest .v.blue{color:var(--blue)}
+.notes{padding:16px 24px;background:var(--bg);font-size:14px;color:var(--muted)}
+.notes div{padding:3px 0}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.pay .opt{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.pay .opt b{color:var(--blue)}
+.chip{display:inline-block;background:var(--green-sf);color:var(--green);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700;margin-left:6px}
+
+/* final cta */
+.final{background:linear-gradient(180deg,var(--navy2),var(--navy));color:#eaf1fb;text-align:center}
+.final h2{color:#fff;font-size:32px;font-weight:800}
+.final p{color:#c4d3e6;font-size:17px;max-width:52ch;margin:12px auto 0}
+.final .cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.final small{display:block;margin-top:20px;color:#8ea2ba;font-size:13px}
+
+/* footer */
+footer{background:var(--navy);color:#aebfd4;text-align:center;padding:30px 22px;font-size:13px}
+footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top:6px}
+
+@media(max-width:760px){
+  section{padding:46px 0}
+  .hero h1{font-size:33px} .hero p.sub{font-size:17px}
+  h2.title{font-size:25px}
+  .g3,.g2,.ba,.compare,.pay{grid-template-columns:1fr}
+  .hero .cta .btn,.final .cta .btn{flex:1 1 100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="top">
+      <div class="logo">
+        <div class="mark"><span>A</span></div>
+        <div><b>Elton Longaray</b><small>Soluções inteligentes em programação e IA</small></div>
+      </div>
+      <span class="tag">PROPOSTA · ARMERIA ESPARTA</span>
+    </div>
+
+    <h1>O fim da peça prometida <span class="hl">pra dois clientes.</span></h1>
+    <p class="sub">Um sistema sob medida para a Armeria Esparta — estoque, clientes, produção, documentos e financeiro num só lugar, no <b>celular e no PC</b>, funcionando <b>online e offline</b>.</p>
+
+    <div class="meta">
+      <div>Para <b>Eduardo Aurelio</b></div>
+      <div>Prazo <b>2 a 3 meses</b></div>
+      <div>Projeto <b>R$ 6.000</b> · Manutenção <b>R$ 250/mês</b></div>
+    </div>
+
+    <div class="cta">
+      <a href="#aceite" class="btn primary">Aceitar proposta</a>
+      <a href="#aceite" class="btn ghost">Ainda tenho dúvidas</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== O QUE RECEBE ===== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O que você recebe</div>
+    <h2 class="title">12 módulos, feitos pra sua oficina</h2>
+    <p class="lead" style="margin-bottom:26px">Tudo pensado no dia a dia do armeiro — nada de sistema genérico.</p>
+    <div class="grid g3">
+      <div class="card mod"><div class="ico">📦</div><div><h3>Estoque de peças</h3><p>Status livre / reservada / instalada, local, valor e alerta de estoque baixo.</p></div></div>
+      <div class="card mod"><div class="ico">🚚</div><div><h3>Encomendas</h3><p>Pedido com entrega prevista; "Chegou" → entra no estoque automaticamente.</p></div></div>
+      <div class="card mod"><div class="ico">👤</div><div><h3>Clientes</h3><p>Ficha com CRAF e aniversário, busca, frequência, anotações, WhatsApp e e-mail.</p></div></div>
+      <div class="card mod"><div class="ico">🔫</div><div><h3>Armas</h3><p>Vinculadas ao dono, com ficha e status (em produção / entregue).</p></div></div>
+      <div class="card mod"><div class="ico">🧾</div><div><h3>Ordem de Serviço</h3><p>Trava anti-conflito de peça, fotos antes/depois, anotações, imprimir/compartilhar.</p></div></div>
+      <div class="card mod"><div class="ico">⚙️</div><div><h3>Esteira de produção</h3><p>Fluxo visual: na fila → na esteira → pronta.</p></div></div>
+      <div class="card mod"><div class="ico">📄</div><div><h3>Documentos</h3><p>CRAF e guia de manutenção por arma, imprimir e compartilhar (Exército).</p></div></div>
+      <div class="card mod"><div class="ico">💰</div><div><h3>Financeiro</h3><p>Balanço entrou/saiu/sobrou, valor da hora, acesso por senha e relatório.</p></div></div>
+      <div class="card mod"><div class="ico">📊</div><div><h3>Relatórios</h3><p>Peças que mais saem, armas que mais aparecem e financeiro.</p></div></div>
+      <div class="card mod"><div class="ico">🔔</div><div><h3>Lembretes</h3><p>Aniversários, cobranças e retorno de cliente.</p></div></div>
+      <div class="card mod"><div class="ico">📲</div><div><h3>Multiplataforma (PWA)</h3><p>App instalável no celular e no PC, sem depender das lojas.</p></div></div>
+      <div class="card mod"><div class="ico">🌐</div><div><h3>Online + Offline</h3><p>Funciona sem internet e sincroniza sozinho quando a conexão volta.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ANTES x DEPOIS ===== -->
+<section class="tint">
+  <div class="wrap">
+    <div class="eyebrow">A virada de chave</div>
+    <h2 class="title">Antes × Depois do sistema</h2>
+    <p class="lead" style="margin-bottom:24px">O mesmo dia de trabalho — com e sem o controle na mão.</p>
+    <div class="ba">
+      <div class="col antes">
+        <h3>😮‍💨 Antes</h3>
+        <ul>
+          <li>Peça no caderno — e às vezes prometida pra dois</li>
+          <li>"Prometi essa peça pra quem mesmo?"</li>
+          <li>Valor da hora no chute</li>
+          <li>Financeiro só no fim do mês, na calculadora</li>
+          <li>Não sabe ao certo o que tem, deve ou prometeu</li>
+        </ul>
+      </div>
+      <div class="col depois">
+        <h3>🎯 Depois</h3>
+        <ul>
+          <li>Cada peça sabe se está livre, reservada ou instalada</li>
+          <li>O sistema trava antes de você prometer errado</li>
+          <li>Valor da hora calculado em cada serviço</li>
+          <li>Balanço entrou / saiu / sobrou automático</li>
+          <li>Tudo num olhar — celular e PC, online e offline</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARAÇÃO DE CUSTO ===== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Comparativo</div>
+    <h2 class="title">Quanto custaria com uma empresa de software de fora</h2>
+    <div class="compare">
+      <div class="price-card out">
+        <div class="k">Empresa de software de fora</div>
+        <div class="big">R$ 15–30 mil<span style="font-size:16px;color:var(--muted)"> ou mais</span></div>
+        <ul>
+          <li>Manutenção: R$ 400 – R$ 800 / mês</li>
+          <li>Suporte: chamado, só horário comercial</li>
+          <li>Mudanças: processo lento</li>
+        </ul>
+      </div>
+      <div class="price-card mine">
+        <div class="ribbon">COMIGO</div>
+        <div class="k">Com o Elton</div>
+        <div class="big">R$ 6.000</div>
+        <ul>
+          <li>Manutenção: R$ 250 / mês</li>
+          <li>Suporte direto comigo, a qualquer hora — inclusive domingo</li>
+          <li>Ajustes rápidos e próximos de você</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:16px;font-size:14.5px">Você mesmo pode conferir — peça orçamento a 2 ou 3 empresas (reuniões de 30–40 min com o comercial delas).</p>
+  </div>
+</section>
+
+<!-- ===== INVESTIMENTO ===== -->
+<section class="tint">
+  <div class="wrap">
+    <div class="eyebrow">Investimento no meu trabalho</div>
+    <h2 class="title">Valores e pagamento</h2>
+    <div class="invest" style="margin-top:16px">
+      <div class="row"><div><b>🛠️ Projeto</b><div class="d">Desenvolvimento dos 12 módulos, entrega e publicação no ar</div></div><div class="v blue">R$ 6.000,00</div></div>
+      <div class="row"><div><b>🔄 Manutenção mensal</b><div class="d">Hospedagem, banco de dados, backup para segurança dos dados, suporte e melhorias</div></div><div class="v">R$ 250,00<span style="font-size:14px;color:var(--muted)">/mês</span></div></div>
+      <div class="notes">
+        <div>⭐ <b>O suporte é direto comigo, a qualquer hora — inclusive domingo.</b></div>
+        <div>💡 A manutenção só começa a ser cobrada <b>depois da entrega</b> (1ª cobrança 30 dias após o sistema no ar).</div>
+        <div>⚠️ Instalação de novas tecnologias/funcionalidades futuras é cobrada separadamente.</div>
+      </div>
+    </div>
+    <div class="pay">
+      <div class="opt"><b>Opção A · PIX</b> <span class="chip">sem juros</span><p style="margin:8px 0 0;color:var(--muted);font-size:14.5px">Entrada de <b>R$ 3.000</b> + restante em <b>6× R$ 500</b>.</p></div>
+      <div class="opt"><b>Opção B · Cartão</b><p style="margin:8px 0 0;color:var(--muted);font-size:14.5px">Valor total no cartão, ou entrada + parcelamento no cartão (com juros da operadora).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL / ACEITE ===== -->
+<section class="final" id="aceite">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--blue-br)">Vamos começar?</div>
+    <h2>Pronto pra tirar a oficina do caderno</h2>
+    <p>Em 2 a 3 meses o sistema está no ar, no seu celular e no seu PC. Escolha abaixo — a gente segue a conversa pelo WhatsApp.</p>
+    <div class="cta">
+      <a href="#" class="btn primary" onclick="return false">✅ Aceitar proposta</a>
+      <a href="#" class="btn ghost" onclick="return false">🤔 Ainda tenho dúvidas</a>
+    </div>
+    <small>(botões ilustrativos — vão levar ao WhatsApp do Elton com a mensagem automática)</small>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="justify-content:center">
+    <div class="mark"><span>A</span></div>
+    <div style="text-align:left"><b style="color:#eaf1fb">Elton Longaray</b><small>Soluções inteligentes em programação e IA</small></div>
+  </div>
+  <div class="motto">Si vis pacem, para bellum · Armeria Esparta</div>
+</footer>
+
+</body>
+</html>
