@@ -111,7 +111,23 @@ h2.title{font-size:29px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px;te
 footer{background:var(--navy);color:#aebfd4;text-align:center;padding:30px 22px;font-size:13px}
 footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top:6px}
 
+/* faixa clara com a logo */
+.logobar{background:#f5f8fc;text-align:center;padding:16px 20px;border-bottom:1px solid #e3e9f2}
+.logobar img{height:168px;width:auto;max-width:90%;display:inline-block}
+/* opções de pagamento no CTA final */
+.payopts{max-width:540px;margin:22px auto 0;display:flex;flex-direction:column;gap:10px;text-align:left}
+.payopt{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(159,178,200,.3);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s}
+.payopt input{margin-top:3px;accent-color:var(--blue-br);width:18px;height:18px;flex:0 0 auto}
+.payopt b{color:#fff;display:block;font-size:16px}
+.payopt span{color:#b9c8dc;font-size:14px}
+.payopt:hover{border-color:rgba(74,144,217,.6)}
+.payopt:has(input:checked){border-color:var(--blue-br);background:rgba(74,144,217,.16)}
+.doubt{margin:22px 0 10px}
+.doubt a{color:var(--blue-br);text-decoration:underline;font-weight:600;font-size:15.5px;cursor:pointer}
+.btn.big{padding:17px 46px;font-size:17.5px}
+
 @media(max-width:760px){
+  .logobar img{height:116px}
   section{padding:44px 0}
   .hero h1{font-size:32px} .hero p.sub{font-size:16.5px}
   h2.title{font-size:24px}
@@ -123,13 +139,10 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <body>
 
 <!-- ===== HERO / OBJETIVO (sem botões) ===== -->
+<div class="logobar"><img src="logo.png" alt="Elton Longaray — Soluções inteligentes em programação e IA"></div>
 <header class="hero">
   <div class="wrap">
     <div class="top">
-      <div class="logo">
-        <div class="mark"><span>A</span></div>
-        <div><b>Elton Longaray</b><small>Soluções inteligentes em programação e IA</small></div>
-      </div>
       <span class="tag">PROPOSTA · ARMERIA ESPARTA</span>
     </div>
 
@@ -241,29 +254,19 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
   </div>
 </section>
 
-<!-- ===== 06 · PAGAMENTO ===== -->
-<section class="tint">
-  <div class="wrap">
-    <div class="eyebrow">Formas de pagamento</div>
-    <h2 class="title">Como pagar o projeto (R$ 6.000,00)</h2>
-    <div class="pay">
-      <div class="opt"><b>Opção A · PIX</b> <span class="chip">sem juros</span><p style="margin:8px 0 0;color:var(--muted);font-size:14.5px">Entrada de <b>R$ 3.000</b> + restante em <b>6× R$ 500</b>.</p></div>
-      <div class="opt"><b>Opção B · Cartão</b><p style="margin:8px 0 0;color:var(--muted);font-size:14.5px">Valor total no cartão, ou entrada + parcelamento no cartão (com juros da operadora).</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== CTA FINAL ===== -->
 <section class="final" id="aceite">
   <div class="wrap">
-    <div class="eyebrow" style="color:var(--blue-br)">Resposta</div>
-    <h2>Pronto pra tirar a oficina do caderno</h2>
-    <p>Em 2 a 3 meses o sistema está no ar, no seu celular e no seu PC. É só escolher — a gente segue a conversa pelo WhatsApp.</p>
-    <div class="cta">
-      <a href="#" class="btn primary" onclick="return false">✅ Aceitar proposta</a>
-      <a href="#" class="btn ghost" onclick="return false">🤔 Ainda tenho dúvidas</a>
+    <div class="eyebrow" style="color:var(--blue-br)">Vamos fechar?</div>
+    <h2>Escolha uma das opções abaixo</h2>
+    <div class="payopts">
+      <label class="payopt"><input type="radio" name="pg"><div><b>a) À vista</b><span>R$ 6.000 pagos de uma vez</span></div></label>
+      <label class="payopt"><input type="radio" name="pg" checked><div><b>b) Entrada + parcelas no PIX</b><span>R$ 3.000 + 6× R$ 500 · sem juros</span></div></label>
+      <label class="payopt"><input type="radio" name="pg"><div><b>c) Cartão de crédito</b><span>Total, ou entrada + parcelas · juros da operadora</span></div></label>
     </div>
-    <small>(botões ilustrativos — vão levar ao WhatsApp do Élton com a mensagem automática)</small>
+    <p class="doubt"><a onclick="return false">🤔 Ficou com alguma dúvida? Clique aqui</a></p>
+    <a href="#" class="btn primary big" onclick="return false">✅ Aceitar proposta</a>
+    <small>Ilustrativo por enquanto — o "Aceitar" vai levar ao WhatsApp do Élton com a forma escolhida + o link do documento (com opção de baixar).</small>
   </div>
 </section>
 
