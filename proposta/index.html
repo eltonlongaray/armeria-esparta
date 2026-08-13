@@ -125,9 +125,29 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 .doubt{margin:22px 0 10px}
 .doubt a{color:var(--blue-br);text-decoration:underline;font-weight:600;font-size:15.5px;cursor:pointer}
 .btn.big{padding:17px 46px;font-size:17.5px}
+.payopt .pi{flex:1;min-width:0}
+.final-desc{color:#c4d3e6;font-size:17px;max-width:46ch;margin:12px auto 0}
+.final-sub{color:#c4d3e6;font-size:15px;margin:6px auto 0}
+.det{max-width:540px;margin:-2px auto 4px;background:rgba(74,144,217,.09);border:1px solid rgba(74,144,217,.28);border-radius:12px;padding:15px 16px;text-align:left}
+.ctrl{margin-bottom:13px}
+.ctrl>label{display:block;color:#c4d3e6;font-size:13.5px;margin-bottom:7px}
+.ctrl>label small{color:#8ea2ba}
+.ctrl .row{display:flex;align-items:center;gap:12px}
+.ctrl input[type=range]{flex:1;accent-color:var(--blue-br);min-width:0}
+.ctrl .row b{color:#fff;min-width:118px;text-align:right;font-variant-numeric:tabular-nums}
+.ctrl select{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(159,178,200,.35);border-radius:8px;padding:9px 12px;font-size:14px;width:100%}
+.sum{color:#eaf1fb;font-size:14.5px;background:rgba(0,0,0,.22);border-radius:9px;padding:11px 13px;margin-top:6px;line-height:1.5}
+.sum b{color:var(--blue-br)}
+.tl{max-width:540px;margin:26px auto 0;text-align:left}
+.tl-h{color:var(--steel);font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px}
+.tl-row{display:flex;align-items:baseline;gap:10px;padding:9px 2px;border-bottom:1px solid rgba(159,178,200,.16)}
+.tl-row .m{color:#aebfd4;font-size:14px;min-width:118px}
+.tl-row .v{color:#fff;font-size:15.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.tl-row .d{color:#8ea2ba;font-size:12.5px;margin-left:auto;text-align:right}
 
 @media(max-width:760px){
   .logobar img{height:116px}
+  .ctrl .row b{min-width:96px;font-size:14px}
   section{padding:44px 0}
   .hero h1{font-size:32px} .hero p.sub{font-size:16.5px}
   h2.title{font-size:24px}
@@ -155,7 +175,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
     <div class="meta">
       <div>Para <b>Eduardo Aurelio</b></div>
       <div>Responsável <b>Élton Longaray</b></div>
-      <div>Prazo de entrega <b>2 a 3 meses</b></div>
+      <div>Prazo de entrega <b>3 a 4 meses</b></div>
     </div>
   </div>
 </header>
@@ -232,7 +252,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
     <div class="eyebrow">Comparativo</div>
     <h2 class="title">Quanto custaria com uma empresa de software de fora</h2>
     <div class="pricebox">
-      <div class="r"><span>Projeto (sistema sob medida)</span><b class="big-out">R$ 15.000 – R$ 30.000 ou mais</b></div>
+      <div class="r"><span>Projeto (sistema sob medida)</span><b class="big-out">R$ 20.000 – R$ 40.000 ou mais</b></div>
       <div class="r"><span>Manutenção mensal</span><b>R$ 400 – R$ 800</b></div>
       <div class="r"><span>Suporte</span><b>Chamado, só horário comercial</b></div>
     </div>
@@ -246,7 +266,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
     <div class="eyebrow">Fazendo comigo</div>
     <h2 class="title">Investimento no meu trabalho</h2>
     <div class="invest">
-      <div class="row"><div><b>🛠️ Projeto</b><div class="d">Desenvolvimento dos 12 módulos, entrega e publicação no ar</div></div><div class="v blue">R$ 6.000,00</div></div>
+      <div class="row"><div><b>🛠️ Projeto</b><div class="d">Desenvolvimento dos 12 módulos, entrega e publicação no ar</div></div><div class="v blue">R$ 9.000,00</div></div>
       <div class="row"><div><b>🔄 Manutenção mensal</b><div class="d">Hospedagem, banco de dados, backup para segurança dos dados, suporte, correções e pequenas melhorias</div></div><div class="v">R$ 250,00<span style="font-size:14px;color:var(--muted)">/mês</span></div></div>
       <div class="notes">
         <div>⭐ <b>O suporte é direto comigo, a qualquer hora — inclusive domingo.</b></div>
@@ -260,15 +280,33 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <!-- ===== CTA FINAL ===== -->
 <section class="final" id="aceite">
   <div class="wrap">
-    <div class="eyebrow" style="color:var(--blue-br)">Formas de pagamento</div>
-    <h2>Escolha uma das opções abaixo</h2>
+    <h2>Pronto pra tirar a oficina do caderno?</h2>
+    <p class="final-desc">Em 3 a 4 meses o sistema está no ar, no seu celular e no seu PC.</p>
+
+    <div class="eyebrow" style="color:var(--blue-br);margin-top:26px">Formas de pagamento</div>
+    <p class="final-sub">Escolha uma das opções abaixo:</p>
+
     <div class="payopts">
-      <label class="payopt"><input type="radio" name="pg"><div><b>a) À vista</b><span>R$ 6.000 pagos de uma vez</span></div></label>
-      <label class="payopt"><input type="radio" name="pg" checked><div><b>b) Entrada + parcelas no PIX</b><span>R$ 3.000 + 6× R$ 500 · sem juros</span></div></label>
-      <label class="payopt"><input type="radio" name="pg"><div><b>c) Cartão de crédito</b><span>Total, ou entrada + parcelas · juros da operadora</span></div></label>
+      <label class="payopt"><input type="radio" name="pg" value="a" onchange="selPg()"><div class="pi"><b>a) À vista</b><span>R$ 9.000 pagos de uma vez</span></div></label>
+
+      <label class="payopt"><input type="radio" name="pg" value="b" checked onchange="selPg()"><div class="pi"><b>b) Entrada + parcelas no PIX</b><span>sem juros · você escolhe a entrada e as parcelas</span></div></label>
+      <div class="det" id="detB">
+        <div class="ctrl"><label>Entrada <small>(mínimo R$ 4.000)</small></label><div class="row"><input type="range" id="entB" min="4000" max="8500" step="500" value="4000" oninput="calc()"><b id="entBv">R$ 4.000,00</b></div></div>
+        <div class="ctrl"><label>Parcelas do restante <small>(até 6×, sem juros)</small></label><select id="parB" onchange="calc()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
+        <div class="sum" id="sumB"></div>
+      </div>
+
+      <label class="payopt"><input type="radio" name="pg" value="c" onchange="selPg()"><div class="pi"><b>c) Entrada + parcelas no cartão</b><span>entrada livre · parcelas com juros do cartão</span></div></label>
+      <div class="det" id="detC" style="display:none">
+        <div class="ctrl"><label>Entrada <small>(o quanto quiser — pode ser R$ 0)</small></label><div class="row"><input type="range" id="entC" min="0" max="8500" step="500" value="0" oninput="calc()"><b id="entCv">R$ 0,00</b></div></div>
+        <div class="ctrl"><label>Parcelas do restante <small>(até 12×, com juros)</small></label><select id="parC" onchange="calc()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+        <div class="sum" id="sumC"></div>
+      </div>
     </div>
-    <p style="color:#c4d3e6;font-size:16px;margin:26px 0 12px">Pronto pra tirar a oficina do caderno?</p>
-    <a class="btn primary big" onclick="aceitar()">✅ Aceitar proposta</a>
+
+    <div class="tl" id="timeline"></div>
+
+    <a class="btn primary big" style="margin-top:26px" onclick="aceitar()">✅ Aceitar proposta</a>
     <p style="margin:28px 0 0"><a onclick="duvida()" style="color:#8ea2ba;font-size:13.5px;text-decoration:underline;cursor:pointer">Ainda tenho dúvidas</a></p>
   </div>
 </section>
@@ -284,15 +322,61 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <script>
 const ZAP='5551982276577';
 const DOC='https://eltonlongaray.github.io/armeria-esparta/proposta/';
+const PRECO=9000, MANUT=250;
+const FEES={1:.042,2:.0609,3:.0701,4:.0791,5:.088,6:.0967,7:.1259,8:.1342,9:.1425,10:.1506,11:.1587,12:.1666};
+const brl=n=>'R$ '+Number(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+let escolha='À vista '+brl(PRECO);
+function selPg(){
+  const v=(document.querySelector('input[name="pg"]:checked')||{}).value;
+  document.getElementById('detB').style.display=(v==='b')?'block':'none';
+  document.getElementById('detC').style.display=(v==='c')?'block':'none';
+  calc();
+}
+function calc(){
+  const v=(document.querySelector('input[name="pg"]:checked')||{}).value;
+  let parcela=0,n=0;
+  if(v==='b'){
+    const ent=+document.getElementById('entB').value; n=+document.getElementById('parB').value;
+    const rest=PRECO-ent; parcela=rest/n;
+    document.getElementById('entBv').textContent=brl(ent);
+    document.getElementById('sumB').innerHTML='Entrada <b>'+brl(ent)+'</b> + <b>'+n+'× '+brl(parcela)+'</b> · sem juros · total <b>'+brl(PRECO)+'</b>';
+    escolha='PIX — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (sem juros, total '+brl(PRECO)+')';
+  } else if(v==='c'){
+    const ent=+document.getElementById('entC').value; n=+document.getElementById('parC').value;
+    const rest=PRECO-ent, fee=FEES[n], cardTotal=rest/(1-fee); parcela=cardTotal/n; const total=ent+cardTotal;
+    document.getElementById('entCv').textContent=brl(ent);
+    document.getElementById('sumC').innerHTML='Entrada <b>'+brl(ent)+'</b> + <b>'+n+'× '+brl(parcela)+'</b> · juros '+(fee*100).toFixed(2).replace('.',',')+'% · total <b>'+brl(total)+'</b>';
+    escolha='Cartão — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (com juros, total '+brl(total)+')';
+  } else {
+    escolha='À vista '+brl(PRECO);
+  }
+  renderTL(v,parcela,n);
+}
+function renderTL(v,parcela,n){
+  const el=document.getElementById('timeline');
+  if(v==='a'){
+    el.innerHTML='<div class="tl-h">Como fica no seu bolso</div>'+
+      '<div class="tl-row"><span class="m">No início</span><span class="v">'+brl(PRECO)+'</span><span class="d">à vista</span></div>'+
+      '<div class="tl-row"><span class="m">A partir do 4º mês</span><span class="v">'+brl(MANUT)+'</span><span class="d">manutenção/mês</span></div>';
+    return;
+  }
+  let rows=''; const meses=Math.max(n,4);
+  for(let m=1;m<=meses;m++){
+    const p=(m<=n)?parcela:0, man=(m>=4)?MANUT:0, tot=p+man;
+    const d=(p?'parcela':'')+(man?(p?' + manutenção':'manutenção'):'');
+    rows+='<div class="tl-row"><span class="m">Mês '+m+'</span><span class="v">'+brl(tot)+'</span><span class="d">'+d+'</span></div>';
+  }
+  rows+='<div class="tl-row"><span class="m">Depois das parcelas</span><span class="v">'+brl(MANUT)+'</span><span class="d">só manutenção/mês</span></div>';
+  el.innerHTML='<div class="tl-h">Como fica mês a mês (a manutenção entra no 4º mês)</div>'+rows;
+}
 function aceitar(){
-  const sel=document.querySelector('input[name="pg"]:checked');
-  const opt=sel?sel.closest('.payopt').querySelector('b').textContent:'';
-  const msg='Aceito a proposta! Forma de pagamento: '+opt+'. — '+DOC;
+  const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'. — '+DOC;
   window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent(msg),'_blank');
 }
 function duvida(){
   window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent('Ainda tenho dúvidas'),'_blank');
 }
+selPg();
 </script>
 
 </body>
