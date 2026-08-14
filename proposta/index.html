@@ -193,7 +193,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <section>
   <div class="wrap">
     <div class="eyebrow">Escopo</div>
-    <h2 class="title">O que está sendo entregue — 12 módulos</h2>
+    <h2 class="title">O que está sendo entregue — 13 módulos</h2>
     <p class="lead" style="margin-bottom:26px">Feito no dia a dia do armeiro, nada de sistema genérico.</p>
     <div class="grid g3">
       <div class="card mod"><div class="ico">📦</div><div><h3>Estoque de peças</h3><p>Cadastro por tipo, marca, modelo, geração, calibre e IPSC. Status livre / reservada / instalada, local, valor e alerta de estoque baixo.</p></div></div>
@@ -208,6 +208,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
       <div class="card mod"><div class="ico">🔔</div><div><h3>Lembretes</h3><p>Aniversários, cobranças e retorno de cliente.</p></div></div>
       <div class="card mod"><div class="ico">📲</div><div><h3>Multiplataforma (PWA)</h3><p>Aplicativo web instalável: vira um ícone e abre como app no celular e no PC, sem depender das lojas.</p></div></div>
       <div class="card mod"><div class="ico">🌐</div><div><h3>Online + Offline</h3><p>Funciona sem internet e sincroniza sozinho quando a conexão volta.</p></div></div>
+      <div class="card mod"><div class="ico">🔐</div><div><h3>Acesso e login</h3><p>Entrada no sistema com usuário e senha — controla quem acessa e protege os dados.</p></div></div>
     </div>
   </div>
 </section>
@@ -379,7 +380,7 @@ function renderTL(v,parcela,n){
   el.innerHTML='<div class="tl-h">Como fica mês a mês (a manutenção entra no 4º mês)</div>'+rows;
 }
 function aceitar(){
-  const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'.';
+  const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'. Manutenção mensal: R$ 280,00 (a partir do 4º mês).';
   window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent(msg),'_blank');
 }
 function duvida(){
