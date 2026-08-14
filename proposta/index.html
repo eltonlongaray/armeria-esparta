@@ -218,9 +218,10 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
     <div class="eyebrow">Fora do escopo (nesta fase)</div>
     <h2 class="title">O que não entra agora</h2>
     <ul class="out-list">
-      <li>🤖 Inteligência artificial embarcada</li>
+      <li>🤖 Inteligência artificial embarcada, com integração via WhatsApp</li>
+      <li>Integração com o app do banco</li>
       <li>Emissão fiscal de nota (NF-e)</li>
-      <li>Integração com bancos / maquininha</li>
+      <li>Integração com maquininha de cartão</li>
       <li>App nativo nas lojas (entregue como app web instalável)</li>
     </ul>
     <p class="lead" style="margin-top:12px;font-size:14.5px">Podem virar fases futuras, orçadas à parte.</p>
@@ -276,7 +277,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
     <h2 class="title">Investimento no meu trabalho</h2>
     <div class="invest">
       <div class="row"><div><b>🛠️ Projeto</b><div class="d">Desenvolvimento dos 12 módulos, entrega e publicação no ar</div></div><div class="v blue">R$ 9.000,00</div></div>
-      <div class="row"><div><b>🔄 Manutenção mensal</b><div class="d">Hospedagem, banco de dados, backup para segurança dos dados, suporte, correções e pequenas melhorias</div></div><div class="v">R$ 250,00<span style="font-size:14px;color:var(--muted)">/mês</span></div></div>
+      <div class="row"><div><b>🔄 Manutenção mensal</b><div class="d">Hospedagem, banco de dados, backup para segurança dos dados, suporte, correções e pequenas melhorias</div></div><div class="v">R$ 280,00<span style="font-size:14px;color:var(--muted)">/mês</span></div></div>
       <div class="notes">
         <div>⭐ <b>O suporte é direto comigo, a qualquer hora — inclusive domingo.</b></div>
         <div>💡 A manutenção só começa a ser cobrada <b>depois da entrega</b> (1ª cobrança 30 dias após o sistema no ar).</div>
@@ -300,7 +301,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 
       <label class="payopt"><input type="radio" name="pg" value="b" checked onchange="selPg()"><div class="pi"><b>b) Entrada + parcelas no PIX</b><span>sem juros · você escolhe a entrada e as parcelas</span></div></label>
       <div class="det" id="detB">
-        <div class="ctrl"><label>Entrada <small>(mínimo R$ 4.000 — pode digitar)</small></label><div class="row"><input type="range" id="entB" min="4000" max="8500" step="500" value="4000" oninput="document.getElementById('entBn').value=this.value;calc()"><span class="entbox">R$ <input type="number" id="entBn" min="4000" max="8500" step="100" value="4000" oninput="calc()" onchange="clB()"></span></div></div>
+        <div class="ctrl"><label>Entrada <small>(mínimo R$ 3.000 — pode digitar)</small></label><div class="row"><input type="range" id="entB" min="3000" max="8500" step="500" value="3000" oninput="document.getElementById('entBn').value=this.value;calc()"><span class="entbox">R$ <input type="number" id="entBn" min="3000" max="8500" step="100" value="3000" oninput="calc()" onchange="clB()"></span></div></div>
         <div class="ctrl"><label>Parcelas do restante <small>(até 6×, sem juros)</small></label><select id="parB" onchange="calc()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
         <div class="sum" id="sumB"></div>
       </div>
@@ -315,7 +316,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 
     <div class="tl" id="timeline"></div>
 
-    <a class="btn primary big" style="margin-top:26px" onclick="aceitar()">✅ Aceitar proposta</a>
+    <a class="btn primary big" style="margin-top:26px" onclick="aceitar()">🚀 Iniciar projeto</a>
     <p style="margin:28px 0 0"><a onclick="duvida()" style="color:#8ea2ba;font-size:13.5px;text-decoration:underline;cursor:pointer">Ainda tenho dúvidas</a></p>
   </div>
 </section>
@@ -328,10 +329,11 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
   <div class="motto">Proposta · Sistema de gestão para a Armeria Esparta</div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 const ZAP='5551982276577';
 const DOC='https://eltonlongaray.github.io/armeria-esparta/proposta/';
-const PRECO=9000, MANUT=250;
+const PRECO=9000, MANUT=280;
 const FEES={1:.042,2:.0609,3:.0701,4:.0791,5:.088,6:.0967,7:.1259,8:.1342,9:.1425,10:.1506,11:.1587,12:.1666};
 const brl=n=>'R$ '+Number(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 let escolha='À vista '+brl(PRECO);
@@ -345,7 +347,7 @@ function calc(){
   const v=(document.querySelector('input[name="pg"]:checked')||{}).value;
   let parcela=0,n=0;
   if(v==='b'){
-    const ent=Math.min(8500,Math.max(4000,+document.getElementById('entBn').value||4000)); n=+document.getElementById('parB').value;
+    const ent=Math.min(8500,Math.max(3000,+document.getElementById('entBn').value||3000)); n=+document.getElementById('parB').value;
     const rest=PRECO-ent; parcela=rest/n;
     document.getElementById('sumB').innerHTML='Entrada <b>'+brl(ent)+'</b> + <b>'+n+'× '+brl(parcela)+'</b> · sem juros · total <b>'+brl(PRECO)+'</b>';
     escolha='PIX — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (sem juros, total '+brl(PRECO)+')';
@@ -376,10 +378,39 @@ function renderTL(v,parcela,n){
   rows+='<div class="tl-row"><span class="m">Depois das parcelas</span><span class="v">'+brl(MANUT)+'</span><span class="d">só manutenção/mês</span></div>';
   el.innerHTML='<div class="tl-h">Como fica mês a mês (a manutenção entra no 4º mês)</div>'+rows;
 }
-function clB(){ let x=Math.min(8500,Math.max(4000,Math.round(+document.getElementById('entBn').value||4000))); document.getElementById('entBn').value=x; document.getElementById('entB').value=x; calc(); }
+function clB(){ let x=Math.min(8500,Math.max(3000,Math.round(+document.getElementById('entBn').value||3000))); document.getElementById('entBn').value=x; document.getElementById('entB').value=x; calc(); }
 function clC(){ let x=Math.min(8500,Math.max(0,Math.round(+document.getElementById('entCn').value||0))); document.getElementById('entCn').value=x; document.getElementById('entC').value=x; calc(); }
+const MODULOS=['Estoque de peças','Encomendas','Clientes','Armas','Ordem de Serviço','Esteira de produção','Documentos','Financeiro','Relatórios','Lembretes','Multiplataforma (PWA)','Online + Offline'];
+function gerarPDF(){
+  if(!window.jspdf) return;
+  const { jsPDF }=window.jspdf;
+  const doc=new jsPDF({unit:'pt',format:'a4'});
+  doc.setFillColor(14,33,56); doc.rect(0,0,595,92,'F');
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(19);
+  doc.text('Proposta aceita — Sistema Armeria Esparta',40,44);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(200,215,235);
+  doc.text('Elton Longaray · Soluções inteligentes em programação e IA',40,68);
+  let y=126;
+  doc.setTextColor(20,32,46); doc.setFont('helvetica','bold'); doc.setFontSize(14);
+  doc.text('O que está sendo entregue',40,y); y+=22;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(40,50,64);
+  MODULOS.forEach(m=>{ doc.text('•  '+m,50,y); y+=16.5; });
+  y+=14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(20,32,46);
+  doc.text('Forma de pagamento escolhida',40,y); y+=22;
+  doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(40,50,64);
+  doc.splitTextToSize(escolha,505).forEach(l=>{ doc.text(l,50,y); y+=15; });
+  y+=4; doc.text('Projeto: R$ 9.000,00  ·  Manutenção: R$ 280,00/mês (após a entrega)',50,y); y+=30;
+  doc.setDrawColor(210); doc.line(40,y,555,y); y+=28;
+  doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.setTextColor(31,157,85);
+  doc.text('Proposta aceita por Eduardo Aurelio',40,y); y+=18;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(120,130,145);
+  doc.text('Registrado em '+new Date().toLocaleString('pt-BR'),40,y);
+  doc.save('Proposta-Armeria-Esparta-aceita.pdf');
+}
 function aceitar(){
-  const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'. — '+DOC;
+  gerarPDF();
+  const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'.';
   window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent(msg),'_blank');
 }
 function duvida(){
