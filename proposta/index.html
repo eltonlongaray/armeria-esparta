@@ -300,14 +300,14 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 
       <label class="payopt"><input type="radio" name="pg" value="b" checked onchange="selPg()"><div class="pi"><b>b) Entrada + parcelas no PIX</b><span>sem juros · você escolhe a entrada e as parcelas</span></div></label>
       <div class="det" id="detB">
-        <div class="ctrl"><label>Entrada <small>(mínimo R$ 3.000 — pode digitar)</small></label><div class="row"><input type="range" id="entB" min="3000" max="8500" step="500" value="3000" oninput="document.getElementById('entBn').value=this.value;calc()"><span class="entbox">R$ <input type="number" id="entBn" min="3000" max="8500" step="100" value="3000" oninput="calc()" onchange="clB()"></span></div></div>
+        <div class="ctrl"><label>Entrada <small>(mínimo R$ 3.000)</small></label><div class="row"><input type="range" id="entB" min="3000" max="8500" step="500" value="3000" oninput="calc()"><b id="entBv">R$ 3.000,00</b></div></div>
         <div class="ctrl"><label>Parcelas do restante <small>(até 6×, sem juros)</small></label><select id="parB" onchange="calc()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select></div>
         <div class="sum" id="sumB"></div>
       </div>
 
       <label class="payopt"><input type="radio" name="pg" value="c" onchange="selPg()"><div class="pi"><b>c) Entrada + parcelas no cartão</b><span>entrada livre · parcelas com juros do cartão</span></div></label>
       <div class="det" id="detC" style="display:none">
-        <div class="ctrl"><label>Entrada <small>(o quanto quiser — pode digitar)</small></label><div class="row"><input type="range" id="entC" min="0" max="8500" step="500" value="0" oninput="document.getElementById('entCn').value=this.value;calc()"><span class="entbox">R$ <input type="number" id="entCn" min="0" max="8500" step="100" value="0" oninput="calc()" onchange="clC()"></span></div></div>
+        <div class="ctrl"><label>Entrada <small>(o quanto quiser)</small></label><div class="row"><input type="range" id="entC" min="0" max="8500" step="500" value="0" oninput="calc()"><b id="entCv">R$ 0,00</b></div></div>
         <div class="ctrl"><label>Parcelas do restante <small>(até 12×, com juros)</small></label><select id="parC" onchange="calc()"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
         <div class="sum" id="sumC"></div>
       </div>
@@ -345,13 +345,15 @@ function calc(){
   const v=(document.querySelector('input[name="pg"]:checked')||{}).value;
   let parcela=0,n=0;
   if(v==='b'){
-    const ent=Math.min(8500,Math.max(3000,+document.getElementById('entBn').value||3000)); n=+document.getElementById('parB').value;
+    const ent=+document.getElementById('entB').value; n=+document.getElementById('parB').value;
     const rest=PRECO-ent; parcela=rest/n;
+    document.getElementById('entBv').textContent=brl(ent);
     document.getElementById('sumB').innerHTML='Entrada <b>'+brl(ent)+'</b> + <b>'+n+'× '+brl(parcela)+'</b> · sem juros · total <b>'+brl(PRECO)+'</b>';
     escolha='PIX — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (sem juros, total '+brl(PRECO)+')';
   } else if(v==='c'){
-    const ent=Math.min(8500,Math.max(0,+document.getElementById('entCn').value||0)); n=+document.getElementById('parC').value;
+    const ent=+document.getElementById('entC').value; n=+document.getElementById('parC').value;
     const rest=PRECO-ent, fee=FEES[n], cardTotal=rest/(1-fee); parcela=cardTotal/n; const total=ent+cardTotal;
+    document.getElementById('entCv').textContent=brl(ent);
     document.getElementById('sumC').innerHTML='Entrada <b>'+brl(ent)+'</b> + <b>'+n+'× '+brl(parcela)+'</b> · juros '+(fee*100).toFixed(2).replace('.',',')+'% · total <b>'+brl(total)+'</b>';
     escolha='Cartão — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (com juros, total '+brl(total)+')';
   } else {
@@ -376,8 +378,6 @@ function renderTL(v,parcela,n){
   rows+='<div class="tl-row"><span class="m">Depois das parcelas</span><span class="v">'+brl(MANUT)+'</span><span class="d">só manutenção/mês</span></div>';
   el.innerHTML='<div class="tl-h">Como fica mês a mês (a manutenção entra no 4º mês)</div>'+rows;
 }
-function clB(){ let x=Math.min(8500,Math.max(3000,Math.round(+document.getElementById('entBn').value||3000))); document.getElementById('entBn').value=x; document.getElementById('entB').value=x; calc(); }
-function clC(){ let x=Math.min(8500,Math.max(0,Math.round(+document.getElementById('entCn').value||0))); document.getElementById('entCn').value=x; document.getElementById('entC').value=x; calc(); }
 function aceitar(){
   const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'.';
   window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent(msg),'_blank');
