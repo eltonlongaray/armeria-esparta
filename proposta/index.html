@@ -222,7 +222,6 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
       <li>Integração com o app do banco</li>
       <li>Emissão fiscal de nota (NF-e)</li>
       <li>Integração com maquininha de cartão</li>
-      <li>App nativo nas lojas (entregue como app web instalável)</li>
     </ul>
     <p class="lead" style="margin-top:12px;font-size:14.5px">Podem virar fases futuras, orçadas à parte.</p>
   </div>
@@ -240,7 +239,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
           <li>Ao montar um pedido, não sabe se a peça já está reservada pra outro cliente</li>
           <li>Sentar pra olhar o caderno e refazer os mesmos cálculos todo mês</li>
           <li>Não saber com certeza o valor da hora</li>
-          <li>Não ter, de forma organizada, o que já foi feito em cada arma</li>
+          <li>Não ter acesso rápido e organizado ao histórico do que já foi feito em cada arma</li>
         </ul>
       </div>
       <div class="col depois">
@@ -329,7 +328,6 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
   <div class="motto">Proposta · Sistema de gestão para a Armeria Esparta</div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 const ZAP='5551982276577';
 const DOC='https://eltonlongaray.github.io/armeria-esparta/proposta/';
@@ -380,36 +378,7 @@ function renderTL(v,parcela,n){
 }
 function clB(){ let x=Math.min(8500,Math.max(3000,Math.round(+document.getElementById('entBn').value||3000))); document.getElementById('entBn').value=x; document.getElementById('entB').value=x; calc(); }
 function clC(){ let x=Math.min(8500,Math.max(0,Math.round(+document.getElementById('entCn').value||0))); document.getElementById('entCn').value=x; document.getElementById('entC').value=x; calc(); }
-const MODULOS=['Estoque de peças','Encomendas','Clientes','Armas','Ordem de Serviço','Esteira de produção','Documentos','Financeiro','Relatórios','Lembretes','Multiplataforma (PWA)','Online + Offline'];
-function gerarPDF(){
-  if(!window.jspdf) return;
-  const { jsPDF }=window.jspdf;
-  const doc=new jsPDF({unit:'pt',format:'a4'});
-  doc.setFillColor(14,33,56); doc.rect(0,0,595,92,'F');
-  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(19);
-  doc.text('Proposta aceita — Sistema Armeria Esparta',40,44);
-  doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(200,215,235);
-  doc.text('Elton Longaray · Soluções inteligentes em programação e IA',40,68);
-  let y=126;
-  doc.setTextColor(20,32,46); doc.setFont('helvetica','bold'); doc.setFontSize(14);
-  doc.text('O que está sendo entregue',40,y); y+=22;
-  doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(40,50,64);
-  MODULOS.forEach(m=>{ doc.text('•  '+m,50,y); y+=16.5; });
-  y+=14;
-  doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(20,32,46);
-  doc.text('Forma de pagamento escolhida',40,y); y+=22;
-  doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(40,50,64);
-  doc.splitTextToSize(escolha,505).forEach(l=>{ doc.text(l,50,y); y+=15; });
-  y+=4; doc.text('Projeto: R$ 9.000,00  ·  Manutenção: R$ 280,00/mês (após a entrega)',50,y); y+=30;
-  doc.setDrawColor(210); doc.line(40,y,555,y); y+=28;
-  doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.setTextColor(31,157,85);
-  doc.text('Proposta aceita por Eduardo Aurelio',40,y); y+=18;
-  doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(120,130,145);
-  doc.text('Registrado em '+new Date().toLocaleString('pt-BR'),40,y);
-  doc.save('Proposta-Armeria-Esparta-aceita.pdf');
-}
 function aceitar(){
-  gerarPDF();
   const msg='Aceito a proposta do sistema Armeria Esparta! Forma de pagamento: '+escolha+'.';
   window.open('https://wa.me/'+ZAP+'?text='+encodeURIComponent(msg),'_blank');
 }
