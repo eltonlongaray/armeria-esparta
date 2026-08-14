@@ -112,7 +112,7 @@ footer{background:var(--navy);color:#aebfd4;text-align:center;padding:30px 22px;
 footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top:6px}
 
 /* faixa clara com a logo */
-.logobar{background:#f5f8fc;text-align:center;padding:16px 20px;border-bottom:1px solid #e3e9f2}
+.logobar{background:#ffffff;text-align:center;padding:18px 20px;border-bottom:1px solid #e3e9f2}
 .logobar img{height:168px;width:auto;max-width:90%;display:inline-block}
 /* opções de pagamento no CTA final */
 .payopts{max-width:540px;margin:22px auto 0;display:flex;flex-direction:column;gap:10px;text-align:left}
@@ -162,6 +162,9 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 </style>
 </head>
 <body>
+
+<!-- ===== FAIXA DA LOGO (topo, fundo branco) ===== -->
+<div class="logobar"><img src="logo.png" alt="Elton Longaray - Soluções inteligentes em programação e IA"></div>
 
 <!-- ===== HERO / OBJETIVO (sem botões) ===== -->
 <header class="hero">
@@ -290,10 +293,7 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 <!-- ===== CTA FINAL ===== -->
 <section class="final" id="aceite">
   <div class="wrap">
-    <h2>Pronto pra tirar a oficina do caderno?</h2>
-    <p class="final-desc">Em 3 a 4 meses o sistema está no ar, no seu celular e no seu PC.</p>
-
-    <div class="eyebrow" style="color:var(--blue-br);margin-top:26px">Formas de pagamento</div>
+    <div class="eyebrow" style="color:var(--blue-br);margin-top:4px;font-size:24px;letter-spacing:.4px;text-transform:none">Formas de pagamento</div>
     <p class="final-sub">Escolha uma das opções abaixo:</p>
 
     <div class="payopts">
@@ -316,7 +316,10 @@ footer .motto{color:var(--steel);font-style:italic;letter-spacing:1px;margin-top
 
     <div class="tl" id="timeline"></div>
 
-    <a class="btn primary big" style="margin-top:26px" onclick="aceitar()">🚀 Iniciar projeto</a>
+    <h2 style="margin-top:38px">Pronto pra tirar a oficina do caderno?</h2>
+    <p class="final-desc" style="margin-bottom:2px">Em 3 a 4 meses o sistema está no ar, no seu celular e no seu PC.</p>
+
+    <a class="btn primary big" style="margin-top:22px" onclick="aceitar()">🚀 Iniciar projeto</a>
     <p style="margin:28px 0 0"><a onclick="duvida()" style="color:#8ea2ba;font-size:13.5px;text-decoration:underline;cursor:pointer">Ainda tenho dúvidas</a></p>
   </div>
 </section>
@@ -356,7 +359,7 @@ function calc(){
     const rest=PRECO-ent, fee=FEES[n], cardTotal=rest/(1-fee); parcela=cardTotal/n; const total=ent+cardTotal;
     document.getElementById('entCv').textContent=brl(ent);
     document.getElementById('sumC').innerHTML='Entrada <b>'+brl(ent)+'</b> + <b>'+n+'× '+brl(parcela)+'</b> · juros '+(fee*100).toFixed(2).replace('.',',')+'% · total <b>'+brl(total)+'</b>';
-    escolha='Cartão — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (com juros, total '+brl(total)+')';
+    escolha='Cartão — entrada '+brl(ent)+' + '+n+'x '+brl(parcela)+' (com juros)';
   } else {
     escolha='À vista '+brl(PRECO);
   }
