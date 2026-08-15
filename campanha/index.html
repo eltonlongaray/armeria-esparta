@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ser Homem de Verdade · Campanha e Identidade de Marca</title>
+<style>
+:root{
+  --bg:#0d0e11; --bg2:#14161b; --panel:#171a20; --line:#282b33;
+  --ink:#ece9e2; --soft:#b9b6ad; --mut:#8a8880;
+  --gold:#e3a81c; --gold2:#f0c14b; --gold-dim:#7a5c14;
+  --red:#e0705c; --green:#48c07e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.7;font-size:18px;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:#111}
+
+/* progress */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:60;transition:width .1s}
+
+/* hero */
+.hero{position:relative;background:radial-gradient(1000px 400px at 50% -10%,rgba(227,168,28,.14),transparent 60%),var(--bg);
+  border-bottom:1px solid var(--line);text-align:center;padding:64px 20px 48px}
+.hero .frame{max-width:760px;margin:0 auto;border:1px solid var(--gold-dim);border-radius:14px;padding:38px 26px;position:relative}
+.hero .eye{color:var(--gold);font-size:14px;font-weight:800;letter-spacing:5px;text-transform:uppercase}
+.hero h1{font-size:clamp(34px,7vw,58px);font-weight:900;letter-spacing:-1px;margin:14px 0 0;line-height:1.05}
+.hero .rule{width:70px;height:3px;background:var(--gold);margin:22px auto}
+.hero .sub{color:var(--soft);font-size:17px;margin:0}
+.hero .who{color:var(--gold);font-weight:700;font-size:15px;margin-top:6px}
+
+/* sticky nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(13,14,17,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .in{max-width:1000px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:11px 14px;scrollbar-width:none}
+nav .in::-webkit-scrollbar{display:none}
+nav a{flex:0 0 auto;color:var(--soft);text-decoration:none;font-size:13.5px;font-weight:600;
+  padding:7px 13px;border-radius:20px;border:1px solid transparent;white-space:nowrap;transition:.15s}
+nav a:hover{color:var(--ink);border-color:var(--line)}
+nav a.on{color:#1a1204;background:var(--gold);border-color:var(--gold);font-weight:700}
+
+/* layout */
+main{max-width:820px;margin:0 auto;padding:16px 20px 80px}
+section{padding:40px 0 8px;border-top:1px solid var(--line)}
+section:first-child{border-top:none}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.sh .n{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--gold);color:#1a1204;
+  font-weight:900;font-size:17px;display:grid;place-items:center}
+.sh h2{font-size:27px;font-weight:800;margin:0;letter-spacing:-.3px}
+h3{font-size:20px;font-weight:800;margin:26px 0 6px;color:var(--gold2)}
+p{margin:12px 0}
+b,strong{color:#fff;font-weight:700}
+.lead{font-size:19px}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:16px 0}
+.callout{border-left:4px solid var(--gold);background:linear-gradient(90deg,rgba(227,168,28,.08),transparent);
+  border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+.callout.big b{color:var(--gold2)}
+
+ul{list-style:none;margin:12px 0;padding:0}
+li{position:relative;padding:8px 0 8px 28px}
+li::before{content:"";position:absolute;left:4px;top:14px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+ul.no li::before{background:var(--red)}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:16px;overflow:hidden;border-radius:12px}
+.tbl th{background:#000;color:#fff;text-align:left;padding:13px 15px;font-size:14px;letter-spacing:.3px}
+.tbl td{padding:13px 15px;border-top:1px solid var(--line);vertical-align:top}
+.tbl tr td:first-child{color:var(--red);font-weight:600;width:42%}
+.tbl td:last-child{color:var(--ink)}
+
+/* script */
+.script{background:#08090b;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:18px 20px;margin:14px 0}
+.script p{margin:10px 0;color:#d7d4cc}
+.script .cue{color:var(--gold2);font-weight:700}
+.script .bd{color:var(--gold);font-weight:800}
+
+/* questionário */
+.q{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.q .t{font-weight:800;color:#fff}
+.q .d{color:var(--soft);font-size:16px;margin-top:3px}
+.q .ph{margin-top:10px;font-size:13.5px;color:var(--mut);border:1px dashed var(--line);border-radius:8px;padding:9px 12px}
+
+/* frases */
+.ph-item{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:13px 15px;margin:9px 0}
+.ph-item .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1204;
+  font-weight:800;font-size:14px;display:grid;place-items:center}
+.ph-item .tx{flex:1}
+.ph-item button{flex:0 0 auto;background:transparent;border:1px solid var(--line);color:var(--soft);
+  border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer;transition:.15s;font-family:inherit}
+.ph-item button:hover{border-color:var(--gold);color:var(--gold)}
+.ph-item button.ok{border-color:var(--green);color:var(--green)}
+
+footer{border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:14px;padding:30px 20px 50px}
+footer b{color:var(--gold)}
+.note-ro{text-align:center;color:var(--mut);font-size:14px;margin:8px 0 0}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<header class="hero">
+  <div class="frame">
+    <div class="eye">Armeria Esparta</div>
+    <h1>SER HOMEM<br>DE VERDADE</h1>
+    <div class="rule"></div>
+    <p class="sub">Segmento para Campanha e Identidade de Marca</p>
+    <p class="who">Marca pessoal do Eduardo</p>
+  </div>
+</header>
+
+<nav>
+  <div class="in">
+    <a href="#conceito" class="on">1 · Conceito</a>
+    <a href="#marca">2 · Identidade</a>
+    <a href="#regras">3 · Regras</a>
+    <a href="#manifesto">4 · Manifesto</a>
+    <a href="#historias">5 · Histórias</a>
+    <a href="#formatos">6 · Formatos</a>
+    <a href="#frases">7 · Frases</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 1 -->
+  <section id="conceito">
+    <div class="sh"><span class="n">1</span><h2>O conceito</h2></div>
+    <h3>O problema</h3>
+    <p>O teu trabalho não pode ser anunciado nem patrocinado nas redes por causa da política de armas. Na prática, isso trava o teu alcance e derruba qualquer impulsionamento — por melhor que seja o conteúdo, ele bate no teto invisível da categoria "arma" e não chega em quem deveria chegar.</p>
+    <h3>A solução</h3>
+    <p>Parar de ser visto como "página de arma" e passar a ser visto como <b>referência masculina</b>. O conteúdo deixa de ser sobre o objeto e passa a ser <b>para homens</b> — sobre vida, disciplina, caráter e propósito. A tua artesania vira o palco da mensagem; a peça é só o pano de fundo. Conteúdo de desenvolvimento masculino tem alcance enorme e <b>até pode ser impulsionado</b>, porque não é sobre arma — é sobre ser homem. Você sai da poça onde todo mundo briga e passa a nadar no oceano.</p>
+    <h3>Como funciona — 1 vídeo por semana</h3>
+    <div class="callout big">
+      <p>Pega <b>um tema</b> → linka com <b>a tua vida</b> (algo real que te aconteceu) → linka com <b>o trabalho</b> que tu tá fazendo com as mãos naquele momento → <b>amarra tudo</b> numa só ideia e fecha com o bordão.</p>
+      <p style="margin-bottom:0">Simples, sustentável e que <b>acumula</b>: cada vídeo constrói o personagem, e o personagem constrói a referência que faz a pessoa ir ao clube por causa de você.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="marca">
+    <div class="sh"><span class="n">2</span><h2>Identidade de marca</h2></div>
+    <h3>O personagem</h3>
+    <div class="card">
+      <p class="lead"><b>O artesão que lapida metal e caráter.</b></p>
+      <p><b>Ninguém nasce homem de verdade</b> — isso se conquista, se constrói dia após dia, contra tudo o que o mundo faz pra destruir aquilo que é verdadeiro. É essa a mensagem que ele carrega em cada vídeo.</p>
+      <p>Enquanto dá acabamento numa peça, ele conversa — e essa conversa tem <b>dois destinatários ao mesmo tempo</b>: a <b>filha</b>, que está atrás da câmera gravando, porque ela precisa aprender o que é um homem de verdade pra um dia saber <b>escolher certo</b>; e <b>todo homem que assiste</b> do outro lado da tela, que precisa ouvir isso tanto quanto ela. É pai ensinando a filha e mentor formando homens — no mesmo gesto.</p>
+      <p>Ele ensina com o que viveu: exemplos da própria vida, histórias de competição, o <b>estilo de vida do atleta</b> que treina no escuro pra brilhar no pódio, a rotina de quem se lapida todo dia atrás de um objetivo e <b>honra seus princípios e valores</b> mesmo quando sai mais caro. Não é discurso de cima — é <b>testemunho</b>. Ele fala do alto dos próprios erros, com a humildade de quem também caiu e levantou, e com a firmeza de quem <b>respeita e valoriza a mulher</b>.</p>
+      <p style="margin-bottom:0">O metal na bancada é o espelho da mensagem: assim como uma peça só fica boa com <b>paciência, precisão e capricho no que ninguém vê</b>, o homem também só se torna homem no trabalho silencioso de se lapidar.</p>
+    </div>
+    <h3>O bordão</h3>
+    <p><b>"Ser homem de verdade."</b> Assina cada vídeo. É, ao mesmo tempo, a filha sendo instruída a escolher certo e o homem que assiste sendo lembrado de quem ele ainda pode se tornar.</p>
+    <h3>Tom de voz</h3>
+    <p>Papo reto, de igual pra igual — nunca de cima. Hora engraçado, hora sério: brinca quando cabe, endurece quando o assunto pede. Linguagem de oficina, direta e sem enrolação. Emoção verdadeira, sem novela. É um cara falando com outro cara — e com a filha.</p>
+    <h3>Público-alvo</h3>
+    <p><b>Homens de 30 a 60 anos</b> (18+): pais, trabalhadores, esportistas, homens em construção que querem se tornar a melhor versão de si e dar o exemplo pros seus. Gente que valoriza disciplina, honra e propósito — e que se cansa de discurso raso.</p>
+    <h3>Arquétipo</h3>
+    <p>O <b>artesão-guerreiro-pai</b>. A essência de Esparta: disciplina, honra, mestria e proteção dos seus. Ele não é influenciador — é mestre de ofício que virou mentor. A oficina é o templo.</p>
+  </section>
+
+  <!-- 3 -->
+  <section id="regras">
+    <div class="sh"><span class="n">3</span><h2>Regras de conteúdo</h2></div>
+    <div class="callout big">
+      <p style="margin:0"><b>Regra de ouro:</b> em vez de pensar "não posso falar de arma", <b>traga sempre o foco pro ESPORTE</b> — o tiro esportivo / tiro prático. Você não é vendedor de arma; você é <b>atleta e artesão de precisão</b>. Essa virada muda tudo aos olhos do algoritmo e da audiência.</p>
+    </div>
+    <h3>O que PODE falar</h3>
+    <ul>
+      <li>Vida, disciplina, superação, princípios, honra e palavra</li>
+      <li>Como tratar uma mulher, criação de filhos, ser exemplo em casa</li>
+      <li>O <b>esporte</b> (tiro prático) — a rotina e a mentalidade de atleta</li>
+      <li>Ensinamentos dos <b>livros</b> que você lê, mastigados pros homens</li>
+      <li>O ofício: precisão, paciência, foco, o prazer de fazer bem-feito</li>
+    </ul>
+    <h3>O que EVITAR — e como trocar</h3>
+    <table class="tbl">
+      <tr><th>Em vez de dizer…</th><th style="color:#fff">Diga…</th></tr>
+      <tr><td>"arma", "pistola"</td><td>"o equipamento", "a plataforma", "o projeto"</td></tr>
+      <tr><td>citar calibre ou munição</td><td>não cita — foca em "o esporte", "a precisão"</td></tr>
+      <tr><td>marca (Glock, Taurus…)</td><td>não cita a marca</td></tr>
+      <tr><td>"compra", "preço", "vendo"</td><td>"quem quiser, me chama no direct"</td></tr>
+    </table>
+    <h3>O que PODE mostrar</h3>
+    <ul>
+      <li>As <b>mãos</b> trabalhando, as ferramentas, a bancada, as faíscas</li>
+      <li>O acabamento, a textura, o detalhe, o antes/depois do capricho</li>
+      <li><b>Você falando</b>, olhando pra câmera</li>
+      <li><b>Fotos e vídeos com campeões</b>, troféus, o pódio</li>
+      <li>O ambiente da oficina — o "templo" do ofício</li>
+    </ul>
+    <h3>O que EVITAR mostrar</h3>
+    <ul class="no">
+      <li>Boca de cano apontada pra câmera</li>
+      <li>Munição</li>
+      <li>A peça inteira como "produto", estilo vitrine de loja</li>
+      <li>Logo ou marca de fabricante</li>
+      <li>Qualquer coisa com cara de anúncio ou catálogo</li>
+    </ul>
+    <div class="callout"><p style="margin:0"><b>Duração:</b> 1 minuto por vídeo. Gancho forte nos 3 primeiros segundos (uma frase de impacto já com a mão na peça), uma ideia só, e corte no fim — sem enrolar.</p></div>
+  </section>
+
+  <!-- 4 -->
+  <section id="manifesto">
+    <div class="sh"><span class="n">4</span><h2>Vídeo manifesto (Ep. 00)</h2></div>
+    <p style="color:var(--soft)"><i>O vídeo de apresentação — fixado no perfil. É a porta de entrada do canal.</i></p>
+    <h3>Sobre o que deve falar</h3>
+    <p>Ele precisa entregar três coisas, nessa ordem emocional:</p>
+    <ul>
+      <li><b>A revelação:</b> quem grava esses vídeos é a filha dele. "Tudo que eu falo aqui pra vocês, eu tô falando pra ela também — porque ela precisa saber o que é um homem de verdade, pra um dia saber escolher certo."</li>
+      <li><b>O credo:</b> ninguém nasce homem de verdade; o mundo tenta destruir o que é verdadeiro; homem de verdade se constrói todo dia; valoriza a mulher; e tem a humildade de reconhecer os próprios erros.</li>
+      <li><b>A missão do canal:</b> papo reto de homem pra homem, toda semana — de quem lapida metal e aprendeu a lapidar a si mesmo.</li>
+    </ul>
+    <h3>Sobre o que deve mostrar</h3>
+    <ul>
+      <li>Ele na bancada, dando acabamento — as mãos em foco, o trabalho acontecendo</li>
+      <li><b>A filha aparecendo / segurando a câmera</b> — o momento de virada do vídeo, o coração de tudo</li>
+      <li><b>Foto ou vídeo com 2 ou 3 campeões</b> que ele preparou, com troféus / pódio — a prova de que ele é referência de verdade</li>
+    </ul>
+    <h3>Chamada pra ação</h3>
+    <div class="callout"><p style="margin:0">"Se tu é homem e quer se lapidar — ou tem um filho pra criar — <b>segue aqui</b>. Toda semana um papo reto. E <b>marca aquele mano</b> que precisa ouvir isso."</p></div>
+  </section>
+
+  <!-- 5 -->
+  <section id="historias">
+    <div class="sh"><span class="n">5</span><h2>Banco de histórias</h2></div>
+    <p style="color:var(--soft)"><i>Cada resposta vira um vídeo. O que vale é a história <b style="color:var(--soft)">real</b> que carrega um ensinamento.</i></p>
+    <div id="qs"></div>
+    <p class="note-ro">🔒 Por enquanto a página é só leitura — em breve o Eduardo poderá responder aqui mesmo.</p>
+  </section>
+
+  <!-- 6 -->
+  <section id="formatos">
+    <div class="sh"><span class="n">6</span><h2>Formatos de roteiro</h2></div>
+    <h3>Formato 1 — A filha pergunta, ele responde matador</h3>
+    <p>A filha (atrás da câmera) faz uma pergunta simples e profunda. Ele para o que está fazendo, pensa, e responde curto e forte — depois volta pro trabalho.</p>
+    <div class="script">
+      <p><span class="cue">FILHA (off):</span> "Pai, como eu sei se um homem presta?"</p>
+      <p><span class="cue">ELE (larga a lixa, olha pra ela):</span> "Repara no que ele faz quando ninguém tá vendo. Metal e homem é igual — o que vale não é o brilho de fora, é o acabamento por dentro. Escolhe quem tem capricho no escondido."</p>
+      <p><span class="cue">(volta pro trabalho)</span> → <span class="bd">"Ser homem de verdade."</span></p>
+    </div>
+    <h3>Formato 2 — Só ele falando</h3>
+    <p>Gancho com a mão na peça → desenvolve o tema com uma história real → no ponto alto, larga a ferramenta e olha pra câmera → fecha no bordão.</p>
+    <div class="script">
+      <p><span class="cue">(lixando a peça):</span> "Essa peça aqui, se eu apressar, sai torta. E homem é a mesma coisa."</p>
+      <p><span class="cue">(trabalhando):</span> "Numa competição, eu quis apressar um ajuste. Deu ruim, perdi a etapa. Aprendi ali que pressa é inimiga de quem quer fazer bem-feito…"</p>
+      <p><span class="cue">(larga a ferramenta, olha pra câmera):</span> "Ninguém fica pronto na pressa. Você se lapida na paciência, no erro e na disciplina — um dia de cada vez."</p>
+      <p><span class="bd">"Ser homem de verdade."</span></p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="frases">
+    <div class="sh"><span class="n">7</span><h2>20 frases "ser homem de verdade"</h2></div>
+    <p style="color:var(--soft)"><i>Banco de ideias e legendas. Toque em <b style="color:var(--soft)">copiar</b> pra usar num vídeo.</i></p>
+    <div id="frases"></div>
+  </section>
+
+</main>
+
+<footer>
+  <b>ARMERIA ESPARTA</b> · Marca pessoal do Eduardo<br>
+  <span style="font-style:italic;color:var(--soft)">"Ser homem de verdade"</span>
+</footer>
+
+<script>
+// progress bar
+addEventListener('scroll',()=>{
+  const h=document.documentElement,st=h.scrollTop,sh=h.scrollHeight-h.clientHeight;
+  document.getElementById('prog').style.width=(sh>0?st/sh*100:0)+'%';
+});
+// active nav
+const links=[...document.querySelectorAll('nav a')];
+const map={}; links.forEach(a=>map[a.getAttribute('href').slice(1)]=a);
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.remove('on')); (map[e.target.id]||{}).classList?.add('on'); }});
+},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+
+// questionário
+const QS=[
+ ['Desafios','Qual o maior desafio que você já enfrentou (vida, trabalho, oficina ou competição)? O que estava em jogo?'],
+ ['Superações','Uma vez em que você estava no fundo e deu a volta por cima. Como foi?'],
+ ['Conquistas','Do que você mais se orgulha? (uma vitória sua ou de um atleta que você preparou)'],
+ ['Medos','Que medo você teve que encarar de frente? O que aprendeu com ele?'],
+ ['Aprendizado de livros','Que livro te marcou? Qual ideia dele você carrega até hoje?'],
+ ['Erros (humildade)','Um erro que te ensinou algo — e que você tem a humildade de reconhecer.'],
+ ['Competição','Uma lição que só a competição te ensinou.'],
+ ['A filha / a família','Uma lição que você quer que sua filha nunca esqueça.'],
+ ['O ofício','Algo que o trabalho de precisão te ensinou sobre a vida.'],
+];
+document.getElementById('qs').innerHTML=QS.map((q,i)=>
+ `<div class="q"><div class="t">${i+1}. ${q[0]}</div><div class="d">${q[1]}</div>
+  <div class="ph">✍️ Sua resposta aparecerá aqui (em breve)</div></div>`).join('');
+
+// frases
+const FR=[
+ 'Homem de verdade não nasce pronto — se constrói todo dia, no silêncio e na porrada.',
+ 'Ser homem é cumprir a palavra mesmo quando ninguém tá vendo.',
+ 'O mundo tenta destruir o que é verdadeiro. Ser homem de verdade é resistir a isso.',
+ 'Homem de verdade valoriza a mulher — não diminui ela pra se sentir grande.',
+ 'Força de verdade é a que se controla. Qualquer um explode; poucos seguram.',
+ 'Homem que erra e reconhece é mais forte que o que finge acertar sempre.',
+ 'Disciplina é fazer o certo mesmo sem vontade — é o que separa homem de menino.',
+ 'Você é o exemplo que seus filhos vão seguir. Escolhe bem o que você mostra.',
+ 'Homem de verdade protege — não amedronta.',
+ 'Precisão não se improvisa, se treina. Na oficina e na vida.',
+ 'Quem não domina a si mesmo é dominado por qualquer coisa.',
+ 'Ser homem é carregar peso sem transformar isso em desculpa.',
+ 'Respeito não se exige, se conquista — no detalhe, todo dia.',
+ 'Homem de verdade honra seus princípios mesmo quando sai mais caro.',
+ 'Cuidar da mulher e da família não te faz menos homem — te faz o homem certo.',
+ 'O verdadeiro alvo é você melhor amanhã do que foi hoje.',
+ 'Paciência é força. O que tem valor leva tempo pra ficar pronto.',
+ 'Homem de verdade não abandona o que começou quando aperta.',
+ 'A humildade não te rebaixa — te mantém no caminho.',
+ 'Ser homem de verdade é escolher certo todo dia, mesmo quando ninguém aplaude.',
+];
+document.getElementById('frases').innerHTML=FR.map((f,i)=>
+ `<div class="ph-item"><span class="num">${i+1}</span><span class="tx">${f}</span>
+  <button onclick="cp(this,${i})">copiar</button></div>`).join('');
+function cp(btn,i){
+  navigator.clipboard.writeText(FR[i]).then(()=>{
+    btn.textContent='copiado ✓'; btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='copiar'; btn.classList.remove('ok');},1400);
+  });
+}
+</script>
+</body>
+</html>
