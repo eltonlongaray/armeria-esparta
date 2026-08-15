@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Por que vale · Sistema Armeria Esparta</title>
+<style>
+:root{
+  --navy:#0e2138; --navy2:#16304f; --blue:#2f6fb3; --blue-br:#4a90d9;
+  --bg:#eef2f8; --card:#ffffff; --ink:#16202e; --muted:#5b6a80; --line:#e6ecf5;
+  --green:#1f9d55; --green-sf:#e7f6ee; --steel:#9fb2c8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;padding:16px 12px 40px}
+.col{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 18px;box-shadow:0 8px 24px rgba(16,40,70,.07)}
+.card h2{margin:0 0 3px;font-size:19px;font-weight:800;letter-spacing:-.2px;color:var(--navy)}
+.eye{font-size:11.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--blue-br);margin-bottom:8px}
+.sub{color:var(--muted);font-size:13.5px;margin:2px 0 0}
+
+/* header card */
+.head{background:linear-gradient(180deg,var(--navy2),var(--navy));border:none;text-align:center;color:#fff}
+.head .logo{width:118px;height:auto;background:#fff;border-radius:14px;padding:8px 10px;display:inline-block;margin-bottom:12px}
+.head h1{font-size:22px;font-weight:800;margin:0;letter-spacing:-.3px;line-height:1.2}
+.head p{color:#c4d3e6;font-size:14px;margin:8px 0 0}
+
+ul{margin:8px 0 0;padding:0;list-style:none}
+li{position:relative;padding:5px 0 5px 24px;font-size:14.5px;color:var(--ink)}
+li::before{content:"";position:absolute;left:2px;top:11px;width:8px;height:8px;border-radius:50%;background:var(--blue)}
+li b{color:var(--navy)}
+
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.3px}
+th.n,td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+td.mod{font-weight:600;color:var(--navy);font-size:12.5px}
+.tot td{background:#f3f7fc;font-weight:800;color:var(--navy);border-top:2px solid var(--blue)}
+.hl td{background:var(--green-sf)}
+.hl td:first-child{font-weight:800;color:#166a3b}
+.hl td.n{color:var(--green);font-weight:800}
+.big{font-size:15px}
+
+.kpi{display:flex;gap:10px;margin-top:12px}
+.kpi div{flex:1;background:#f3f7fc;border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center}
+.kpi .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.kpi .v{font-size:18px;font-weight:800;color:var(--navy);margin-top:2px;white-space:nowrap}
+.kpi .v.g{color:var(--green)}
+
+.punch{background:var(--green-sf);border:1px solid #bfe6ce;border-radius:12px;padding:14px 14px;margin-top:14px;text-align:center}
+.punch b{color:#166a3b;font-size:15px}
+.punch .p{font-size:26px;font-weight:800;color:var(--green);margin:2px 0 0;letter-spacing:-.5px}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.foot{text-align:center;color:var(--muted);font-size:12px;padding:4px 8px}
+.foot b{color:var(--navy)}
+</style>
+</head>
+<body>
+<div class="col">
+
+  <!-- HEADER -->
+  <div class="card head">
+    <img class="logo" src="logo-topo.png" alt="Elton Longaray">
+    <h1>Por que um sistema<br>sob medida vale isso</h1>
+    <p>Resumo rápido e visual — direto ao ponto.</p>
+  </div>
+
+  <!-- POR QUE CUSTA -->
+  <div class="card">
+    <div class="eye">O que R$ 9.000 realmente paga</div>
+    <h2>Não é só "fazer telas"</h2>
+    <p class="sub">Antes de aparecer na tela, tudo isso precisa existir por trás:</p>
+    <ul>
+      <li>Planejamento e <b>modelagem do banco de dados</b></li>
+      <li><b>Regras de negócio</b> (estoque, reservas, financeiro)</li>
+      <li>Ligação entre <b>clientes, armas, peças e serviços</b></li>
+      <li>Controle de usuários, permissões e <b>segurança</b></li>
+      <li>Funcionar no <b>celular e no PC</b>, online e offline</li>
+      <li><b>Testes, publicação, backup e suporte</b></li>
+    </ul>
+    <p class="note">Um erro num sistema desses custa caro de verdade: peça reservada errada, histórico perdido, conta errada. Por isso não é só o tempo de código.</p>
+  </div>
+
+  <!-- COMPARAÇÃO RÁPIDA -->
+  <div class="card">
+    <div class="eye">Referência de mercado</div>
+    <h2>Comparação rápida</h2>
+    <table>
+      <tr><th>Tipo de solução</th><th class="n">Faixa típica</th></tr>
+      <tr><td>Sistema simples (poucos cadastros)</td><td class="n">R$ 5.000<br>– 12.000</td></tr>
+      <tr><td>ERP pequeno personalizado</td><td class="n">R$ 15.000<br>– 35.000</td></tr>
+      <tr><td>Sistema com dashboards, relatórios e financeiro</td><td class="n">R$ 25.000<br>– 60.000+</td></tr>
+      <tr class="hl"><td>Sua proposta<br><span style="font-weight:600;color:#2a7d4f;font-size:11.5px">13 módulos, vários com lógica e integração entre módulos — uma rede intermodular bem amarrada</span></td><td class="n big">R$ 9.000</td></tr>
+    </table>
+  </div>
+
+  <!-- VALOR MÓDULO A MÓDULO -->
+  <div class="card">
+    <div class="eye">O trunfo</div>
+    <h2>Se fosse cobrado módulo a módulo</h2>
+    <p class="sub">Quanto uma empresa cobraria por CADA parte, separada:</p>
+    <table>
+      <tr><th>Módulo</th><th class="n">Grande</th><th class="n">Média</th></tr>
+      <tr><td class="mod">Acesso e login</td><td class="n">2.500</td><td class="n">1.500</td></tr>
+      <tr><td class="mod">Estoque + status das peças</td><td class="n">5.000</td><td class="n">3.000</td></tr>
+      <tr><td class="mod">Encomendas</td><td class="n">3.000</td><td class="n">1.800</td></tr>
+      <tr><td class="mod">Clientes</td><td class="n">3.000</td><td class="n">1.800</td></tr>
+      <tr><td class="mod">Armas + histórico</td><td class="n">4.000</td><td class="n">2.400</td></tr>
+      <tr><td class="mod">Ordem de Serviço</td><td class="n">5.500</td><td class="n">3.200</td></tr>
+      <tr><td class="mod">Esteira de produção</td><td class="n">3.500</td><td class="n">2.000</td></tr>
+      <tr><td class="mod">Documentos</td><td class="n">2.500</td><td class="n">1.500</td></tr>
+      <tr><td class="mod">Financeiro</td><td class="n">6.000</td><td class="n">3.500</td></tr>
+      <tr><td class="mod">Relatórios / Dashboard</td><td class="n">5.000</td><td class="n">3.000</td></tr>
+      <tr><td class="mod">Lembretes</td><td class="n">2.000</td><td class="n">1.200</td></tr>
+      <tr><td class="mod">Multiplataforma (PWA)</td><td class="n">4.000</td><td class="n">2.500</td></tr>
+      <tr><td class="mod">Online + Offline</td><td class="n">5.000</td><td class="n">3.000</td></tr>
+      <tr class="tot"><td>TOTAL separado</td><td class="n">51.000</td><td class="n">30.400</td></tr>
+    </table>
+    <div class="punch">
+      <b>Tudo junto, comigo:</b>
+      <div class="p">R$ 9.000</div>
+    </div>
+  </div>
+
+  <!-- DILUÍDO NO TEMPO -->
+  <div class="card">
+    <div class="eye">Pra dar pra sentir</div>
+    <h2>Diluído no tempo de trabalho</h2>
+    <p class="sub">São 3 a 4 meses de desenvolvimento. Na prática, é como pagar por mês:</p>
+    <table>
+      <tr><th>Período</th><th class="n">Equivale a</th></tr>
+      <tr><td>Em 3 meses</td><td class="n big">R$ 3.000/mês</td></tr>
+      <tr><td>Em 4 meses</td><td class="n big">R$ 2.250/mês</td></tr>
+    </table>
+    <p class="note">E isso nem conta separado as reuniões, planejamento, testes e ajustes ao longo do caminho.</p>
+  </div>
+
+  <!-- MANUTENÇÃO -->
+  <div class="card">
+    <div class="eye">Depois de pronto</div>
+    <h2>Manutenção abaixo do mercado</h2>
+    <div class="kpi">
+      <div><div class="l">No mercado</div><div class="v">R$ 400–800</div></div>
+      <div><div class="l">Comigo</div><div class="v g">R$ 280</div></div>
+    </div>
+    <p class="sub" style="margin-top:12px">Inclui hospedagem, banco de dados, backup, suporte, correções e pequenas melhorias. <b>Só começa 30 dias depois</b> do sistema no ar.</p>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="card">
+    <div class="eye">Resumindo</div>
+    <h2>Você faz um ótimo negócio</h2>
+    <p class="sub">Um sistema que no mercado sairia de <b>R$ 30.000 a R$ 51.000</b> — feito sob medida pra sua oficina — por <b style="color:var(--green)">R$ 9.000</b>, parcelado, com manutenção barata e suporte direto comigo.</p>
+    <p class="note">Por trás disso: formação em programação + as ferramentas profissionais que eu mantenho pra construir e amarrar cada parte do sistema. Trabalho de verdade, preço de irmão.</p>
+  </div>
+
+  <div class="foot"><b>Elton Longaray</b> · Soluções inteligentes em programação e IA</div>
+
+</div>
+</body>
+</html>
