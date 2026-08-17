@@ -242,11 +242,12 @@ footer b{color:var(--gold-br)}
 <!-- 6 -->
 <section class="sec bg-cream" id="formatos"><div class="wrap">
   <div class="sh"><span class="n">6</span><h2>Formatos de roteiro</h2></div>
+  <div class="callout"><p style="margin:0">⚠️ Os roteiros abaixo são só <b>exemplos do conceito</b> — a ideia, não o texto pronto. Não precisa falar exatamente isso: usa as tuas palavras e as tuas histórias. É só pra pegar o jeitão.</p></div>
   <h3>Formato 1 — A filha pergunta, tu responde matador</h3>
   <p>Esse é o quadro específico com a tua filha: ela (atrás da câmera) faz uma pergunta simples e profunda. Tu para o que tá fazendo, pensa, e responde curto e forte — depois volta pro trabalho.</p>
   <div class="script">
     <p><span class="cue">FILHA (off):</span> "Pai, como eu sei se um homem presta?"</p>
-    <p><span class="cue">TU (larga a lixa, olha pra ela):</span> "Repara no que ele faz quando ninguém tá vendo. Metal e homem é igual — o que vale não é o brilho de fora, é o acabamento por dentro. Escolhe quem tem capricho no escondido."</p>
+    <p><span class="cue">TU (larga a lixa, olha pra ela):</span> "Olha se a palavra dele vale. Homem que presta é que nem peça bem-feita — o que importa não é o brilho de fora, é o acabamento por dentro: o caráter. Aparência qualquer um tem; palavra, poucos honram."</p>
     <p><span class="cue">(volta pro trabalho)</span> → <span class="bd">"Ser homem de verdade."</span></p>
   </div>
   <h3>Formato 2 — Só tu falando pros homens</h3>
@@ -261,7 +262,7 @@ footer b{color:var(--gold-br)}
 
 <!-- 7 -->
 <section class="sec bg-white" id="frases"><div class="wrap">
-  <div class="sh"><span class="n">7</span><h2>20 frases "ser homem de verdade"</h2></div>
+  <div class="sh"><span class="n">7</span><h2>10 frases "ser homem de verdade"</h2></div>
   <p style="color:var(--muted)"><i>Banco de ideias e legendas. Toque em <b>copiar</b> pra usar num vídeo.</i></p>
   <div id="frases"></div>
 </div></section>
@@ -296,26 +297,16 @@ const QS=[
 document.getElementById('qs').innerHTML=QS.map((q,i)=>
  `<div class="q"><div class="t">${i+1}. ${q[0]}</div><div class="d">${q[1]}</div><div class="ph">✍️ Tua resposta vai aparecer aqui (em breve)</div></div>`).join('');
 const FR=[
- 'Homem de verdade não nasce pronto — se constrói todo dia, no silêncio e na porrada.',
- 'Ser homem é cumprir a palavra mesmo quando ninguém tá vendo.',
- 'O mundo tenta destruir o que é verdadeiro. Ser homem de verdade é resistir a isso.',
- 'Homem de verdade valoriza a mulher — não diminui ela pra se sentir grande.',
- 'Força de verdade é a que se controla. Qualquer um explode; poucos seguram.',
- 'Homem que erra e reconhece é mais forte que o que finge acertar sempre.',
- 'Disciplina é fazer o certo mesmo sem vontade — é o que separa homem de menino.',
- 'Você é o exemplo que seus filhos vão seguir. Escolhe bem o que tu mostra.',
- 'Homem de verdade protege — não amedronta.',
- 'Precisão não se improvisa, se treina. Na oficina e na vida.',
- 'Quem não domina a si mesmo é dominado por qualquer coisa.',
- 'Ser homem é carregar peso sem transformar isso em desculpa.',
- 'Respeito não se exige, se conquista — no detalhe, todo dia.',
- 'Homem de verdade honra seus princípios mesmo quando sai mais caro.',
- 'Cuidar da mulher e da família não te faz menos homem — te faz o homem certo.',
- 'O verdadeiro alvo é tu melhor amanhã do que foi hoje.',
- 'Paciência é força. O que tem valor leva tempo pra ficar pronto.',
- 'Homem de verdade não abandona o que começou quando aperta.',
- 'A humildade não te rebaixa — te mantém no caminho.',
- 'Ser homem de verdade é escolher certo todo dia, mesmo quando ninguém aplaude.',
+ 'Homem de verdade não nasce pronto — se constrói todo dia, no silêncio.',
+ 'A palavra de um homem vale mais que papel assinado. Ou ela vale, ou ele não vale.',
+ 'Força de verdade é a que se controla. Qualquer um explode — segurar é que é raro.',
+ 'Homem de verdade valoriza a mulher; não precisa diminuir ninguém pra se sentir grande.',
+ 'Quem erra e assume é mais homem que quem finge que acerta sempre.',
+ 'Disciplina é fazer o certo mesmo sem vontade — é o que separa o homem do menino.',
+ 'Teu filho não vai ser o que tu fala — vai ser o que tu faz.',
+ 'O trabalho que ninguém vê é o que sustenta a vitória que todo mundo aplaude.',
+ 'Homem de verdade honra o que acredita, mesmo quando sai mais caro.',
+ 'Não se mede um homem no dia fácil — se mede quando aperta e ele não larga.',
 ];
 document.getElementById('frases').innerHTML=FR.map((f,i)=>
  `<div class="ph-item"><span class="num">${i+1}</span><span class="tx">${f}</span><button onclick="cp(this,${i})">copiar</button></div>`).join('');
